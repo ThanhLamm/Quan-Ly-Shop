@@ -8,8 +8,6 @@ package View;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 
 /**
  *
