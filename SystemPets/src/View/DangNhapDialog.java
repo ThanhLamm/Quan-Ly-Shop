@@ -6,6 +6,7 @@
 package View;
 
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 /**
  *
@@ -17,9 +18,10 @@ public class DangNhapDialog extends javax.swing.JDialog {
    * Creates new form Login
    */
   public DangNhapDialog(java.awt.Frame parent, boolean modal) {
-    super(parent, modal);
+    super(parent, modal);    
+    customUI();
     initComponents();
-    innit();
+    init();
 
   }
 
@@ -310,7 +312,7 @@ public class DangNhapDialog extends javax.swing.JDialog {
      */
     try {
       for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-        if ("Nimbus".equals(info.getName())) {
+        if ("Windows".equals(info.getName())) {
           javax.swing.UIManager.setLookAndFeel(info.getClassName());
           break;
         }
@@ -342,7 +344,7 @@ public class DangNhapDialog extends javax.swing.JDialog {
         dialog.setVisible(true);
       }
     });
-  }  
+  }
   
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -366,15 +368,28 @@ public class DangNhapDialog extends javax.swing.JDialog {
   private javax.swing.JTextField txtTK;
   // End of variables declaration//GEN-END:variables
 
-void innit() {
+void customUI() {
+  //custom UI
+    try {
+      for(UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+        if("Windows".equals(info.getName())) {
+          UIManager.setLookAndFeel(info.getClassName());
+          break;
+        }
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+}
+  
+void init() {
     this.setLocationRelativeTo(null);
     bait.requestFocus();
   }
 
   private void login() {
     this.setVisible(false);
-    TrangChuFrame frame = new TrangChuFrame();
-    frame.show(true);
+    new TrangChuFrame().setVisible(true);
     JOptionPane.showMessageDialog(this, "Đăng nhập thành công !");
     
   }

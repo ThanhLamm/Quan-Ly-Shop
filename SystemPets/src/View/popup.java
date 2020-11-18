@@ -14,6 +14,8 @@ import javax.swing.JPanel;
  * @author Thinkpad
  */
 public class popup extends javax.swing.JDialog {
+  
+  int check;
 
   /**
    * Creates new form popup
@@ -21,7 +23,7 @@ public class popup extends javax.swing.JDialog {
   public popup(java.awt.Frame parent, boolean modal) {
     super(parent, modal);
     initComponents();
-    innit();
+    init();
   }
 
   /**
@@ -35,8 +37,10 @@ public class popup extends javax.swing.JDialog {
     jPanel1 = new javax.swing.JPanel();
     pnlDMK = new javax.swing.JPanel();
     txtDMK = new javax.swing.JLabel();
-    pnlDTT = new javax.swing.JPanel();
+    pnlQLNV = new javax.swing.JPanel();
     txtDTT = new javax.swing.JLabel();
+    pnlDangXuat = new javax.swing.JPanel();
+    txtDangXuat = new javax.swing.JLabel();
     pnlHuy = new javax.swing.JPanel();
     txtHuy = new javax.swing.JLabel();
 
@@ -45,9 +49,13 @@ public class popup extends javax.swing.JDialog {
 
     jPanel1.setBackground(new java.awt.Color(255, 255, 255));
     jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(102, 102, 102), new java.awt.Color(102, 102, 102)));
+    jPanel1.setLayout(new java.awt.GridLayout(4, 1));
 
     pnlDMK.setBackground(new java.awt.Color(255, 255, 255));
     pnlDMK.addMouseListener(new java.awt.event.MouseAdapter() {
+      public void mouseClicked(java.awt.event.MouseEvent evt) {
+        pnlDMKMouseClicked(evt);
+      }
       public void mouseEntered(java.awt.event.MouseEvent evt) {
         pnlDMKMouseEntered(evt);
       }
@@ -62,21 +70,49 @@ public class popup extends javax.swing.JDialog {
     txtDMK.setText("Đổi mật khẩu");
     pnlDMK.add(txtDMK, "card2");
 
-    pnlDTT.setBackground(new java.awt.Color(255, 255, 255));
-    pnlDTT.addMouseListener(new java.awt.event.MouseAdapter() {
+    jPanel1.add(pnlDMK);
+
+    pnlQLNV.setBackground(new java.awt.Color(255, 255, 255));
+    pnlQLNV.addMouseListener(new java.awt.event.MouseAdapter() {
+      public void mouseClicked(java.awt.event.MouseEvent evt) {
+        pnlQLNVMouseClicked(evt);
+      }
       public void mouseEntered(java.awt.event.MouseEvent evt) {
-        pnlDTTMouseEntered(evt);
+        pnlQLNVMouseEntered(evt);
       }
       public void mouseExited(java.awt.event.MouseEvent evt) {
-        pnlDTTMouseExited(evt);
+        pnlQLNVMouseExited(evt);
       }
     });
-    pnlDTT.setLayout(new java.awt.CardLayout());
+    pnlQLNV.setLayout(new java.awt.CardLayout());
 
     txtDTT.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
     txtDTT.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-    txtDTT.setText("Xem thông tin cá nhân");
-    pnlDTT.add(txtDTT, "card2");
+    txtDTT.setText("Quản lý nhân viên");
+    pnlQLNV.add(txtDTT, "card2");
+
+    jPanel1.add(pnlQLNV);
+
+    pnlDangXuat.setBackground(new java.awt.Color(255, 255, 255));
+    pnlDangXuat.addMouseListener(new java.awt.event.MouseAdapter() {
+      public void mouseClicked(java.awt.event.MouseEvent evt) {
+        pnlDangXuatMouseClicked(evt);
+      }
+      public void mouseEntered(java.awt.event.MouseEvent evt) {
+        pnlDangXuatMouseEntered(evt);
+      }
+      public void mouseExited(java.awt.event.MouseEvent evt) {
+        pnlDangXuatMouseExited(evt);
+      }
+    });
+    pnlDangXuat.setLayout(new java.awt.CardLayout());
+
+    txtDangXuat.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+    txtDangXuat.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    txtDangXuat.setText("Đăng xuất");
+    pnlDangXuat.add(txtDangXuat, "card2");
+
+    jPanel1.add(pnlDangXuat);
 
     pnlHuy.setBackground(new java.awt.Color(255, 255, 255));
     pnlHuy.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -97,33 +133,17 @@ public class popup extends javax.swing.JDialog {
     txtHuy.setText("Huỷ");
     pnlHuy.add(txtHuy, "card2");
 
-    javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-    jPanel1.setLayout(jPanel1Layout);
-    jPanel1Layout.setHorizontalGroup(
-      jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(pnlDMK, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-      .addComponent(pnlDTT, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-      .addComponent(pnlHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-    );
-    jPanel1Layout.setVerticalGroup(
-      jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(jPanel1Layout.createSequentialGroup()
-        .addComponent(pnlDMK, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addGap(0, 0, 0)
-        .addComponent(pnlDTT, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addGap(0, 0, 0)
-        .addComponent(pnlHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-    );
+    jPanel1.add(pnlHuy);
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+      .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+      .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
     );
 
     pack();
@@ -139,15 +159,15 @@ public class popup extends javax.swing.JDialog {
     resetColor(pnlDMK, txtDMK);
   }//GEN-LAST:event_pnlDMKMouseExited
 
-  private void pnlDTTMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDTTMouseEntered
+  private void pnlQLNVMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlQLNVMouseEntered
     // TODO add your handling code here:
-    setColor(pnlDTT, txtDTT);
-  }//GEN-LAST:event_pnlDTTMouseEntered
+    setColor(pnlQLNV, txtDTT);
+  }//GEN-LAST:event_pnlQLNVMouseEntered
 
-  private void pnlDTTMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDTTMouseExited
+  private void pnlQLNVMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlQLNVMouseExited
     // TODO add your handling code here:
-    resetColor(pnlDTT, txtDTT);
-  }//GEN-LAST:event_pnlDTTMouseExited
+    resetColor(pnlQLNV, txtDTT);
+  }//GEN-LAST:event_pnlQLNVMouseExited
 
   private void pnlHuyMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlHuyMouseEntered
     // TODO add your handling code here:
@@ -159,10 +179,38 @@ public class popup extends javax.swing.JDialog {
     resetColor(pnlHuy, txtHuy);
   }//GEN-LAST:event_pnlHuyMouseExited
 
+  private void pnlDangXuatMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDangXuatMouseEntered
+    // TODO add your handling code here:
+    setColor(pnlDangXuat, txtDangXuat);
+  }//GEN-LAST:event_pnlDangXuatMouseEntered
+
+  private void pnlDangXuatMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDangXuatMouseExited
+    // TODO add your handling code here:
+    resetColor(pnlDangXuat, txtDangXuat);
+  }//GEN-LAST:event_pnlDangXuatMouseExited
+
   private void pnlHuyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlHuyMouseClicked
     // TODO add your handling code here:
-    this.setVisible(false);
+    setVisible(false);
   }//GEN-LAST:event_pnlHuyMouseClicked
+
+  private void pnlDMKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDMKMouseClicked
+    // TODO add your handling code here:
+    TrangChuFrame.popup = 1;
+    setVisible(false);
+  }//GEN-LAST:event_pnlDMKMouseClicked
+
+  private void pnlQLNVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlQLNVMouseClicked
+    // TODO add your handling code here:
+    TrangChuFrame.popup = 2;
+    setVisible(false);
+  }//GEN-LAST:event_pnlQLNVMouseClicked
+
+  private void pnlDangXuatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDangXuatMouseClicked
+    // TODO add your handling code here:
+    TrangChuFrame.popup = 3;    
+    setVisible(false);
+  }//GEN-LAST:event_pnlDangXuatMouseClicked
 
   /**
    * @param args the command line arguments
@@ -209,15 +257,18 @@ public class popup extends javax.swing.JDialog {
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JPanel jPanel1;
   private javax.swing.JPanel pnlDMK;
-  private javax.swing.JPanel pnlDTT;
+  private javax.swing.JPanel pnlDangXuat;
   private javax.swing.JPanel pnlHuy;
+  private javax.swing.JPanel pnlQLNV;
   private javax.swing.JLabel txtDMK;
   private javax.swing.JLabel txtDTT;
+  private javax.swing.JLabel txtDangXuat;
   private javax.swing.JLabel txtHuy;
   // End of variables declaration//GEN-END:variables
 
-  void innit() {
+  void init() {
     this.setLocationRelativeTo(null);
+    pnlQLNV.setVisible(false);
   }
   
   void setColor(JPanel pane, JLabel field) {
