@@ -5,7 +5,9 @@
  */
 package View;
 
+import static View.TrangChuFrame.txtDKHD;
 import java.awt.Color;
+import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -196,20 +198,28 @@ public class popup extends javax.swing.JDialog {
 
   private void pnlDMKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDMKMouseClicked
     // TODO add your handling code here:
-    TrangChuFrame.popup = 1;
     setVisible(false);
   }//GEN-LAST:event_pnlDMKMouseClicked
 
   private void pnlQLNVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlQLNVMouseClicked
     // TODO add your handling code here:
-    TrangChuFrame.popup = 2;
+    TrangChuFrame.pnlNhanVien.setVisible(true);
+    TrangChuFrame.pnlDichVu.setVisible(false);
+    TrangChuFrame.pnlHoaDon.setVisible(false);
+    TrangChuFrame.pnlKhachHang.setVisible(false);
+    TrangChuFrame.pnlSanPham.setVisible(false);
+    TrangChuFrame.pnlThongKe.setVisible(false);
+    
+    TrangChuFrame.pnlDKHD.setBackground(new java.awt.Color(236,252,246));
+    txtDKHD.setForeground(Color.black);
+    
     setVisible(false);
   }//GEN-LAST:event_pnlQLNVMouseClicked
 
   private void pnlDangXuatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDangXuatMouseClicked
-    // TODO add your handling code here:
-    TrangChuFrame.popup = 3;    
-    setVisible(false);
+    // TODO add your handling code here:  
+    setVisible(false);      
+    
   }//GEN-LAST:event_pnlDangXuatMouseClicked
 
   /**
@@ -268,7 +278,6 @@ public class popup extends javax.swing.JDialog {
 
   void init() {
     this.setLocationRelativeTo(null);
-    pnlQLNV.setVisible(false);
   }
   
   void setColor(JPanel pane, JLabel field) {

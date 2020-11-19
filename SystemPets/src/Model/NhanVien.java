@@ -12,113 +12,115 @@ import java.util.Date;
  * @author TechCare
  */
 public class NhanVien {
-    String MANV,TENNV,MATKHAU,DIACHI,EMAIL,SDT,HINHANH,VAITRO;
-    Date NGAYSINH,NGAYVAOLAM;
-    double LUONG;
 
-    public NhanVien() {
-    }
+  String MANV, TENNV, MATKHAU, DIACHI, EMAIL, SDT, HINHANH;
+  boolean VAITRO;
+  Date NGAYSINH, NGAYVAOLAM;
+  double LUONG;
 
-    public NhanVien(String MANV, String TENNV, String MATKHAU, String DIACHI, String EMAIL, String SDT, String HINHANH, String VAITRO, Date NGAYSINH, Date NGAYVAOLAM, double LUONG) {
-        this.MANV = MANV;
-        this.TENNV = TENNV;
-        this.MATKHAU = MATKHAU;
-        this.DIACHI = DIACHI;
-        this.EMAIL = EMAIL;
-        this.SDT = SDT;
-        this.HINHANH = HINHANH;
-        this.VAITRO = VAITRO;
-        this.NGAYSINH = NGAYSINH;
-        this.NGAYVAOLAM = NGAYVAOLAM;
-        this.LUONG = LUONG;
-    }
+  public NhanVien() {
+  }
 
-    public String getMANV() {
-        return MANV;
-    }
+  public NhanVien(String MANV, String TENNV, String MATKHAU, String DIACHI, String EMAIL, String SDT, String HINHANH, boolean VAITRO, Date NGAYSINH, Date NGAYVAOLAM, double LUONG) {
+    this.MANV = MANV;
+    this.TENNV = TENNV;
+    this.MATKHAU = MATKHAU;
+    this.DIACHI = DIACHI;
+    this.EMAIL = EMAIL;
+    this.SDT = SDT;
+    this.HINHANH = HINHANH;
+    this.VAITRO = VAITRO;
+    this.NGAYSINH = NGAYSINH;
+    this.NGAYVAOLAM = NGAYVAOLAM;
+    this.LUONG = LUONG;
+  }
 
-    public void setMANV(String MANV) {
-        this.MANV = MANV;
-    }
+  public String getMANV() {
+    return MANV;
+  }
 
-    public String getTENNV() {
-        return TENNV;
-    }
+  public void setMANV(String MANV) {
+    this.MANV = MANV;
+  }
 
-    public void setTENNV(String TENNV) {
-        this.TENNV = TENNV;
-    }
+  public String getTENNV() {
+    return TENNV;
+  }
 
-    public String getMATKHAU() {
-        return MATKHAU;
-    }
+  public void setTENNV(String TENNV) {
+    this.TENNV = TENNV;
+  }
 
-    public void setMATKHAU(String MATKHAU) {
-        this.MATKHAU = MATKHAU;
-    }
+  public String getMATKHAU() {
+    return MATKHAU;
+  }
 
-    public String getDIACHI() {
-        return DIACHI;
-    }
+  public void setMATKHAU(String MATKHAU) {
+    this.MATKHAU = MATKHAU;
+  }
 
-    public void setDIACHI(String DIACHI) {
-        this.DIACHI = DIACHI;
-    }
+  public String getDIACHI() {
+    return DIACHI;
+  }
 
-    public String getEMAIL() {
-        return EMAIL;
-    }
+  public void setDIACHI(String DIACHI) {
+    this.DIACHI = DIACHI;
+  }
 
-    public void setEMAIL(String EMAIL) {
-        this.EMAIL = EMAIL;
-    }
+  public String getEMAIL() {
+    return EMAIL;
+  }
 
-    public String getSDT() {
-        return SDT;
-    }
+  public void setEMAIL(String EMAIL) {
+    this.EMAIL = EMAIL;
+  }
 
-    public void setSDT(String SDT) {
-        this.SDT = SDT;
-    }
+  public String getSDT() {
+    return SDT;
+  }
 
-    public String getHINHANH() {
-        return HINHANH;
-    }
+  public void setSDT(String SDT) {
+    this.SDT = SDT;
+  }
 
-    public void setHINHANH(String HINHANH) {
-        this.HINHANH = HINHANH;
-    }
+  public String getHINHANH() {
+    return HINHANH;
+  }
 
-    public String getVAITRO() {
-        return VAITRO;
-    }
+  public void setHINHANH(String HINHANH) {
+    this.HINHANH = HINHANH;
+  }
 
-    public void setVAITRO(String VAITRO) {
-        this.VAITRO = VAITRO;
-    }
+  public boolean isVAITRO() {
+    return VAITRO;
+  }
 
-    public Date getNGAYSINH() {
-        return NGAYSINH;
-    }
+  public void setVAITRO(boolean VAITRO) {
+    this.VAITRO = VAITRO;
+  }
 
-    public void setNGAYSINH(Date NGAYSINH) {
-        this.NGAYSINH = NGAYSINH;
-    }
+  public Date getNGAYSINH() {
+    return NGAYSINH;
+  }
 
-    public Date getNGAYVAOLAM() {
-        return NGAYVAOLAM;
-    }
+  public void setNGAYSINH(Date NGAYSINH) {
+    this.NGAYSINH = NGAYSINH;
+  }
 
-    public void setNGAYVAOLAM(Date NGAYVAOLAM) {
-        this.NGAYVAOLAM = NGAYVAOLAM;
-    }
+  public Date getNGAYVAOLAM() {
+    return NGAYVAOLAM;
+  }
 
-    public double getLUONG() {
-        return LUONG;
-    }
+  public void setNGAYVAOLAM(Date NGAYVAOLAM) {
+    this.NGAYVAOLAM = NGAYVAOLAM;
+  }
 
-    public void setLUONG(double LUONG) {
-        this.LUONG = LUONG;
-    }
-    
+  public double getLUONG() {
+    return LUONG;
+  }
+
+  public void setLUONG(double LUONG) {
+    this.LUONG = LUONG;
+  }
+
 }

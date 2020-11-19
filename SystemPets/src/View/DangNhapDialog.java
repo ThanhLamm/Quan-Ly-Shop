@@ -390,8 +390,7 @@ void init() {
   private void login() {
     this.setVisible(false);
     new TrangChuFrame().setVisible(true);
-    JOptionPane.showMessageDialog(this, "Đăng nhập thành công !");
-    
+    JOptionPane.showMessageDialog(this, "Đăng nhập thành công !");    
   }
 
 }
