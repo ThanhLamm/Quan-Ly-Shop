@@ -7,7 +7,6 @@ package View;
 
 import static View.TrangChuFrame.txtDKHD;
 import java.awt.Color;
-import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -18,7 +17,7 @@ import javax.swing.JPanel;
 public class popup extends javax.swing.JDialog {
   
   int check;
-
+  java.awt.Frame parent;
   /**
    * Creates new form popup
    */
@@ -199,6 +198,7 @@ public class popup extends javax.swing.JDialog {
   private void pnlDMKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDMKMouseClicked
     // TODO add your handling code here:
     setVisible(false);
+    new doiMKDialog(null, true).setVisible(true);
   }//GEN-LAST:event_pnlDMKMouseClicked
 
   private void pnlQLNVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlQLNVMouseClicked
@@ -218,8 +218,10 @@ public class popup extends javax.swing.JDialog {
 
   private void pnlDangXuatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDangXuatMouseClicked
     // TODO add your handling code here:  
-    setVisible(false);      
-    
+    setVisible(false);
+    DangNhapDialog dn = new DangNhapDialog(parent, true);
+    DangNhapDialog.tc.setVisible(false);
+    dn.setVisible(true);
   }//GEN-LAST:event_pnlDangXuatMouseClicked
 
   /**

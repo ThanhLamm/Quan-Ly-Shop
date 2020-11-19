@@ -77,6 +77,5 @@ public class SanPham {
 
     public void setNGAYNHAPKHO(Date NGAYNHAPKHO) {
         this.NGAYNHAPKHO = NGAYNHAPKHO;
-    }
-    
+    }    
 }

@@ -14,6 +14,7 @@ import javax.swing.UIManager;
  */
 public class DangNhapDialog extends javax.swing.JDialog {
 
+  public static TrangChuFrame tc = new TrangChuFrame();
   /**
    * Creates new form Login
    */
@@ -389,7 +390,7 @@ void init() {
 
   private void login() {
     this.setVisible(false);
-    new TrangChuFrame().setVisible(true);
+    tc.setVisible(true);
     JOptionPane.showMessageDialog(this, "Đăng nhập thành công !");    
   }
 

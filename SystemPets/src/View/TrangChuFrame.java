@@ -25,16 +25,14 @@ import javax.swing.table.JTableHeader;
  * @author Thinkpad
  */
 public class TrangChuFrame extends javax.swing.JFrame {
-
   
   /**
    * Creates new form TrangChuFrame
    */
-  public  TrangChuFrame() {
+  public TrangChuFrame() {
     customUI();
     initComponents();
-    init();
-    
+    init();    
   }
 
   /**
