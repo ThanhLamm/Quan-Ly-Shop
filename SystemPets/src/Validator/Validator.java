@@ -6,7 +6,6 @@
 package Validator;
 
 import java.awt.Color;
-import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 /**
@@ -14,7 +13,7 @@ import javax.swing.JTextField;
  * @author Thinkpad
  */
 public class Validator {
-  public boolean checkEmpty(JTextField field,StringBuilder sb, String msg) {
+  public static boolean checkEmpty(JTextField field,StringBuilder sb, String msg) {
     boolean check = true;
     if (field.getText().equals("")) {
       sb.append(msg).append("\n");

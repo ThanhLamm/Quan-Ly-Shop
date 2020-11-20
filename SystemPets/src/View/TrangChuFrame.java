@@ -5,6 +5,7 @@
  */
 package View;
 
+import Utils.Auth;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -13,7 +14,6 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.Timer;
@@ -32,7 +32,8 @@ public class TrangChuFrame extends javax.swing.JFrame {
   public TrangChuFrame() {
     customUI();
     initComponents();
-    init();    
+    init();
+//    security();
   }
 
   /**
@@ -1052,16 +1053,16 @@ public class TrangChuFrame extends javax.swing.JFrame {
     /* Create and display the form */
     java.awt.EventQueue.invokeLater(new Runnable() {
       public void run() {
-          DangNhapDialog dialog = new DangNhapDialog(new javax.swing.JFrame(), true);
-        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-          @Override
-          public void windowClosing(java.awt.event.WindowEvent e) {
-            System.exit(0);
-          }
-        });
-        dialog.setVisible(true);
-//        TrangChuFrame a = new TrangChuFrame();
-//        a.setVisible(true);
+//          DangNhapDialog dialog = new DangNhapDialog(new javax.swing.JFrame(), true);
+//        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+//          @Override
+//          public void windowClosing(java.awt.event.WindowEvent e) {
+//            System.exit(0);
+//          }
+//        });
+//        dialog.setVisible(true);
+        TrangChuFrame a = new TrangChuFrame();
+        a.setVisible(true);
       }
     });
   }
@@ -1166,9 +1167,17 @@ public class TrangChuFrame extends javax.swing.JFrame {
       }
     } catch (Exception e) {
       e.printStackTrace();
+    }  
+  }
+  
+  void security() {
+    if (Auth.user.isVAITRO()) {
+      String user = Auth.user.getTENNV();
+      lblUser.setText(user);
+    } else {
+      String user = Auth.user.getTENNV();
+      lblUser.setText(user);
     }
-    
-    
   }
   
   void init() {
@@ -1180,7 +1189,6 @@ public class TrangChuFrame extends javax.swing.JFrame {
         lblTime.setText(now.format(dtf).toString());
       }
     }).start();
-    
 
     this.setLocationRelativeTo(null);
     URL path = TrangChuFrame.class.getResource("/Image/fav.png");
@@ -1192,8 +1200,6 @@ public class TrangChuFrame extends javax.swing.JFrame {
     lblTitle.setText("ĐĂNG KÍ HOÁ ĐƠN");
     hiddenPNL();
     unhidePNL(pnlHoaDon);
-    
-    
   }
 
   void setColor(JPanel pane) {

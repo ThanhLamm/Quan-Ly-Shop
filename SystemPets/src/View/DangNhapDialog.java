@@ -5,8 +5,12 @@
  */
 package View;
 
+import Dao.NhanVienDao;
+import JdbcConnection.JdbcHelper;
+import Utils.Auth;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import model.NhanVien;
 
 /**
  *
@@ -15,6 +19,9 @@ import javax.swing.UIManager;
 public class DangNhapDialog extends javax.swing.JDialog {
 
   public static TrangChuFrame tc = new TrangChuFrame();
+  NhanVienDao nvDao;
+  JdbcHelper connect;
+  
   /**
    * Creates new form Login
    */
@@ -39,7 +46,6 @@ public class DangNhapDialog extends javax.swing.JDialog {
     jSeparator2 = new javax.swing.JSeparator();
     txtMK = new javax.swing.JPasswordField();
     jSeparator4 = new javax.swing.JSeparator();
-    bait = new javax.swing.JTextField();
     jPanel2 = new javax.swing.JPanel();
     jLabel7 = new javax.swing.JLabel();
     exit = new javax.swing.JLabel();
@@ -62,43 +68,24 @@ public class DangNhapDialog extends javax.swing.JDialog {
     jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
     txtTK.setBackground(new java.awt.Color(253, 232, 252));
-    txtTK.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-    txtTK.setForeground(new java.awt.Color(204, 204, 204));
-    txtTK.setText("Nhập tài khoản");
+    txtTK.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+    txtTK.setForeground(new java.awt.Color(0, 0, 0));
     txtTK.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(253, 232, 252)));
     txtTK.setOpaque(false);
-    txtTK.addFocusListener(new java.awt.event.FocusAdapter() {
-      public void focusGained(java.awt.event.FocusEvent evt) {
-        txtTKFocusGained(evt);
-      }
-    });
     jPanel1.add(txtTK, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, 280, 40));
 
     jSeparator2.setForeground(new java.awt.Color(102, 102, 102));
     jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 340, 340, 10));
 
     txtMK.setBackground(new java.awt.Color(253, 232, 252));
-    txtMK.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-    txtMK.setForeground(new java.awt.Color(204, 204, 204));
-    txtMK.setText("Nhập mật khẩu");
+    txtMK.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+    txtMK.setForeground(new java.awt.Color(0, 0, 0));
     txtMK.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(253, 232, 252)));
     txtMK.setOpaque(false);
-    txtMK.addFocusListener(new java.awt.event.FocusAdapter() {
-      public void focusGained(java.awt.event.FocusEvent evt) {
-        txtMKFocusGained(evt);
-      }
-    });
     jPanel1.add(txtMK, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 300, 280, 40));
 
     jSeparator4.setForeground(new java.awt.Color(102, 102, 102));
     jPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 230, 340, 10));
-
-    bait.setBackground(new java.awt.Color(253, 232, 252));
-    bait.setForeground(new java.awt.Color(253, 232, 252));
-    bait.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(253, 232, 252)));
-    bait.setCaretColor(new java.awt.Color(253, 232, 252));
-    bait.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-    jPanel1.add(bait, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 270, -1, -1));
 
     jPanel2.setBackground(new java.awt.Color(204, 204, 204));
     jPanel2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -217,18 +204,6 @@ public class DangNhapDialog extends javax.swing.JDialog {
 
     pack();
   }// </editor-fold>//GEN-END:initComponents
-
-  private void txtTKFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTKFocusGained
-    // TODO add your handling code here:
-    txtTK.setText("");
-    txtTK.setForeground(new java.awt.Color(102, 102, 102));
-  }//GEN-LAST:event_txtTKFocusGained
-
-  private void txtMKFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMKFocusGained
-    // TODO add your handling code here:
-    txtMK.setText("");
-    txtMK.setForeground(new java.awt.Color(102, 102, 102));
-  }//GEN-LAST:event_txtMKFocusGained
 
   private void lblDangNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDangNhapMouseClicked
     // TODO add your handling code here:
@@ -349,7 +324,6 @@ public class DangNhapDialog extends javax.swing.JDialog {
   
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
-  private javax.swing.JTextField bait;
   private javax.swing.JLabel exit;
   private javax.swing.JLabel jLabel1;
   private javax.swing.JLabel jLabel2;
@@ -383,15 +357,38 @@ void customUI() {
     }
 }
   
-void init() {
+  void init() {
     this.setLocationRelativeTo(null);
-    bait.requestFocus();
   }
 
   private void login() {
-    this.setVisible(false);
-    tc.setVisible(true);
-    JOptionPane.showMessageDialog(this, "Đăng nhập thành công !");    
+    if(validator().length() > 0) {
+      JOptionPane.showMessageDialog(this, validator()+"Đăng nhập thất bại !", "Lỗi", HEIGHT);
+      return;
+    }
+    connect = new JdbcHelper();
+    nvDao = new NhanVienDao();
+    NhanVien nv = nvDao.findByMaNV(txtTK.getText(), connect);
+    if(nv==null) {
+      JOptionPane.showMessageDialog(this, "Tài khoản không tồn tại", "Lỗi", HEIGHT);
+      txtTK.requestFocus();
+      txtMK.setText("");
+    } else if(!nv.getMATKHAU().equals(txtMK.getText())) {
+      JOptionPane.showMessageDialog(this, "Sai mật khẩu", "Lỗi", HEIGHT);
+      txtMK.requestFocus();
+    } else {
+      Auth.user = nv;
+      this.setVisible(false);
+      tc.setVisible(true);
+//      System.out.println(Auth.user.getTENNV());
+      JOptionPane.showMessageDialog(this, "Đăng nhập thành công !"); 
+    }       
   }
-
+  
+  StringBuilder validator() {
+    StringBuilder sb = new StringBuilder();
+    Validator.Validator.checkEmpty(txtTK, sb, "Tài khoản không được để trống !");
+    Validator.Validator.checkEmpty(txtMK, sb, "Mật khẩu không được để trống !");
+    return sb;
+  }
 }

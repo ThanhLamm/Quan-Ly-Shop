@@ -17,7 +17,4 @@ public class Auth {
   public static void clear() {
     Auth.user = null;
   }
-  public static boolean isLogin() {
-    return Auth.user !=null;
-  }
 }
