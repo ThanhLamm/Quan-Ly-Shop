@@ -5,16 +5,23 @@
  */
 package View;
 
-import static View.DangNhapDialog.tc;
+import Dao.NhanVienDao;
+import JdbcConnection.JdbcHelper;
+import Utils.Auth;
+import Validator.Validator;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import model.NhanVien;
 
 /**
  *
  * @author Thinkpad
  */
 public class doiMKDialog extends javax.swing.JDialog {
-
+  
+  NhanVienDao nvDAO;
+  JdbcHelper connect;
+  
   /**
    * Creates new form themDVDialog
    */
@@ -36,10 +43,10 @@ public class doiMKDialog extends javax.swing.JDialog {
     buttonGroup1 = new javax.swing.ButtonGroup();
     jPanel2 = new javax.swing.JPanel();
     jPanel1 = new javax.swing.JPanel();
-    jTextField4 = new javax.swing.JTextField();
-    jTextField3 = new javax.swing.JTextField();
-    jTextField2 = new javax.swing.JTextField();
-    jTextField1 = new javax.swing.JTextField();
+    txtXacNhan = new javax.swing.JTextField();
+    txtMKmoi = new javax.swing.JTextField();
+    txtMKcu = new javax.swing.JTextField();
+    txtTaiKhoan = new javax.swing.JTextField();
     jLabel1 = new javax.swing.JLabel();
     jLabel2 = new javax.swing.JLabel();
     jLabel3 = new javax.swing.JLabel();
@@ -56,25 +63,26 @@ public class doiMKDialog extends javax.swing.JDialog {
     jPanel1.setBackground(new java.awt.Color(241, 255, 246));
     jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-    jTextField4.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jTextField4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
-    jTextField4.setOpaque(false);
-    jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, 230, -1));
+    txtXacNhan.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+    txtXacNhan.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
+    txtXacNhan.setOpaque(false);
+    jPanel1.add(txtXacNhan, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, 230, -1));
 
-    jTextField3.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jTextField3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
-    jTextField3.setOpaque(false);
-    jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 230, -1));
+    txtMKmoi.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+    txtMKmoi.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
+    txtMKmoi.setOpaque(false);
+    jPanel1.add(txtMKmoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 230, -1));
 
-    jTextField2.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jTextField2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
-    jTextField2.setOpaque(false);
-    jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 230, -1));
+    txtMKcu.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+    txtMKcu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
+    txtMKcu.setOpaque(false);
+    jPanel1.add(txtMKcu, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 230, -1));
 
-    jTextField1.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
-    jTextField1.setOpaque(false);
-    jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 30, 230, -1));
+    txtTaiKhoan.setEditable(false);
+    txtTaiKhoan.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+    txtTaiKhoan.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
+    txtTaiKhoan.setOpaque(false);
+    jPanel1.add(txtTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 30, 230, -1));
 
     jLabel1.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
     jLabel1.setText("Tên tài khoản:");
@@ -150,10 +158,7 @@ public class doiMKDialog extends javax.swing.JDialog {
 
   private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
     // TODO add your handling code here:
-    JOptionPane.showMessageDialog(this, "Đổi mật khẩu thành công !");
-    this.setVisible(false);
-    tc.setVisible(false);
-    new DangNhapDialog(null, true).setVisible(true);
+    doiMK();
   }//GEN-LAST:event_btnXacNhanActionPerformed
 
   /**
@@ -239,10 +244,10 @@ public class doiMKDialog extends javax.swing.JDialog {
   private javax.swing.JLabel jLabel4;
   private javax.swing.JPanel jPanel1;
   private javax.swing.JPanel jPanel2;
-  private javax.swing.JTextField jTextField1;
-  private javax.swing.JTextField jTextField2;
-  private javax.swing.JTextField jTextField3;
-  private javax.swing.JTextField jTextField4;
+  private javax.swing.JTextField txtMKcu;
+  private javax.swing.JTextField txtMKmoi;
+  private javax.swing.JTextField txtTaiKhoan;
+  private javax.swing.JTextField txtXacNhan;
   // End of variables declaration//GEN-END:variables
   void customUI() {
     //custom UI
@@ -260,5 +265,40 @@ public class doiMKDialog extends javax.swing.JDialog {
 
   void init() {
     this.setLocationRelativeTo(null);
+    txtTaiKhoan.setText(Auth.user.getMaNV());
+  }
+  
+  StringBuilder validator() {
+    StringBuilder sb = new StringBuilder();
+    Validator.checkEmpty(txtMKcu, sb, "Hãy nhập mật khẩu cũ");
+    Validator.checkEmpty(txtMKmoi, sb, "Hãy nhập mật khẩu mới");
+    Validator.checkEmpty(txtXacNhan, sb, "Hãy xác nhận lại mật khẩu");
+    return sb;
+  }
+  
+  void doiMK() {
+    if(validator().length() > 0) {
+      JOptionPane.showMessageDialog(this, validator() + "Đổi mật khẩu thất bại !", "Lỗi", HEIGHT);
+      return;
+    }
+    if(!txtMKmoi.getText().equals(txtXacNhan.getText())) {
+      JOptionPane.showMessageDialog(this, "Xác nhận mật khẩu lỗi !", "Lỗi", HEIGHT);
+      txtXacNhan.requestFocus();
+      return;
+    }
+    connect = new JdbcHelper();
+    nvDAO = new NhanVienDao();
+    NhanVien nv = nvDAO.findByMaNV(txtTaiKhoan.getText(), connect);
+    if(!nv.getMatKhau().equals(txtMKcu.getText())) {
+      JOptionPane.showMessageDialog(this, "Mật khẩu cũ không đúng !", "Lỗi", HEIGHT);
+      return;
+    }
+    if(nvDAO.updateNV(txtTaiKhoan.getText(), txtMKmoi.getText(), connect) == 1) {
+      JOptionPane.showMessageDialog(this, "Đổi mật khẩu thành công !");
+      Auth.user.setMatKhau(txtMKmoi.getText());
+      this.setVisible(false);
+    } else {
+      JOptionPane.showMessageDialog(this, "Đổi mật khẩu thất bại !", "Lỗi", HEIGHT);
+    }
   }
 }

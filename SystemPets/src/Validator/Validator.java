@@ -25,7 +25,7 @@ public class Validator {
     return check;
   }
   
-  public boolean CheckNumber(JTextField field, StringBuilder sb, String msg) {
+  public static boolean CheckNumber(JTextField field, StringBuilder sb, String msg) {
     boolean check = true;
     if (!checkEmpty(field, sb, msg)) {
       return false;

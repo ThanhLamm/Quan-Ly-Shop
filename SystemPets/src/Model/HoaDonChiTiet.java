@@ -10,58 +10,69 @@ package model;
  * @author TechCare
  */
 public class HoaDonChiTiet {
-    int MAHDCT,SOLUONGMUA;
-    String MAHD,MADV,MASP;
+
+    int MaHDCT, SoLuongMua;
+    String MaHD, MaDV, MaSP;
+    double Gia;
 
     public HoaDonChiTiet() {
     }
 
-    public HoaDonChiTiet(int MAHDCT, int SOLUONGMUA, String MAHD, String MADV, String MASP) {
-        this.MAHDCT = MAHDCT;
-        this.SOLUONGMUA = SOLUONGMUA;
-        this.MAHD = MAHD;
-        this.MADV = MADV;
-        this.MASP = MASP;
+    public HoaDonChiTiet(int MaHDCT, int SoLuongMua, String MaHD, String MaDV, String MaSP, double Gia) {
+        this.MaHDCT = MaHDCT;
+        this.SoLuongMua = SoLuongMua;
+        this.MaHD = MaHD;
+        this.MaDV = MaDV;
+        this.MaSP = MaSP;
+        this.Gia = Gia;
     }
 
-    public int getMAHDCT() {
-        return MAHDCT;
+    public int getMaHDCT() {
+        return MaHDCT;
     }
 
-    public void setMAHDCT(int MAHDCT) {
-        this.MAHDCT = MAHDCT;
+    public void setMaHDCT(int MaHDCT) {
+        this.MaHDCT = MaHDCT;
     }
 
-    public int getSOLUONGMUA() {
-        return SOLUONGMUA;
+    public int getSoLuongMua() {
+        return SoLuongMua;
     }
 
-    public void setSOLUONGMUA(int SOLUONGMUA) {
-        this.SOLUONGMUA = SOLUONGMUA;
+    public void setSoLuongMua(int SoLuongMua) {
+        this.SoLuongMua = SoLuongMua;
     }
 
-    public String getMAHD() {
-        return MAHD;
+    public String getMaHD() {
+        return MaHD;
     }
 
-    public void setMAHD(String MAHD) {
-        this.MAHD = MAHD;
+    public void setMaHD(String MaHD) {
+        this.MaHD = MaHD;
     }
 
-    public String getMADV() {
-        return MADV;
+    public String getMaDV() {
+        return MaDV;
     }
 
-    public void setMADV(String MADV) {
-        this.MADV = MADV;
+    public void setMaDV(String MaDV) {
+        this.MaDV = MaDV;
     }
 
-    public String getMASP() {
-        return MASP;
+    public String getMaSP() {
+        return MaSP;
     }
 
-    public void setMASP(String MASP) {
-        this.MASP = MASP;
+    public void setMaSP(String MaSP) {
+        this.MaSP = MaSP;
     }
-    
+
+    public double getGia() {
+        return Gia;
+    }
+
+    public void setGia(double Gia) {
+        this.Gia = Gia;
+    }
+
 }

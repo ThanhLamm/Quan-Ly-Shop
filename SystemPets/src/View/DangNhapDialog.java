@@ -18,7 +18,6 @@ import model.NhanVien;
  */
 public class DangNhapDialog extends javax.swing.JDialog {
 
-  public static TrangChuFrame tc = new TrangChuFrame();
   NhanVienDao nvDao;
   JdbcHelper connect;
   
@@ -69,20 +68,20 @@ public class DangNhapDialog extends javax.swing.JDialog {
 
     txtTK.setBackground(new java.awt.Color(253, 232, 252));
     txtTK.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-    txtTK.setForeground(new java.awt.Color(0, 0, 0));
+    txtTK.setForeground(new java.awt.Color(102, 102, 102));
     txtTK.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(253, 232, 252)));
     txtTK.setOpaque(false);
-    jPanel1.add(txtTK, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, 280, 40));
+    jPanel1.add(txtTK, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 200, 280, 30));
 
     jSeparator2.setForeground(new java.awt.Color(102, 102, 102));
     jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 340, 340, 10));
 
     txtMK.setBackground(new java.awt.Color(253, 232, 252));
     txtMK.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-    txtMK.setForeground(new java.awt.Color(0, 0, 0));
+    txtMK.setForeground(new java.awt.Color(102, 102, 102));
     txtMK.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(253, 232, 252)));
     txtMK.setOpaque(false);
-    jPanel1.add(txtMK, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 300, 280, 40));
+    jPanel1.add(txtMK, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 310, 280, 30));
 
     jSeparator4.setForeground(new java.awt.Color(102, 102, 102));
     jPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 230, 340, 10));
@@ -373,14 +372,13 @@ void customUI() {
       JOptionPane.showMessageDialog(this, "Tài khoản không tồn tại", "Lỗi", HEIGHT);
       txtTK.requestFocus();
       txtMK.setText("");
-    } else if(!nv.getMATKHAU().equals(txtMK.getText())) {
+    } else if(!nv.getMatKhau().equals(txtMK.getText())) {
       JOptionPane.showMessageDialog(this, "Sai mật khẩu", "Lỗi", HEIGHT);
       txtMK.requestFocus();
     } else {
       Auth.user = nv;
       this.setVisible(false);
-      tc.setVisible(true);
-//      System.out.println(Auth.user.getTENNV());
+      new TrangChuFrame().setVisible(true);
       JOptionPane.showMessageDialog(this, "Đăng nhập thành công !"); 
     }       
   }

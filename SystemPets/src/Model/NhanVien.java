@@ -13,66 +13,66 @@ import java.util.Date;
  */
 public class NhanVien {
 
-  String MANV, TENNV, MATKHAU, DIACHI, EMAIL, SDT, HINHANH;
-  boolean VAITRO;
-  Date NGAYSINH, NGAYVAOLAM;
-  double LUONG;
+  String MaNV, TenNV, MatKhau, DiaChi, Email, SDT, HinhAnh;
+  boolean VaiTro;
+  Date NgaySinh, NgayVaoLam;
+  double Luong;
 
   public NhanVien() {
   }
 
-  public NhanVien(String MANV, String TENNV, String MATKHAU, String DIACHI, String EMAIL, String SDT, String HINHANH, boolean VAITRO, Date NGAYSINH, Date NGAYVAOLAM, double LUONG) {
-    this.MANV = MANV;
-    this.TENNV = TENNV;
-    this.MATKHAU = MATKHAU;
-    this.DIACHI = DIACHI;
-    this.EMAIL = EMAIL;
+  public NhanVien(String MaNV, String TenNV, String MatKhau, String DiaChi, String Email, String SDT, String HinhAnh, boolean VaiTro, Date NgaySinh, Date NgayVaoLam, double Luong) {
+    this.MaNV = MaNV;
+    this.TenNV = TenNV;
+    this.MatKhau = MatKhau;
+    this.DiaChi = DiaChi;
+    this.Email = Email;
     this.SDT = SDT;
-    this.HINHANH = HINHANH;
-    this.VAITRO = VAITRO;
-    this.NGAYSINH = NGAYSINH;
-    this.NGAYVAOLAM = NGAYVAOLAM;
-    this.LUONG = LUONG;
+    this.HinhAnh = HinhAnh;
+    this.VaiTro = VaiTro;
+    this.NgaySinh = NgaySinh;
+    this.NgayVaoLam = NgayVaoLam;
+    this.Luong = Luong;
   }
 
-  public String getMANV() {
-    return MANV;
+  public String getMaNV() {
+    return MaNV;
   }
 
-  public void setMANV(String MANV) {
-    this.MANV = MANV;
+  public void setMaNV(String MaNV) {
+    this.MaNV = MaNV;
   }
 
-  public String getTENNV() {
-    return TENNV;
+  public String getTenNV() {
+    return TenNV;
   }
 
-  public void setTENNV(String TENNV) {
-    this.TENNV = TENNV;
+  public void setTenNV(String TenNV) {
+    this.TenNV = TenNV;
   }
 
-  public String getMATKHAU() {
-    return MATKHAU;
+  public String getMatKhau() {
+    return MatKhau;
   }
 
-  public void setMATKHAU(String MATKHAU) {
-    this.MATKHAU = MATKHAU;
+  public void setMatKhau(String MatKhau) {
+    this.MatKhau = MatKhau;
   }
 
-  public String getDIACHI() {
-    return DIACHI;
+  public String getDiaChi() {
+    return DiaChi;
   }
 
-  public void setDIACHI(String DIACHI) {
-    this.DIACHI = DIACHI;
+  public void setDiaChi(String DiaChi) {
+    this.DiaChi = DiaChi;
   }
 
-  public String getEMAIL() {
-    return EMAIL;
+  public String getEmail() {
+    return Email;
   }
 
-  public void setEMAIL(String EMAIL) {
-    this.EMAIL = EMAIL;
+  public void setEmail(String Email) {
+    this.Email = Email;
   }
 
   public String getSDT() {
@@ -83,44 +83,44 @@ public class NhanVien {
     this.SDT = SDT;
   }
 
-  public String getHINHANH() {
-    return HINHANH;
+  public String getHinhAnh() {
+    return HinhAnh;
   }
 
-  public void setHINHANH(String HINHANH) {
-    this.HINHANH = HINHANH;
+  public void setHinhAnh(String HinhAnh) {
+    this.HinhAnh = HinhAnh;
   }
 
-  public boolean isVAITRO() {
-    return VAITRO;
+  public boolean isVaiTro() {
+    return VaiTro;
   }
 
-  public void setVAITRO(boolean VAITRO) {
-    this.VAITRO = VAITRO;
+  public void setVaiTro(boolean VaiTro) {
+    this.VaiTro = VaiTro;
   }
 
-  public Date getNGAYSINH() {
-    return NGAYSINH;
+  public Date getNgaySinh() {
+    return NgaySinh;
   }
 
-  public void setNGAYSINH(Date NGAYSINH) {
-    this.NGAYSINH = NGAYSINH;
+  public void setNgaySinh(Date NgaySinh) {
+    this.NgaySinh = NgaySinh;
   }
 
-  public Date getNGAYVAOLAM() {
-    return NGAYVAOLAM;
+  public Date getNgayVaoLam() {
+    return NgayVaoLam;
   }
 
-  public void setNGAYVAOLAM(Date NGAYVAOLAM) {
-    this.NGAYVAOLAM = NGAYVAOLAM;
+  public void setNgayVaoLam(Date NgayVaoLam) {
+    this.NgayVaoLam = NgayVaoLam;
   }
 
-  public double getLUONG() {
-    return LUONG;
+  public double getLuong() {
+    return Luong;
   }
 
-  public void setLUONG(double LUONG) {
-    this.LUONG = LUONG;
+  public void setLuong(double Luong) {
+    this.Luong = Luong;
   }
 
 }

@@ -5,12 +5,24 @@
  */
 package View;
 
+import Dao.NhanVienDao;
+import JdbcConnection.JdbcHelper;
+import Utils.DateHelper;
 import Utils.ImageHelp;
+import Validator.Validator;
+import static View.TrangChuFrame.tblNV;
+import java.awt.HeadlessException;
 import java.awt.Image;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
+import model.NhanVien;
 
 /**
  *
@@ -18,6 +30,10 @@ import javax.swing.UIManager;
  */
 public class themNVDialog extends javax.swing.JDialog {
 
+  NhanVienDao nvDAO;
+  JdbcHelper connect;
+  ArrayList<NhanVien> listNV;
+  
   /**
    * Creates new form themDVDialog
    */
@@ -40,10 +56,10 @@ public class themNVDialog extends javax.swing.JDialog {
     buttonGroup2 = new javax.swing.ButtonGroup();
     jPanel2 = new javax.swing.JPanel();
     jPanel1 = new javax.swing.JPanel();
-    jTextField4 = new javax.swing.JTextField();
-    jTextField3 = new javax.swing.JTextField();
-    jTextField2 = new javax.swing.JTextField();
-    jTextField1 = new javax.swing.JTextField();
+    txtDiaChi = new javax.swing.JTextField();
+    txtMatKhau = new javax.swing.JTextField();
+    txtTenNV = new javax.swing.JTextField();
+    txtMaNV = new javax.swing.JTextField();
     jLabel1 = new javax.swing.JLabel();
     jLabel2 = new javax.swing.JLabel();
     jLabel3 = new javax.swing.JLabel();
@@ -51,15 +67,17 @@ public class themNVDialog extends javax.swing.JDialog {
     jLabel5 = new javax.swing.JLabel();
     btnXacNhan = new javax.swing.JButton();
     btnHuy = new javax.swing.JButton();
-    jTextField5 = new javax.swing.JTextField();
+    txtNgaySinh = new javax.swing.JTextField();
     jLabel6 = new javax.swing.JLabel();
-    jTextField6 = new javax.swing.JTextField();
+    txtEmail = new javax.swing.JTextField();
     lblAnh = new javax.swing.JLabel();
     jLabel8 = new javax.swing.JLabel();
-    jTextField7 = new javax.swing.JTextField();
+    txtLuong = new javax.swing.JTextField();
     jLabel9 = new javax.swing.JLabel();
-    jRadioButton1 = new javax.swing.JRadioButton();
-    jRadioButton2 = new javax.swing.JRadioButton();
+    rdoQL = new javax.swing.JRadioButton();
+    rdoNV = new javax.swing.JRadioButton();
+    txtSDT = new javax.swing.JTextField();
+    jLabel7 = new javax.swing.JLabel();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setUndecorated(true);
@@ -70,25 +88,25 @@ public class themNVDialog extends javax.swing.JDialog {
     jPanel1.setBackground(new java.awt.Color(241, 255, 246));
     jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-    jTextField4.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jTextField4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
-    jTextField4.setOpaque(false);
-    jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, 230, -1));
+    txtDiaChi.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+    txtDiaChi.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
+    txtDiaChi.setOpaque(false);
+    jPanel1.add(txtDiaChi, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, 230, -1));
 
-    jTextField3.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jTextField3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
-    jTextField3.setOpaque(false);
-    jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 230, -1));
+    txtMatKhau.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+    txtMatKhau.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
+    txtMatKhau.setOpaque(false);
+    jPanel1.add(txtMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 230, -1));
 
-    jTextField2.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jTextField2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
-    jTextField2.setOpaque(false);
-    jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 230, -1));
+    txtTenNV.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+    txtTenNV.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
+    txtTenNV.setOpaque(false);
+    jPanel1.add(txtTenNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 230, -1));
 
-    jTextField1.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
-    jTextField1.setOpaque(false);
-    jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 230, -1));
+    txtMaNV.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+    txtMaNV.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
+    txtMaNV.setOpaque(false);
+    jPanel1.add(txtMaNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 230, -1));
 
     jLabel1.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
     jLabel1.setText("Mã nhân viên:");
@@ -113,7 +131,12 @@ public class themNVDialog extends javax.swing.JDialog {
     btnXacNhan.setBackground(new java.awt.Color(0, 255, 255));
     btnXacNhan.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
     btnXacNhan.setText("Xác nhận");
-    jPanel1.add(btnXacNhan, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 400, -1, -1));
+    btnXacNhan.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnXacNhanActionPerformed(evt);
+      }
+    });
+    jPanel1.add(btnXacNhan, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 390, -1, -1));
 
     btnHuy.setBackground(new java.awt.Color(0, 255, 255));
     btnHuy.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
@@ -123,24 +146,24 @@ public class themNVDialog extends javax.swing.JDialog {
         btnHuyActionPerformed(evt);
       }
     });
-    jPanel1.add(btnHuy, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 400, -1, -1));
+    jPanel1.add(btnHuy, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 390, -1, -1));
 
-    jTextField5.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jTextField5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
-    jTextField5.setOpaque(false);
-    jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 230, -1));
+    txtNgaySinh.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+    txtNgaySinh.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
+    txtNgaySinh.setOpaque(false);
+    jPanel1.add(txtNgaySinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 230, -1));
 
     jLabel6.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
     jLabel6.setText("Email:");
     jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, -1, -1));
 
-    jTextField6.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jTextField6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
-    jTextField6.setOpaque(false);
-    jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 330, 230, -1));
+    txtEmail.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+    txtEmail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
+    txtEmail.setOpaque(false);
+    jPanel1.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 330, 230, -1));
 
     lblAnh.setBackground(new java.awt.Color(237, 240, 240));
-    lblAnh.setIcon(new javax.swing.ImageIcon("C:\\Users\\lam03\\Documents\\NetBeansProjects\\SystemPets\\logos\\images.jpg")); // NOI18N
+    lblAnh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/images.jpg"))); // NOI18N
     lblAnh.setToolTipText("images.img");
     lblAnh.setOpaque(true);
     lblAnh.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -154,26 +177,36 @@ public class themNVDialog extends javax.swing.JDialog {
     jLabel8.setText("Vai trò:");
     jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 330, -1, -1));
 
-    jTextField7.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jTextField7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
-    jTextField7.setOpaque(false);
-    jPanel1.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 270, 190, -1));
+    txtLuong.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+    txtLuong.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
+    txtLuong.setOpaque(false);
+    jPanel1.add(txtLuong, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 270, 190, -1));
 
     jLabel9.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
     jLabel9.setText("Lương:");
     jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 270, -1, -1));
 
-    buttonGroup2.add(jRadioButton1);
-    jRadioButton1.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jRadioButton1.setText("Quản lý");
-    jRadioButton1.setOpaque(false);
-    jPanel1.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 330, -1, -1));
+    buttonGroup2.add(rdoQL);
+    rdoQL.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+    rdoQL.setText("Quản lý");
+    rdoQL.setOpaque(false);
+    jPanel1.add(rdoQL, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 330, -1, -1));
 
-    buttonGroup2.add(jRadioButton2);
-    jRadioButton2.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jRadioButton2.setText("Nhân viên");
-    jRadioButton2.setOpaque(false);
-    jPanel1.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 330, -1, -1));
+    buttonGroup2.add(rdoNV);
+    rdoNV.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+    rdoNV.setSelected(true);
+    rdoNV.setText("Nhân viên");
+    rdoNV.setOpaque(false);
+    jPanel1.add(rdoNV, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 330, -1, -1));
+
+    txtSDT.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+    txtSDT.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
+    txtSDT.setOpaque(false);
+    jPanel1.add(txtSDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 390, 230, -1));
+
+    jLabel7.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+    jLabel7.setText("Số điện thoại:");
+    jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, -1, -1));
 
     javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
     jPanel2.setLayout(jPanel2Layout);
@@ -188,7 +221,7 @@ public class themNVDialog extends javax.swing.JDialog {
       jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(jPanel2Layout.createSequentialGroup()
         .addGap(26, 26, 26)
-        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
+        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
         .addContainerGap())
     );
 
@@ -212,17 +245,14 @@ public class themNVDialog extends javax.swing.JDialog {
   }//GEN-LAST:event_btnHuyActionPerformed
 
   private void lblAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAnhMouseClicked
-    // TODO add your handling code here:
-    JFileChooser fchooser = new JFileChooser();
-    if (fchooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-      File file = fchooser.getSelectedFile();
-      ImageHelp.save(file);
-      ImageIcon icon = ImageHelp.read(file.getName());
-      Image scaleIcon = icon.getImage().getScaledInstance(lblAnh.getWidth(), lblAnh.getHeight(), Image.SCALE_DEFAULT);
-      lblAnh.setIcon(new javax.swing.ImageIcon(scaleIcon));
-      lblAnh.setToolTipText(file.getName());
-    }
+    selectImage();
   }//GEN-LAST:event_lblAnhMouseClicked
+
+  private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
+    // TODO add your handling code here:
+    themNV();
+  }//GEN-LAST:event_btnXacNhanActionPerformed
+
 
   /**
    * @param args the command line arguments
@@ -292,20 +322,22 @@ public class themNVDialog extends javax.swing.JDialog {
   private javax.swing.JLabel jLabel4;
   private javax.swing.JLabel jLabel5;
   private javax.swing.JLabel jLabel6;
+  private javax.swing.JLabel jLabel7;
   private javax.swing.JLabel jLabel8;
   private javax.swing.JLabel jLabel9;
   private javax.swing.JPanel jPanel1;
   private javax.swing.JPanel jPanel2;
-  private javax.swing.JRadioButton jRadioButton1;
-  private javax.swing.JRadioButton jRadioButton2;
-  private javax.swing.JTextField jTextField1;
-  private javax.swing.JTextField jTextField2;
-  private javax.swing.JTextField jTextField3;
-  private javax.swing.JTextField jTextField4;
-  private javax.swing.JTextField jTextField5;
-  private javax.swing.JTextField jTextField6;
-  private javax.swing.JTextField jTextField7;
   private javax.swing.JLabel lblAnh;
+  private javax.swing.JRadioButton rdoNV;
+  private javax.swing.JRadioButton rdoQL;
+  private javax.swing.JTextField txtDiaChi;
+  private javax.swing.JTextField txtEmail;
+  private javax.swing.JTextField txtLuong;
+  private javax.swing.JTextField txtMaNV;
+  private javax.swing.JTextField txtMatKhau;
+  private javax.swing.JTextField txtNgaySinh;
+  private javax.swing.JTextField txtSDT;
+  private javax.swing.JTextField txtTenNV;
   // End of variables declaration//GEN-END:variables
   void customUI() {
     //custom UI
@@ -323,5 +355,101 @@ public class themNVDialog extends javax.swing.JDialog {
 
   void init() {
     this.setLocationRelativeTo(null);
+  }
+  
+    public void selectImage() throws HeadlessException {
+    // TODO add your handling code here:
+    JFileChooser fchooser = new JFileChooser();
+    if (fchooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+      File file = fchooser.getSelectedFile();
+      ImageHelp.save(file);
+      ImageIcon icon = ImageHelp.read(file.getName());
+      Image scaleIcon = icon.getImage().getScaledInstance(lblAnh.getWidth(), lblAnh.getHeight(), Image.SCALE_DEFAULT);
+      lblAnh.setIcon(new javax.swing.ImageIcon(scaleIcon));
+      lblAnh.setToolTipText(file.getName());
+    }
+  }
+    
+  StringBuilder validator() {
+    StringBuilder sb = new StringBuilder();
+    Validator.checkEmpty(txtMaNV, sb, "Mã nhân viên không được để trống !");
+    Validator.checkEmpty(txtTenNV, sb, "Tên không được để trống !");
+    Validator.checkEmpty(txtMatKhau, sb, "Mật khẩu không được để trống !");
+    Validator.checkEmpty(txtNgaySinh, sb, "Ngày sinh không được để trống !");
+    Validator.checkEmpty(txtDiaChi, sb, "Địa chỉ không được để trông !");
+    Validator.checkEmpty(txtEmail, sb, "Email không được để trống !");
+    Validator.CheckNumber(txtLuong, sb, "Lương không được để trống !");
+    return sb;
+  }
+    
+  void themNV() {
+    if(validator().length() > 0) {
+      JOptionPane.showMessageDialog(this, validator() + "Đăng nhập thất bại !", "Lỗi", HEIGHT);
+      return;
+    }
+    
+    connect = new JdbcHelper();
+    nvDAO = new NhanVienDao();
+    NhanVien nv = nvDAO.findByMaNV(txtMaNV.getText(), connect);
+    if(nv!=null) {
+      JOptionPane.showMessageDialog(this, "Nhân viên có mã "+txtMaNV.getText()+" đã tồn tại !", "Lỗi", HEIGHT);
+      txtMaNV.requestFocus();
+      return;
+    }
+    
+    Date date;
+    try {
+      date = DateHelper.toDate(txtNgaySinh.getText(), "dd-MM-yyyy");
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(this, "Hãy nhập đúng định dạng ngày (ngày-tháng-năm)!", "Lỗi", HEIGHT);
+      txtNgaySinh.requestFocus();
+      return;
+    }
+    
+    NhanVien nvNew = new NhanVien();
+    nvNew.setMaNV(txtMaNV.getText());
+    nvNew.setTenNV(txtTenNV.getText());
+    nvNew.setMatKhau(txtMatKhau.getText());
+    nvNew.setNgaySinh(date);
+    nvNew.setDiaChi(txtDiaChi.getText());
+    nvNew.setEmail(txtEmail.getText());
+    nvNew.setSDT(txtSDT.getText());
+    nvNew.setNgayVaoLam(DateHelper.now());
+    nvNew.setLuong(Double.parseDouble(txtLuong.getText()));
+    nvNew.setHinhAnh(lblAnh.getToolTipText());
+    if(rdoNV.isSelected()) {
+      nvNew.setVaiTro(false);
+    } else {
+      nvNew.setVaiTro(true);
+    }
+    
+    String pattern = "^[\\w]+@.+";
+    if(!Pattern.matches(pattern, txtEmail.getText())) {
+      JOptionPane.showMessageDialog(this, "Hãy nhập đúng định dạng Email ! (lam@gmail.com)");
+      return;
+    }
+    
+    if(nvDAO.insertNV(nvNew, connect) == 1) {
+      JOptionPane.showMessageDialog(this, "Thêm thành công");
+      fillTableNV();
+      TrangChuFrame.txtTKNV.setText("");
+      setVisible(false);
+    } else {
+      JOptionPane.showMessageDialog(this, "Thêm thất bại !", "Lỗi", HEIGHT);
+    }
+  }
+  
+  public void fillTableNV() {
+    nvDAO = new NhanVienDao();
+    listNV = nvDAO.getNhanVienOnlyNV(connect);
+    DefaultTableModel model = (DefaultTableModel) tblNV.getModel();
+    model.setRowCount(0);
+    int STT = 1;
+    for(NhanVien nv : listNV) {
+      model.addRow(new Object[]{
+        STT, nv.getMaNV(), nv.getTenNV(), nv.getNgaySinh(), nv.getDiaChi(), nv.getEmail(), nv.getNgayVaoLam(), nv.getLuong()
+      });
+      STT++;
+    }
   }
 }

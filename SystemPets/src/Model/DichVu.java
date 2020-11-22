@@ -10,49 +10,49 @@ package model;
  * @author TechCare
  */
 public class DichVu {
-    String MADV,TENDV,GHICHU;
-    double GIATIEN;
+   String MaDV,TenDV,MaLH,GhiChu;
+
+    public DichVu(String MaDV, String TenDV, String MaLH, String GhiChu) {
+        this.MaDV = MaDV;
+        this.TenDV = TenDV;
+        this.MaLH = MaLH;
+        this.GhiChu = GhiChu;
+    }
 
     public DichVu() {
     }
 
-    public DichVu(String MADV, String TENDV, String GHICHU, double GIATIEN) {
-        this.MADV = MADV;
-        this.TENDV = TENDV;
-        this.GHICHU = GHICHU;
-        this.GIATIEN = GIATIEN;
+    public String getMaDV() {
+        return MaDV;
     }
 
-    public String getMADV() {
-        return MADV;
+    public void setMaDV(String MaDV) {
+        this.MaDV = MaDV;
     }
 
-    public void setMADV(String MADV) {
-        this.MADV = MADV;
+    public String getTenDV() {
+        return TenDV;
     }
 
-    public String getTENDV() {
-        return TENDV;
+    public void setTenDV(String TenDV) {
+        this.TenDV = TenDV;
     }
 
-    public void setTENDV(String TENDV) {
-        this.TENDV = TENDV;
+    public String getMaLH() {
+        return MaLH;
     }
 
-    public String getGHICHU() {
-        return GHICHU;
+    public void setMaLH(String MaLH) {
+        this.MaLH = MaLH;
     }
 
-    public void setGHICHU(String GHICHU) {
-        this.GHICHU = GHICHU;
+    public String getGhiChu() {
+        return GhiChu;
     }
 
-    public double getGIATIEN() {
-        return GIATIEN;
+    public void setGhiChu(String GhiChu) {
+        this.GhiChu = GhiChu;
     }
-
-    public void setGIATIEN(double GIATIEN) {
-        this.GIATIEN = GIATIEN;
-    }
-    
+   
+   
 }

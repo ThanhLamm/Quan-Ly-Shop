@@ -12,42 +12,36 @@ import java.util.Date;
  * @author TechCare
  */
 public class KhachHang {
-    String MAKH,TENKH,DIACHI,SDT;
-    Date NGAYSINH;
-
+    String TenKH,DiaChi,SDT;
+    Date NgaySinh;
+    boolean GioiTinh;
+double KhuyenMai;
     public KhachHang() {
     }
 
-    public KhachHang(String MAKH, String TENKH, String DIACHI, String SDT, Date NGAYSINH) {
-        this.MAKH = MAKH;
-        this.TENKH = TENKH;
-        this.DIACHI = DIACHI;
+    public KhachHang(String TenKH, String DiaChi, String SDT, Date NgaySinh, boolean GioiTinh, double KhuyenMai) {
+        this.TenKH = TenKH;
+        this.DiaChi = DiaChi;
         this.SDT = SDT;
-        this.NGAYSINH = NGAYSINH;
+        this.NgaySinh = NgaySinh;
+        this.GioiTinh = GioiTinh;
+        this.KhuyenMai = KhuyenMai;
     }
 
-    public String getMAKH() {
-        return MAKH;
+    public String getTenKH() {
+        return TenKH;
     }
 
-    public void setMAKH(String MAKH) {
-        this.MAKH = MAKH;
+    public void setTenKH(String TenKH) {
+        this.TenKH = TenKH;
     }
 
-    public String getTENKH() {
-        return TENKH;
+    public String getDiaChi() {
+        return DiaChi;
     }
 
-    public void setTENKH(String TENKH) {
-        this.TENKH = TENKH;
-    }
-
-    public String getDIACHI() {
-        return DIACHI;
-    }
-
-    public void setDIACHI(String DIACHI) {
-        this.DIACHI = DIACHI;
+    public void setDiaChi(String DiaChi) {
+        this.DiaChi = DiaChi;
     }
 
     public String getSDT() {
@@ -58,12 +52,30 @@ public class KhachHang {
         this.SDT = SDT;
     }
 
-    public Date getNGAYSINH() {
-        return NGAYSINH;
+    public Date getNgaySinh() {
+        return NgaySinh;
     }
 
-    public void setNGAYSINH(Date NGAYSINH) {
-        this.NGAYSINH = NGAYSINH;
+    public void setNgaySinh(Date NgaySinh) {
+        this.NgaySinh = NgaySinh;
     }
+
+    public boolean isGioiTinh() {
+        return GioiTinh;
+    }
+
+    public void setGioiTinh(boolean GioiTinh) {
+        this.GioiTinh = GioiTinh;
+    }
+
+    public double getKhuyenMai() {
+        return KhuyenMai;
+    }
+
+    public void setKhuyenMai(double KhuyenMai) {
+        this.KhuyenMai = KhuyenMai;
+    }
+
+    
     
 }

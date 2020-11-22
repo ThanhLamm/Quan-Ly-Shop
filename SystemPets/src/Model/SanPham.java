@@ -14,68 +14,78 @@ import java.util.Date;
  * @author TechCare
  */
 public class SanPham {
-    String MASP,TENSP,GHICHU;
-    int SOLUONG;
-    double GIATIENSP;
-    Date NGAYNHAPKHO;
-
+   String MaSP,TenSP,GhiChu;
+int SoLuong;
+double GiaNhap, GiaBan;
+Date NgayNhapKho;
     public SanPham() {
     }
 
-    public SanPham(String MASP, String TENSP, String GHICHU, int SOLUONG, double GIATIENSP, Date NGAYNHAPKHO) {
-        this.MASP = MASP;
-        this.TENSP = TENSP;
-        this.GHICHU = GHICHU;
-        this.SOLUONG = SOLUONG;
-        this.GIATIENSP = GIATIENSP;
-        this.NGAYNHAPKHO = NGAYNHAPKHO;
+    public SanPham(String MaSP, String TenSP, String GhiChu, int SoLuong, double GiaNhap, double GiaBan, Date NgayNhapKho) {
+        this.MaSP = MaSP;
+        this.TenSP = TenSP;
+        this.GhiChu = GhiChu;
+        this.SoLuong = SoLuong;
+        this.GiaNhap = GiaNhap;
+        this.GiaBan = GiaBan;
+        this.NgayNhapKho = NgayNhapKho;
     }
 
-    public String getMASP() {
-        return MASP;
+    public String getMaSP() {
+        return MaSP;
     }
 
-    public void setMASP(String MASP) {
-        this.MASP = MASP;
+    public void setMaSP(String MaSP) {
+        this.MaSP = MaSP;
     }
 
-    public String getTENSP() {
-        return TENSP;
+    public String getTenSP() {
+        return TenSP;
     }
 
-    public void setTENSP(String TENSP) {
-        this.TENSP = TENSP;
+    public void setTenSP(String TenSP) {
+        this.TenSP = TenSP;
     }
 
-    public String getGHICHU() {
-        return GHICHU;
+    public String getGhiChu() {
+        return GhiChu;
     }
 
-    public void setGHICHU(String GHICHU) {
-        this.GHICHU = GHICHU;
+    public void setGhiChu(String GhiChu) {
+        this.GhiChu = GhiChu;
     }
 
-    public int getSOLUONG() {
-        return SOLUONG;
+    public int getSoLuong() {
+        return SoLuong;
     }
 
-    public void setSOLUONG(int SOLUONG) {
-        this.SOLUONG = SOLUONG;
+    public void setSoLuong(int SoLuong) {
+        this.SoLuong = SoLuong;
     }
 
-    public double getGIATIENSP() {
-        return GIATIENSP;
+    public double getGiaNhap() {
+        return GiaNhap;
     }
 
-    public void setGIATIENSP(double GIATIENSP) {
-        this.GIATIENSP = GIATIENSP;
+    public void setGiaNhap(double GiaNhap) {
+        this.GiaNhap = GiaNhap;
     }
 
-    public Date getNGAYNHAPKHO() {
-        return NGAYNHAPKHO;
+    public double getGiaBan() {
+        return GiaBan;
     }
 
-    public void setNGAYNHAPKHO(Date NGAYNHAPKHO) {
-        this.NGAYNHAPKHO = NGAYNHAPKHO;
-    }    
+    public void setGiaBan(double GiaBan) {
+        this.GiaBan = GiaBan;
+    }
+
+    public Date getNgayNhapKho() {
+        return NgayNhapKho;
+    }
+
+    public void setNgayNhapKho(Date NgayNhapKho) {
+        this.NgayNhapKho = NgayNhapKho;
+    }
+
+    
 }

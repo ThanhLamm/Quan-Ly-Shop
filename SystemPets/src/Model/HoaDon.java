@@ -12,59 +12,59 @@ import java.util.Date;
  * @author TechCare
  */
 public class HoaDon {
-    String MAHD,MANV,MAKH;
-    Date NGAYTHANHTOAN;
-    double TONGTIEN;
+    String MaHD,MaNV,SDT,GhiChu;
+    Date NgayTao;
 
     public HoaDon() {
     }
 
-    public HoaDon(String MAHD, String MANV, String MAKH, Date NGAYTHANHTOAN, double TONGTIEN) {
-        this.MAHD = MAHD;
-        this.MANV = MANV;
-        this.MAKH = MAKH;
-        this.NGAYTHANHTOAN = NGAYTHANHTOAN;
-        this.TONGTIEN = TONGTIEN;
+    public HoaDon(String MaHD, String MaNV, String SDT, String GhiChu, Date NgayTao) {
+        this.MaHD = MaHD;
+        this.MaNV = MaNV;
+        this.SDT = SDT;
+        this.GhiChu = GhiChu;
+        this.NgayTao = NgayTao;
     }
 
-    public String getMAHD() {
-        return MAHD;
+    public String getMaHD() {
+        return MaHD;
     }
 
-    public void setMAHD(String MAHD) {
-        this.MAHD = MAHD;
+    public void setMaHD(String MaHD) {
+        this.MaHD = MaHD;
     }
 
-    public String getMANV() {
-        return MANV;
+    public String getMaNV() {
+        return MaNV;
     }
 
-    public void setMANV(String MANV) {
-        this.MANV = MANV;
+    public void setMaNV(String MaNV) {
+        this.MaNV = MaNV;
     }
 
-    public String getMAKH() {
-        return MAKH;
+    public String getSDT() {
+        return SDT;
     }
 
-    public void setMAKH(String MAKH) {
-        this.MAKH = MAKH;
+    public void setSDT(String SDT) {
+        this.SDT = SDT;
     }
 
-    public Date getNGAYTHANHTOAN() {
-        return NGAYTHANHTOAN;
+    public String getGhiChu() {
+        return GhiChu;
     }
 
-    public void setNGAYTHANHTOAN(Date NGAYTHANHTOAN) {
-        this.NGAYTHANHTOAN = NGAYTHANHTOAN;
+    public void setGhiChu(String GhiChu) {
+        this.GhiChu = GhiChu;
     }
 
-    public double getTONGTIEN() {
-        return TONGTIEN;
+    public Date getNgayTao() {
+        return NgayTao;
     }
 
-    public void setTONGTIEN(double TONGTIEN) {
-        this.TONGTIEN = TONGTIEN;
+    public void setNgayTao(Date NgayTao) {
+        this.NgayTao = NgayTao;
     }
-    
+
+   
 }

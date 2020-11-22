@@ -10,39 +10,40 @@ package model;
  * @author TechCare
  */
 public class LoaiHinhDichVu {
-    String MALH,TENLH,GHICHU;
+    String MaLH,TenLH,GhiChu;
 
     public LoaiHinhDichVu() {
     }
 
-    public LoaiHinhDichVu(String MALH, String TENLH, String GHICHU) {
-        this.MALH = MALH;
-        this.TENLH = TENLH;
-        this.GHICHU = GHICHU;
+    public LoaiHinhDichVu(String MaLH, String TenLH, String GhiChu) {
+        this.MaLH = MaLH;
+        this.TenLH = TenLH;
+        this.GhiChu = GhiChu;
     }
 
-    public String getMALH() {
-        return MALH;
+    public String getMaLH() {
+        return MaLH;
     }
 
-    public void setMALH(String MALH) {
-        this.MALH = MALH;
+    public void setMaLH(String MaLH) {
+        this.MaLH = MaLH;
     }
 
-    public String getTENLH() {
-        return TENLH;
+    public String getTenLH() {
+        return TenLH;
     }
 
-    public void setTENLH(String TENLH) {
-        this.TENLH = TENLH;
+    public void setTenLH(String TenLH) {
+        this.TenLH = TenLH;
     }
 
-    public String getGHICHU() {
-        return GHICHU;
+    public String getGhiChu() {
+        return GhiChu;
     }
 
-    public void setGHICHU(String GHICHU) {
-        this.GHICHU = GHICHU;
+    public void setGhiChu(String GhiChu) {
+        this.GhiChu = GhiChu;
     }
-    
+
+   
 }
