@@ -2066,16 +2066,21 @@ public class TrangChuFrame extends javax.swing.JFrame {
   
   void deleteNV() {
     int indexNV = tblNV.getSelectedRow();
-    if(indexNV < 1) {
+    if (indexNV < 1) {
       JOptionPane.showMessageDialog(this, "Hãy chọn dòng cần xoá !");
       return;
     }
-    if(nvDAO.deleteNV(String.valueOf(tblNV.getValueAt(indexNV, 1)), connect) == 1) {
-      JOptionPane.showMessageDialog(this, "Xoá thành công !");
-      txtTKNV.setText("");
-      fillTableNV();
-    } else {
-      JOptionPane.showMessageDialog(this, "Xoá thất bại !", "Lỗi", HEIGHT);
+    String maNV = String.valueOf(tblNV.getValueAt((indexNV), 1));
+    NhanVien nv = nvDAO.findByMaNV(maNV, connect);
+    int o = JOptionPane.showConfirmDialog(this, "Bạn có muốn xoá nhân viên " + nv.getTenNV() + " ra khỏi danh sách !", "Thông báo", JOptionPane.YES_OPTION);
+    if (o == 0) {
+      if (nvDAO.nvOff(String.valueOf(tblNV.getValueAt(indexNV, 1)), connect) == 1) {
+        JOptionPane.showMessageDialog(this, "Xoá thành công !");
+        txtTKNV.setText("");
+        fillTableNV();
+      } else {
+        JOptionPane.showMessageDialog(this, "Xoá thất bại !", "Lỗi", HEIGHT);
+      }
     }
   }
   

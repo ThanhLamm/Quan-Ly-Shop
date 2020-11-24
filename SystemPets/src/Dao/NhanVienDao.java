@@ -23,10 +23,10 @@ public class NhanVienDao {
     ArrayList<NhanVien> list = new ArrayList<>();
     try {
       Statement st = connect.getConnect().createStatement();
-      ResultSet rs = st.executeQuery("select * from NHANVIEN");
+      ResultSet rs = st.executeQuery("select * from NHANVIEN where TRANGTHAI = 1");
       while(rs.next()) {
         NhanVien nv = new NhanVien(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(5), rs.getString(6), rs.getString(7),
-                rs.getString(10), rs.getBoolean(11), rs.getDate(4), rs.getDate(8), rs.getDouble(9));
+                rs.getString(10), rs.getBoolean(11), rs.getDate(4), rs.getDate(8), rs.getDouble(9), rs.getBoolean(12));
         list.add(nv);
       }
       st.close();
@@ -41,10 +41,10 @@ public class NhanVienDao {
     ArrayList<NhanVien> list = new ArrayList<>();
     try {
       Statement st = connect.getConnect().createStatement();
-      ResultSet rs = st.executeQuery("select * from NHANVIEN where VAITRO = 0");
+      ResultSet rs = st.executeQuery("select * from NHANVIEN where VAITRO = 0 and TRANGTHAI = 1");
       while(rs.next()) {
         NhanVien nv = new NhanVien(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(5), rs.getString(6), rs.getString(7),
-                rs.getString(10), rs.getBoolean(11), rs.getDate(4), rs.getDate(8), rs.getDouble(9));
+                rs.getString(10), rs.getBoolean(11), rs.getDate(4), rs.getDate(8), rs.getDouble(9), rs.getBoolean(12));
         list.add(nv);
       }
       st.close();
@@ -59,10 +59,10 @@ public class NhanVienDao {
     ArrayList<NhanVien> list = new ArrayList<>();
     try {
       Statement st = connect.getConnect().createStatement();
-      ResultSet rs = st.executeQuery("select * from NHANVIEN where VAITRO = 0 and maNV like "+"'%"+maNV+"%'"+"");
+      ResultSet rs = st.executeQuery("select * from NHANVIEN where VAITRO = 0 and maNV like "+"'%"+maNV+"%'"+" and TRANGTHAI = 1");
       while(rs.next()) {
         NhanVien nv = new NhanVien(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(5), rs.getString(6), rs.getString(7),
-                rs.getString(10), rs.getBoolean(11), rs.getDate(4), rs.getDate(8), rs.getDouble(9));
+                rs.getString(10), rs.getBoolean(11), rs.getDate(4), rs.getDate(8), rs.getDouble(9), rs.getBoolean(12));
         list.add(nv);
       }
       st.close();
@@ -82,7 +82,7 @@ public class NhanVienDao {
       ResultSet rs = ps.executeQuery();
       while(rs.next()) {
         nv = new NhanVien(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(5), rs.getString(6), rs.getString(7),
-                rs.getString(10), rs.getBoolean(11), rs.getDate(4), rs.getDate(8), rs.getDouble(9));
+                rs.getString(10), rs.getBoolean(11), rs.getDate(4), rs.getDate(8), rs.getDouble(9), rs.getBoolean(12));
       }
       ps.close();
       rs.close();
@@ -109,7 +109,7 @@ public class NhanVienDao {
   public int insertNV(NhanVien nv, JdbcHelper connect) {
     int i = 0;
     try {
-      PreparedStatement ps = connect.getConnect().prepareStatement("insert NHANVIEN values (?,?,?,?,?,?,?,?,?,?,?)");
+      PreparedStatement ps = connect.getConnect().prepareStatement("insert NHANVIEN values (?,?,?,?,?,?,?,?,?,?,?, ?)");
       ps.setString(1, nv.getMaNV());
       ps.setString(2, nv.getTenNV());
       ps.setString(3, nv.getMatKhau());
@@ -121,6 +121,7 @@ public class NhanVienDao {
       ps.setDouble(9, nv.getLuong());
       ps.setString(10, nv.getHinhAnh());
       ps.setBoolean(11, nv.isVaiTro());
+      ps.setBoolean(12, true);
       i = ps.executeUpdate();
       ps.close();
     } catch (Exception e) {
@@ -153,6 +154,19 @@ public class NhanVienDao {
     int i = 0;
     try {
       PreparedStatement ps = connect.getConnect().prepareStatement("delete from NHANVIEN where MANV = ?");
+      ps.setString(1, maNV);
+      i = ps.executeUpdate();
+      ps.close();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return i;
+  }
+  
+  public int nvOff(String maNV, JdbcHelper connect) {
+    int i = 0;
+    try {
+      PreparedStatement ps = connect.getConnect().prepareStatement("update NHANVIEN set TRANGTHAI = 0 where MANV = ?");
       ps.setString(1, maNV);
       i = ps.executeUpdate();
       ps.close();

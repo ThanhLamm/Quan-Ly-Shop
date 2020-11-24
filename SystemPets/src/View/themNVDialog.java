@@ -423,9 +423,15 @@ public class themNVDialog extends javax.swing.JDialog {
       nvNew.setVaiTro(true);
     }
     
-    String pattern = "^[\\w]+@.+";
-    if(!Pattern.matches(pattern, txtEmail.getText())) {
+    String patternEmail = "^[\\w]+@.+";
+    if(!Pattern.matches(patternEmail, txtEmail.getText())) {
       JOptionPane.showMessageDialog(this, "Hãy nhập đúng định dạng Email ! (lam@gmail.com)");
+      return;
+    }
+    
+    String patternSDT = "[0][0-9]{9}";
+    if(!Pattern.matches(patternSDT, txtSDT.getText())) {
+      JOptionPane.showMessageDialog(this, "Hãy nhập đúng định dạng SĐT ! (0**********)");
       return;
     }
     
@@ -439,15 +445,16 @@ public class themNVDialog extends javax.swing.JDialog {
     }
   }
   
-  public void fillTableNV() {
+  void fillTableNV() {
     nvDAO = new NhanVienDao();
     listNV = nvDAO.getNhanVienOnlyNV(connect);
     DefaultTableModel model = (DefaultTableModel) tblNV.getModel();
     model.setRowCount(0);
     int STT = 1;
     for(NhanVien nv : listNV) {
+      String ngaySinh = DateHelper.toString(nv.getNgaySinh(), "dd-MM-yyyy");
       model.addRow(new Object[]{
-        STT, nv.getMaNV(), nv.getTenNV(), nv.getNgaySinh(), nv.getDiaChi(), nv.getEmail(), nv.getNgayVaoLam(), nv.getLuong()
+        STT, nv.getMaNV(), nv.getTenNV(), ngaySinh, nv.getDiaChi(), nv.getEmail(), nv.getSDT(), nv.getNgayVaoLam(), nv.getLuong()
       });
       STT++;
     }

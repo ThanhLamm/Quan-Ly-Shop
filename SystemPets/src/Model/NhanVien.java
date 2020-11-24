@@ -17,11 +17,12 @@ public class NhanVien {
   boolean VaiTro;
   Date NgaySinh, NgayVaoLam;
   double Luong;
+  boolean trangThai;
 
   public NhanVien() {
   }
 
-  public NhanVien(String MaNV, String TenNV, String MatKhau, String DiaChi, String Email, String SDT, String HinhAnh, boolean VaiTro, Date NgaySinh, Date NgayVaoLam, double Luong) {
+  public NhanVien(String MaNV, String TenNV, String MatKhau, String DiaChi, String Email, String SDT, String HinhAnh, boolean VaiTro, Date NgaySinh, Date NgayVaoLam, double Luong, boolean trangThai) {
     this.MaNV = MaNV;
     this.TenNV = TenNV;
     this.MatKhau = MatKhau;
@@ -33,6 +34,7 @@ public class NhanVien {
     this.NgaySinh = NgaySinh;
     this.NgayVaoLam = NgayVaoLam;
     this.Luong = Luong;
+    this.trangThai = trangThai;
   }
 
   public String getMaNV() {
@@ -121,6 +123,14 @@ public class NhanVien {
 
   public void setLuong(double Luong) {
     this.Luong = Luong;
+  }
+
+  public boolean isTrangThai() {
+    return trangThai;
+  }
+
+  public void setTrangThai(boolean trangThai) {
+    this.trangThai = trangThai;
   }
 
 }

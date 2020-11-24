@@ -361,28 +361,30 @@ void customUI() {
   }
 
   private void login() {
-    if(validator().length() > 0) {
-      JOptionPane.showMessageDialog(this, validator()+"Đăng nhập thất bại !", "Lỗi", HEIGHT);
+    if (validator().length() > 0) {
+      JOptionPane.showMessageDialog(this, validator() + "Đăng nhập thất bại !", "Lỗi", HEIGHT);
       return;
     }
     connect = new JdbcHelper();
     nvDao = new NhanVienDao();
     NhanVien nv = nvDao.findByMaNV(txtTK.getText(), connect);
-    if(nv==null) {
+    if (nv == null) {
       JOptionPane.showMessageDialog(this, "Tài khoản không tồn tại", "Lỗi", HEIGHT);
       txtTK.requestFocus();
       txtMK.setText("");
-    } else if(!nv.getMatKhau().equals(txtMK.getText())) {
+    } else if (!nv.getMatKhau().equals(txtMK.getText())) {
       JOptionPane.showMessageDialog(this, "Sai mật khẩu", "Lỗi", HEIGHT);
       txtMK.requestFocus();
+    } else if (!nv.isTrangThai()) {
+      JOptionPane.showMessageDialog(this, "Nhân viên " + nv.getTenNV() + " đã nghỉ việc !", "Lỗi", HEIGHT);
     } else {
       Auth.user = nv;
       this.setVisible(false);
       new TrangChuFrame().setVisible(true);
-      JOptionPane.showMessageDialog(this, "Đăng nhập thành công !"); 
-    }       
+      JOptionPane.showMessageDialog(this, "Đăng nhập thành công !");
+    }
   }
-  
+
   StringBuilder validator() {
     StringBuilder sb = new StringBuilder();
     Validator.Validator.checkEmpty(txtTK, sb, "Tài khoản không được để trống !");
