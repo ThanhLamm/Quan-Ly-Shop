@@ -5,13 +5,30 @@
  */
 package View;
 
+import Dao.SanPhamDAO;
+import JdbcConnection.JdbcHelper;
+import Utils.DateHelper;
+import Validator.Validator;
+import static View.TrangChuFrame.dsSP;
+import static View.TrangChuFrame.tblSP;
+import static java.awt.image.ImageObserver.HEIGHT;
+import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
+import model.SanPham;
 
 /**
  *
  * @author Thinkpad
  */
 public class themSPDialog extends javax.swing.JDialog {
+
+  SanPhamDAO spDAO;
+  JdbcHelper connect;
+  ArrayList<SanPham> listSP;
 
   /**
    * Creates new form themDVDialog
@@ -33,11 +50,10 @@ public class themSPDialog extends javax.swing.JDialog {
 
     jPanel2 = new javax.swing.JPanel();
     jPanel1 = new javax.swing.JPanel();
-    jTextField5 = new javax.swing.JTextField();
-    jTextField4 = new javax.swing.JTextField();
-    jTextField3 = new javax.swing.JTextField();
-    jTextField2 = new javax.swing.JTextField();
-    jTextField1 = new javax.swing.JTextField();
+    txtGiaBan = new javax.swing.JTextField();
+    txtSoLuong = new javax.swing.JTextField();
+    txtTenSP = new javax.swing.JTextField();
+    txtMaSP = new javax.swing.JTextField();
     jLabel1 = new javax.swing.JLabel();
     jLabel2 = new javax.swing.JLabel();
     jLabel3 = new javax.swing.JLabel();
@@ -45,6 +61,14 @@ public class themSPDialog extends javax.swing.JDialog {
     jLabel5 = new javax.swing.JLabel();
     btnXacNhan = new javax.swing.JButton();
     btnHuy = new javax.swing.JButton();
+    jLabel6 = new javax.swing.JLabel();
+    txtGiaNhap = new javax.swing.JTextField();
+    jLabel7 = new javax.swing.JLabel();
+    cboNgay = new javax.swing.JComboBox<>();
+    cboThang = new javax.swing.JComboBox<>();
+    cboNam = new javax.swing.JComboBox<>();
+    jScrollPane1 = new javax.swing.JScrollPane();
+    txtGhiChu = new javax.swing.JTextArea();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setUndecorated(true);
@@ -55,55 +79,55 @@ public class themSPDialog extends javax.swing.JDialog {
     jPanel1.setBackground(new java.awt.Color(241, 255, 246));
     jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-    jTextField5.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jTextField5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
-    jTextField5.setOpaque(false);
-    jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, 230, -1));
+    txtGiaBan.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+    txtGiaBan.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
+    txtGiaBan.setOpaque(false);
+    jPanel1.add(txtGiaBan, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 230, -1));
 
-    jTextField4.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jTextField4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
-    jTextField4.setOpaque(false);
-    jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 230, -1));
+    txtSoLuong.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+    txtSoLuong.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
+    txtSoLuong.setOpaque(false);
+    jPanel1.add(txtSoLuong, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 230, -1));
 
-    jTextField3.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jTextField3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
-    jTextField3.setOpaque(false);
-    jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 230, -1));
+    txtTenSP.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+    txtTenSP.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
+    txtTenSP.setOpaque(false);
+    jPanel1.add(txtTenSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 230, -1));
 
-    jTextField2.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jTextField2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
-    jTextField2.setOpaque(false);
-    jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 230, -1));
-
-    jTextField1.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
-    jTextField1.setOpaque(false);
-    jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 230, -1));
+    txtMaSP.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+    txtMaSP.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
+    txtMaSP.setOpaque(false);
+    jPanel1.add(txtMaSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 230, -1));
 
     jLabel1.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
     jLabel1.setText("Mã sản phẩm:");
     jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
     jLabel2.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jLabel2.setText("Tên sản phẩm;");
-    jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+    jLabel2.setText("Tên sản phẩm:");
+    jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
     jLabel3.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
     jLabel3.setText("Số lượng:");
-    jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
+    jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
 
     jLabel4.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jLabel4.setText("Giá sản phẩm:");
-    jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
+    jLabel4.setText("Ngày nhập kho:");
+    jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, -1, 20));
 
     jLabel5.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
     jLabel5.setText("Ghi chú:");
-    jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, -1));
+    jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, -1, -1));
 
     btnXacNhan.setBackground(new java.awt.Color(0, 255, 255));
     btnXacNhan.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
     btnXacNhan.setText("Xác nhận");
-    jPanel1.add(btnXacNhan, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 330, -1, -1));
+    btnXacNhan.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnXacNhanActionPerformed(evt);
+      }
+    });
+    jPanel1.add(btnXacNhan, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 480, -1, -1));
 
     btnHuy.setBackground(new java.awt.Color(0, 255, 255));
     btnHuy.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
@@ -113,7 +137,44 @@ public class themSPDialog extends javax.swing.JDialog {
         btnHuyActionPerformed(evt);
       }
     });
-    jPanel1.add(btnHuy, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 330, -1, -1));
+    jPanel1.add(btnHuy, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 480, 90, -1));
+
+    jLabel6.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+    jLabel6.setText("Giá nhập :");
+    jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, 20));
+
+    txtGiaNhap.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+    txtGiaNhap.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
+    txtGiaNhap.setOpaque(false);
+    jPanel1.add(txtGiaNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 230, -1));
+
+    jLabel7.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+    jLabel7.setText("Giá bán :");
+    jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, -1, 20));
+
+    cboNgay.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+    cboNgay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+    cboNgay.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
+    cboNgay.setOpaque(false);
+    jPanel1.add(cboNgay, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 320, 60, -1));
+
+    cboThang.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+    cboThang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+    cboThang.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
+    cboThang.setOpaque(false);
+    jPanel1.add(cboThang, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 320, 60, -1));
+
+    cboNam.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+    cboNam.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021" }));
+    cboNam.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
+    cboNam.setOpaque(false);
+    jPanel1.add(cboNam, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 320, -1, -1));
+
+    txtGhiChu.setColumns(20);
+    txtGhiChu.setRows(5);
+    jScrollPane1.setViewportView(txtGhiChu);
+
+    jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 380, 240, 80));
 
     javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
     jPanel2.setLayout(jPanel2Layout);
@@ -121,15 +182,15 @@ public class themSPDialog extends javax.swing.JDialog {
       jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(jPanel2Layout.createSequentialGroup()
         .addGap(35, 35, 35)
-        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
+        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
         .addContainerGap())
     );
     jPanel2Layout.setVerticalGroup(
       jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(jPanel2Layout.createSequentialGroup()
         .addGap(26, 26, 26)
-        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addContainerGap(34, Short.MAX_VALUE))
+        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 517, Short.MAX_VALUE)
+        .addContainerGap())
     );
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -140,7 +201,9 @@ public class themSPDialog extends javax.swing.JDialog {
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+      .addGroup(layout.createSequentialGroup()
+        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGap(0, 0, Short.MAX_VALUE))
     );
 
     pack();
@@ -150,6 +213,11 @@ public class themSPDialog extends javax.swing.JDialog {
     // TODO add your handling code here:
     setVisible(false);
   }//GEN-LAST:event_btnHuyActionPerformed
+
+    private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
+      // TODO add your handling code here:
+      themSP();
+    }//GEN-LAST:event_btnXacNhanActionPerformed
 
   /**
    * @param args the command line arguments
@@ -197,18 +265,25 @@ public class themSPDialog extends javax.swing.JDialog {
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton btnHuy;
   private javax.swing.JButton btnXacNhan;
+  private javax.swing.JComboBox<String> cboNam;
+  private javax.swing.JComboBox<String> cboNgay;
+  private javax.swing.JComboBox<String> cboThang;
   private javax.swing.JLabel jLabel1;
   private javax.swing.JLabel jLabel2;
   private javax.swing.JLabel jLabel3;
   private javax.swing.JLabel jLabel4;
   private javax.swing.JLabel jLabel5;
+  private javax.swing.JLabel jLabel6;
+  private javax.swing.JLabel jLabel7;
   private javax.swing.JPanel jPanel1;
   private javax.swing.JPanel jPanel2;
-  private javax.swing.JTextField jTextField1;
-  private javax.swing.JTextField jTextField2;
-  private javax.swing.JTextField jTextField3;
-  private javax.swing.JTextField jTextField4;
-  private javax.swing.JTextField jTextField5;
+  private javax.swing.JScrollPane jScrollPane1;
+  private javax.swing.JTextArea txtGhiChu;
+  private javax.swing.JTextField txtGiaBan;
+  private javax.swing.JTextField txtGiaNhap;
+  private javax.swing.JTextField txtMaSP;
+  private javax.swing.JTextField txtSoLuong;
+  private javax.swing.JTextField txtTenSP;
   // End of variables declaration//GEN-END:variables
   void customUI() {
     //custom UI
@@ -226,5 +301,86 @@ public class themSPDialog extends javax.swing.JDialog {
 
   void init() {
     this.setLocationRelativeTo(null);
+    fillcomboboxDate();
+  }
+
+  StringBuilder validator() {
+    StringBuilder sb = new StringBuilder();
+    Validator.checkEmpty(txtMaSP, sb, "Mã Sản Phẩm không được để trống !");
+    Validator.checkEmpty(txtTenSP, sb, "Tên Sản Phẩm không được để trống !");
+    Validator.CheckNumber(txtSoLuong, sb, "Số Lượng không được để trống !");
+    Validator.CheckNumber(txtGiaNhap, sb, "Giá Nhập không được để trống !");
+    Validator.CheckNumber(txtGiaBan, sb, "Giá Bán không được để trông !");
+    return sb;
+  }
+
+  void themSP() {
+    if (validator().length() > 0) {
+      JOptionPane.showMessageDialog(this, validator() + "Thêm thất bại !", "Lỗi", HEIGHT);
+      return;
+    }
+
+    connect = new JdbcHelper();
+    spDAO = new SanPhamDAO();
+    SanPham sp = spDAO.findByMaSP(txtMaSP.getText(), connect);
+    if (sp != null) {
+      JOptionPane.showMessageDialog(this, "Sản Phẩm có mã " + txtMaSP.getText() + " đã tồn tại !", "Lỗi", HEIGHT);
+      txtMaSP.requestFocus();
+      return;
+    }
+    Date date;
+
+    try {
+      date = DateHelper.toDate(cboNgay.getSelectedItem() + "-" + cboThang.getSelectedItem() + "-" + cboNam.getSelectedItem(), "dd-MM-yyyy");
+    } catch (Exception e) {
+      return;
+    }
+    SanPham spNew = new SanPham();
+    spNew.setMaSP(txtMaSP.getText());
+    spNew.setTenSP(txtTenSP.getText());
+    spNew.setSoLuong(Integer.valueOf(txtSoLuong.getText()));
+    spNew.setNgayNhapKho(date);
+    spNew.setGiaBan(Double.valueOf(txtGiaBan.getText()));
+    spNew.setGiaNhap(Double.valueOf(txtGiaNhap.getText()));
+    spNew.setGhiChu(txtGhiChu.getText());
+    if (spDAO.insertSP(spNew, connect) == 1) {
+      JOptionPane.showMessageDialog(this, "Thêm thành công");
+      fillTableSP();
+      TrangChuFrame.txtTKNV.setText("");
+      setVisible(false);
+    } else {
+      JOptionPane.showMessageDialog(this, "Thêm thất bại !", "Lỗi", HEIGHT);
+    }
+  }
+
+  public void fillTableSP() {
+    spDAO = new SanPhamDAO();
+    listSP = spDAO.getSanPham(connect);
+    DefaultTableModel model = (DefaultTableModel) tblSP.getModel();
+    model.setRowCount(0);
+    for (SanPham sp : listSP) {
+      String ngaynhapkho = DateHelper.toString(sp.getNgayNhapKho(), "dd-MM-yyyy");
+      model.addRow(new Object[]{
+        sp.getMaSP(), sp.getTenSP(), sp.getSoLuong(), sp.getGiaNhap(), sp.getGiaBan(), sp.getGhiChu(), ngaynhapkho
+      });
+    }
+  }
+
+  void fillcomboboxDate() {
+    String setDate[] = java.time.LocalDate.now().toString().split("-");
+    cboNgay.setSelectedItem(setDate[2]);
+    cboThang.setSelectedItem(setDate[1]);
+    cboNam.setSelectedItem(setDate[0]);
+  }
+
+  void fillListSP() {
+    spDAO = new SanPhamDAO();
+    listSP = spDAO.getSanPham(connect);
+    DefaultListModel modelSP = new DefaultListModel<>();
+    modelSP.removeAllElements();
+    for(SanPham sp : listSP) {
+      modelSP.addElement(sp.getTenSP());
+    }
+    dsSP.setModel(modelSP);
   }
 }

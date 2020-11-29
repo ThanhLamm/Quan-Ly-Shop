@@ -12,26 +12,17 @@ import java.util.Date;
  * @author TechCare
  */
 public class HoaDon {
-    String MaHD,MaNV,SDT,GhiChu;
+    String MaNV,SDT,GhiChu;
     Date NgayTao;
 
     public HoaDon() {
     }
 
-    public HoaDon(String MaHD, String MaNV, String SDT, String GhiChu, Date NgayTao) {
-        this.MaHD = MaHD;
+    public HoaDon(String MaNV, String SDT, String GhiChu, Date NgayTao) {
         this.MaNV = MaNV;
         this.SDT = SDT;
         this.GhiChu = GhiChu;
         this.NgayTao = NgayTao;
-    }
-
-    public String getMaHD() {
-        return MaHD;
-    }
-
-    public void setMaHD(String MaHD) {
-        this.MaHD = MaHD;
     }
 
     public String getMaNV() {

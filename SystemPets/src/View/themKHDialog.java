@@ -5,13 +5,28 @@
  */
 package View;
 
+import Dao.KhachHangDAO;
+import JdbcConnection.JdbcHelper;
+import Validator.Validator;
+import static View.TrangChuFrame.tblKH;
+import static View.TrangChuFrame.txtTKKH;
+import static java.awt.image.ImageObserver.HEIGHT;
+import java.util.ArrayList;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
+import model.KhachHang;
 
 /**
  *
  * @author Thinkpad
  */
 public class themKHDialog extends javax.swing.JDialog {
+
+  KhachHangDAO khDAO;
+  JdbcHelper connect;
+  ArrayList<KhachHang> listKH;
 
   /**
    * Creates new form themDVDialog
@@ -28,138 +43,148 @@ public class themKHDialog extends javax.swing.JDialog {
    * Form Editor.
    */
   @SuppressWarnings("unchecked")
-  // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-  private void initComponents() {
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-    buttonGroup1 = new javax.swing.ButtonGroup();
-    jPanel2 = new javax.swing.JPanel();
-    jPanel1 = new javax.swing.JPanel();
-    jTextField4 = new javax.swing.JTextField();
-    jTextField3 = new javax.swing.JTextField();
-    jTextField2 = new javax.swing.JTextField();
-    jTextField1 = new javax.swing.JTextField();
-    jLabel1 = new javax.swing.JLabel();
-    jLabel2 = new javax.swing.JLabel();
-    jLabel3 = new javax.swing.JLabel();
-    jLabel4 = new javax.swing.JLabel();
-    jLabel5 = new javax.swing.JLabel();
-    btnXacNhan = new javax.swing.JButton();
-    btnHuy = new javax.swing.JButton();
-    jRadioButton1 = new javax.swing.JRadioButton();
-    jRadioButton2 = new javax.swing.JRadioButton();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        txtEmailKH = new javax.swing.JTextField();
+        txtDiaChiKH = new javax.swing.JTextField();
+        txtTenKH = new javax.swing.JTextField();
+        txtSDT = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        btnXacNhan = new javax.swing.JButton();
+        btnHuy = new javax.swing.JButton();
+        rdoNu = new javax.swing.JRadioButton();
+        rdoNam = new javax.swing.JRadioButton();
 
-    setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-    setUndecorated(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
 
-    jPanel2.setBackground(new java.awt.Color(241, 255, 246));
-    jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 204, 204), 3, true));
+        jPanel2.setBackground(new java.awt.Color(241, 255, 246));
+        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 204, 204), 3, true));
 
-    jPanel1.setBackground(new java.awt.Color(241, 255, 246));
-    jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.setBackground(new java.awt.Color(241, 255, 246));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-    jTextField4.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jTextField4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
-    jTextField4.setOpaque(false);
-    jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 230, -1));
+        txtEmailKH.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        txtEmailKH.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
+        txtEmailKH.setOpaque(false);
+        jPanel1.add(txtEmailKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 230, -1));
 
-    jTextField3.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jTextField3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
-    jTextField3.setOpaque(false);
-    jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 230, -1));
+        txtDiaChiKH.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        txtDiaChiKH.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
+        txtDiaChiKH.setOpaque(false);
+        jPanel1.add(txtDiaChiKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 230, -1));
 
-    jTextField2.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jTextField2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
-    jTextField2.setOpaque(false);
-    jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 230, -1));
+        txtTenKH.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        txtTenKH.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
+        txtTenKH.setOpaque(false);
+        jPanel1.add(txtTenKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 230, -1));
 
-    jTextField1.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
-    jTextField1.setOpaque(false);
-    jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 230, -1));
+        txtSDT.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        txtSDT.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
+        txtSDT.setOpaque(false);
+        jPanel1.add(txtSDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 230, -1));
 
-    jLabel1.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jLabel1.setText("Số điện thoại:");
-    jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+        jLabel1.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        jLabel1.setText("Số điện thoại:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
-    jLabel2.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jLabel2.setText("Tên khách hàng:");
-    jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+        jLabel2.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        jLabel2.setText("Tên khách hàng:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
-    jLabel3.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jLabel3.setText("Địa chỉ:");
-    jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
+        jLabel3.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        jLabel3.setText("Địa chỉ:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
 
-    jLabel4.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jLabel4.setText("Email:");
-    jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
+        jLabel4.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        jLabel4.setText("Email:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
 
-    jLabel5.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jLabel5.setText("Giới tính:");
-    jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, -1));
+        jLabel5.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        jLabel5.setText("Giới tính:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, -1));
 
-    btnXacNhan.setBackground(new java.awt.Color(0, 255, 255));
-    btnXacNhan.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    btnXacNhan.setText("Xác nhận");
-    jPanel1.add(btnXacNhan, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 330, -1, -1));
+        btnXacNhan.setBackground(new java.awt.Color(0, 255, 255));
+        btnXacNhan.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        btnXacNhan.setText("Xác nhận");
+        btnXacNhan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXacNhanActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnXacNhan, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 340, -1, -1));
 
-    btnHuy.setBackground(new java.awt.Color(0, 255, 255));
-    btnHuy.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    btnHuy.setText("Huỷ");
-    btnHuy.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        btnHuyActionPerformed(evt);
-      }
-    });
-    jPanel1.add(btnHuy, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 330, -1, -1));
+        btnHuy.setBackground(new java.awt.Color(0, 255, 255));
+        btnHuy.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        btnHuy.setText("Huỷ");
+        btnHuy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHuyActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnHuy, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 340, -1, -1));
 
-    buttonGroup1.add(jRadioButton1);
-    jRadioButton1.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jRadioButton1.setText("Nữ");
-    jRadioButton1.setOpaque(false);
-    jPanel1.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 270, -1, -1));
+        buttonGroup1.add(rdoNu);
+        rdoNu.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        rdoNu.setText("Nữ");
+        rdoNu.setOpaque(false);
+        jPanel1.add(rdoNu, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 270, -1, -1));
 
-    buttonGroup1.add(jRadioButton2);
-    jRadioButton2.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jRadioButton2.setSelected(true);
-    jRadioButton2.setText("Nam");
-    jRadioButton2.setOpaque(false);
-    jPanel1.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, -1, -1));
+        buttonGroup1.add(rdoNam);
+        rdoNam.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        rdoNam.setSelected(true);
+        rdoNam.setText("Nam");
+        rdoNam.setOpaque(false);
+        jPanel1.add(rdoNam, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, -1, -1));
 
-    javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-    jPanel2.setLayout(jPanel2Layout);
-    jPanel2Layout.setHorizontalGroup(
-      jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(jPanel2Layout.createSequentialGroup()
-        .addGap(35, 35, 35)
-        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
-        .addContainerGap())
-    );
-    jPanel2Layout.setVerticalGroup(
-      jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(jPanel2Layout.createSequentialGroup()
-        .addGap(26, 26, 26)
-        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addContainerGap(34, Short.MAX_VALUE))
-    );
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(34, Short.MAX_VALUE))
+        );
 
-    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-    getContentPane().setLayout(layout);
-    layout.setHorizontalGroup(
-      layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-    );
-    layout.setVerticalGroup(
-      layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-    );
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
-    pack();
-  }// </editor-fold>//GEN-END:initComponents
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
 
   private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
     // TODO add your handling code here:
     setVisible(false);
   }//GEN-LAST:event_btnHuyActionPerformed
+
+    private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
+      // TODO add your handling code here:
+      themKH();
+    }//GEN-LAST:event_btnXacNhanActionPerformed
 
   /**
    * @param args the command line arguments
@@ -210,24 +235,24 @@ public class themKHDialog extends javax.swing.JDialog {
     });
   }
 
-  // Variables declaration - do not modify//GEN-BEGIN:variables
-  private javax.swing.JButton btnHuy;
-  private javax.swing.JButton btnXacNhan;
-  private javax.swing.ButtonGroup buttonGroup1;
-  private javax.swing.JLabel jLabel1;
-  private javax.swing.JLabel jLabel2;
-  private javax.swing.JLabel jLabel3;
-  private javax.swing.JLabel jLabel4;
-  private javax.swing.JLabel jLabel5;
-  private javax.swing.JPanel jPanel1;
-  private javax.swing.JPanel jPanel2;
-  private javax.swing.JRadioButton jRadioButton1;
-  private javax.swing.JRadioButton jRadioButton2;
-  private javax.swing.JTextField jTextField1;
-  private javax.swing.JTextField jTextField2;
-  private javax.swing.JTextField jTextField3;
-  private javax.swing.JTextField jTextField4;
-  // End of variables declaration//GEN-END:variables
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnHuy;
+    private javax.swing.JButton btnXacNhan;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JRadioButton rdoNam;
+    private javax.swing.JRadioButton rdoNu;
+    private javax.swing.JTextField txtDiaChiKH;
+    private javax.swing.JTextField txtEmailKH;
+    private javax.swing.JTextField txtSDT;
+    private javax.swing.JTextField txtTenKH;
+    // End of variables declaration//GEN-END:variables
   void customUI() {
     //custom UI
     try {
@@ -244,5 +269,80 @@ public class themKHDialog extends javax.swing.JDialog {
 
   void init() {
     this.setLocationRelativeTo(null);
+  }
+
+  StringBuilder validatorKH() {
+    StringBuilder sb = new StringBuilder();
+    Validator.checkEmpty(txtSDT, sb, "Số Điện Thoại không được để trống !");
+    Validator.checkEmpty(txtTenKH, sb, "Tên Khách Hàng không được để trống !");
+    Validator.checkEmpty(txtEmailKH, sb, "Email không được để trống !");
+    Validator.checkEmpty(txtDiaChiKH, sb, "Địa Chỉ không được để trống !");
+    return sb;
+  }
+
+  void themKH() {
+    if (validatorKH().length() > 0) {
+      JOptionPane.showMessageDialog(this, validatorKH() + "Đăng nhập thất bại !", "Lỗi", HEIGHT);
+      return;
+    }
+
+    connect = new JdbcHelper();
+    khDAO = new KhachHangDAO();
+    KhachHang nv = khDAO.findBySDT(txtSDT.getText(), connect);
+    if (nv != null) {
+      JOptionPane.showMessageDialog(this, "Nhân viên có mã " + txtSDT.getText() + " đã tồn tại !", "Lỗi", HEIGHT);
+      txtSDT.requestFocus();
+      return;
+    }
+
+    KhachHang khNew = new KhachHang();
+    khNew.setSDT(txtSDT.getText());
+    khNew.setTenKH(txtTenKH.getText());
+    khNew.setDiaChi(txtDiaChiKH.getText());
+    khNew.setEmail(txtEmailKH.getText());
+    if (rdoNam.isSelected()) {
+      khNew.setGioiTinh(true);
+    } else {
+      khNew.setGioiTinh(false);
+    }
+    khNew.setKhuyenMai(0.0);
+    String patternEmail = "^[\\w]+@.+";
+    if (!Pattern.matches(patternEmail, txtEmailKH.getText())) {
+      JOptionPane.showMessageDialog(this, "Hãy nhập đúng định dạng Email ! (lam@gmail.com)");
+      return;
+    }
+
+    String patternSDT = "[0][0-9]{9}";
+    if (!Pattern.matches(patternSDT, txtSDT.getText())) {
+      JOptionPane.showMessageDialog(this, "Hãy nhập đúng định dạng SĐT ! (0**********)");
+      return;
+    }
+
+    if (khDAO.insertKH(khNew, connect) == 1) {
+      JOptionPane.showMessageDialog(this, "Thêm thành công");
+      fillTableKH();
+      txtTKKH.setText("");
+      setVisible(false);
+    } else {
+      JOptionPane.showMessageDialog(this, "Thêm thất bại !", "Lỗi", HEIGHT);
+    }
+  }
+
+  public void fillTableKH() {
+    khDAO = new KhachHangDAO();
+    listKH = khDAO.getKhachHang(connect);
+    DefaultTableModel model = (DefaultTableModel) tblKH.getModel();
+    model.setRowCount(0);
+    for (KhachHang kh : listKH) {
+      String gioitinh = null;
+      if (kh.isGioiTinh() == true) {
+        gioitinh = "Nam";
+      } else {
+        gioitinh = "Nữ";
+      }
+      model.addRow(new Object[]{
+        kh.getSDT(), kh.getTenKH(), kh.getDiaChi(), kh.getEmail(), gioitinh, kh.getKhuyenMai()
+      });
+    }
   }
 }

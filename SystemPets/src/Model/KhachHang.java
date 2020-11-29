@@ -5,25 +5,24 @@
  */
 package model;
 
-import java.util.Date;
-
 /**
  *
  * @author TechCare
  */
 public class KhachHang {
-    String TenKH,DiaChi,SDT;
-    Date NgaySinh;
+
+    String TenKH, DiaChi, SDT, Email;
     boolean GioiTinh;
-double KhuyenMai;
+    double KhuyenMai;
+
     public KhachHang() {
     }
 
-    public KhachHang(String TenKH, String DiaChi, String SDT, Date NgaySinh, boolean GioiTinh, double KhuyenMai) {
+    public KhachHang(String TenKH, String DiaChi, String SDT, String Email, boolean GioiTinh, double KhuyenMai) {
         this.TenKH = TenKH;
         this.DiaChi = DiaChi;
         this.SDT = SDT;
-        this.NgaySinh = NgaySinh;
+        this.Email = Email;
         this.GioiTinh = GioiTinh;
         this.KhuyenMai = KhuyenMai;
     }
@@ -52,12 +51,12 @@ double KhuyenMai;
         this.SDT = SDT;
     }
 
-    public Date getNgaySinh() {
-        return NgaySinh;
+    public String getEmail() {
+        return Email;
     }
 
-    public void setNgaySinh(Date NgaySinh) {
-        this.NgaySinh = NgaySinh;
+    public void setEmail(String Email) {
+        this.Email = Email;
     }
 
     public boolean isGioiTinh() {
@@ -76,6 +75,4 @@ double KhuyenMai;
         this.KhuyenMai = KhuyenMai;
     }
 
-    
-    
 }

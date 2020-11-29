@@ -5,13 +5,31 @@
  */
 package View;
 
+import Dao.DichVuDAO;
+import Dao.LoaiHinhDAO;
+import JdbcConnection.JdbcHelper;
+import Validator.Validator;
+import static View.TrangChuFrame.dsDV;
+import static View.TrangChuFrame.tblDV;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
+import model.DichVu;
+import model.LoaiHinhDichVu;
 
 /**
  *
  * @author Thinkpad
  */
 public class themDVDialog extends javax.swing.JDialog {
+
+  JdbcHelper connect;
+  LoaiHinhDAO lhDAO;
+  DichVuDAO dvDAO;
+  ArrayList<LoaiHinhDichVu> listLH;
+  ArrayList<DichVu> listDV;
 
   /**
    * Creates new form themDVDialog
@@ -33,18 +51,17 @@ public class themDVDialog extends javax.swing.JDialog {
 
     jPanel2 = new javax.swing.JPanel();
     jPanel1 = new javax.swing.JPanel();
-    jTextField5 = new javax.swing.JTextField();
-    jTextField4 = new javax.swing.JTextField();
-    jTextField3 = new javax.swing.JTextField();
-    jTextField2 = new javax.swing.JTextField();
-    jTextField1 = new javax.swing.JTextField();
+    txtTenDV = new javax.swing.JTextField();
+    txtMaDV = new javax.swing.JTextField();
     jLabel1 = new javax.swing.JLabel();
     jLabel2 = new javax.swing.JLabel();
     jLabel3 = new javax.swing.JLabel();
-    jLabel4 = new javax.swing.JLabel();
     jLabel5 = new javax.swing.JLabel();
     btnXacNhan = new javax.swing.JButton();
     btnHuy = new javax.swing.JButton();
+    cboMaLHDV = new javax.swing.JComboBox<>();
+    jScrollPane1 = new javax.swing.JScrollPane();
+    txtGhiChuDV = new javax.swing.JTextArea();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setUndecorated(true);
@@ -55,30 +72,15 @@ public class themDVDialog extends javax.swing.JDialog {
     jPanel1.setBackground(new java.awt.Color(241, 255, 246));
     jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-    jTextField5.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jTextField5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
-    jTextField5.setOpaque(false);
-    jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, 230, -1));
+    txtTenDV.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+    txtTenDV.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
+    txtTenDV.setOpaque(false);
+    jPanel1.add(txtTenDV, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 230, -1));
 
-    jTextField4.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jTextField4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
-    jTextField4.setOpaque(false);
-    jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 230, -1));
-
-    jTextField3.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jTextField3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
-    jTextField3.setOpaque(false);
-    jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 230, -1));
-
-    jTextField2.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jTextField2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
-    jTextField2.setOpaque(false);
-    jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 230, -1));
-
-    jTextField1.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
-    jTextField1.setOpaque(false);
-    jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 230, -1));
+    txtMaDV.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+    txtMaDV.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
+    txtMaDV.setOpaque(false);
+    jPanel1.add(txtMaDV, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 230, -1));
 
     jLabel1.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
     jLabel1.setText("Loại hình dịch vụ:");
@@ -92,18 +94,19 @@ public class themDVDialog extends javax.swing.JDialog {
     jLabel3.setText("Tên dịch vụ:");
     jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
 
-    jLabel4.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jLabel4.setText("Giá dịch vụ:");
-    jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
-
     jLabel5.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
     jLabel5.setText("Ghi chú:");
-    jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, -1));
+    jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
 
     btnXacNhan.setBackground(new java.awt.Color(0, 255, 255));
     btnXacNhan.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
     btnXacNhan.setText("Xác nhận");
-    jPanel1.add(btnXacNhan, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 330, -1, -1));
+    btnXacNhan.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnXacNhanActionPerformed(evt);
+      }
+    });
+    jPanel1.add(btnXacNhan, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, -1, -1));
 
     btnHuy.setBackground(new java.awt.Color(0, 255, 255));
     btnHuy.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
@@ -113,7 +116,19 @@ public class themDVDialog extends javax.swing.JDialog {
         btnHuyActionPerformed(evt);
       }
     });
-    jPanel1.add(btnHuy, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 330, -1, -1));
+    jPanel1.add(btnHuy, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 330, -1, -1));
+
+    cboMaLHDV.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+    cboMaLHDV.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
+    cboMaLHDV.setOpaque(false);
+    jPanel1.add(cboMaLHDV, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 230, 30));
+
+    txtGhiChuDV.setColumns(20);
+    txtGhiChuDV.setRows(5);
+    txtGhiChuDV.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
+    jScrollPane1.setViewportView(txtGhiChuDV);
+
+    jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 230, -1));
 
     javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
     jPanel2.setLayout(jPanel2Layout);
@@ -121,15 +136,15 @@ public class themDVDialog extends javax.swing.JDialog {
       jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(jPanel2Layout.createSequentialGroup()
         .addGap(35, 35, 35)
-        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
+        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
         .addContainerGap())
     );
     jPanel2Layout.setVerticalGroup(
       jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(jPanel2Layout.createSequentialGroup()
-        .addGap(26, 26, 26)
-        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addContainerGap(34, Short.MAX_VALUE))
+      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGap(69, 69, 69))
     );
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -140,7 +155,7 @@ public class themDVDialog extends javax.swing.JDialog {
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+      .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
     );
 
     pack();
@@ -150,6 +165,11 @@ public class themDVDialog extends javax.swing.JDialog {
     // TODO add your handling code here:
     setVisible(false);
   }//GEN-LAST:event_btnHuyActionPerformed
+
+    private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
+      // TODO add your handling code here:
+      themDV();
+    }//GEN-LAST:event_btnXacNhanActionPerformed
 
   /**
    * @param args the command line arguments
@@ -196,18 +216,17 @@ public class themDVDialog extends javax.swing.JDialog {
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton btnHuy;
   private javax.swing.JButton btnXacNhan;
+  public static javax.swing.JComboBox<String> cboMaLHDV;
   private javax.swing.JLabel jLabel1;
   private javax.swing.JLabel jLabel2;
   private javax.swing.JLabel jLabel3;
-  private javax.swing.JLabel jLabel4;
   private javax.swing.JLabel jLabel5;
   private javax.swing.JPanel jPanel1;
   private javax.swing.JPanel jPanel2;
-  private javax.swing.JTextField jTextField1;
-  private javax.swing.JTextField jTextField2;
-  private javax.swing.JTextField jTextField3;
-  private javax.swing.JTextField jTextField4;
-  private javax.swing.JTextField jTextField5;
+  private javax.swing.JScrollPane jScrollPane1;
+  private javax.swing.JTextArea txtGhiChuDV;
+  private javax.swing.JTextField txtMaDV;
+  private javax.swing.JTextField txtTenDV;
   // End of variables declaration//GEN-END:variables
   void customUI() {
     //custom UI
@@ -225,5 +244,83 @@ public class themDVDialog extends javax.swing.JDialog {
 
   void init() {
     this.setLocationRelativeTo(null);
+    //ket noi csdl
+    connect = new JdbcHelper();
+    //fillcombobox
+    fillComboboxMaLH();
+  }
+
+  void fillComboboxMaLH() {
+    lhDAO = new LoaiHinhDAO();
+    listLH = lhDAO.getLoaiHinhDichVu(connect);
+    for (LoaiHinhDichVu lh : listLH) {
+      cboMaLHDV.addItem(lh.getTenLH() + " - " + lh.getMaLH());
+    }
+  }
+
+  StringBuilder validatorDV() {
+    StringBuilder sb = new StringBuilder();
+    Validator.checkEmpty(txtMaDV, sb, "Mã Dịch Vụ không được để trống !");
+    Validator.checkEmpty(txtTenDV, sb, "Tên Dịch Vụ không được để trống !");
+    return sb;
+  }
+
+  void themDV() {
+    if (validatorDV().length() > 0) {
+      JOptionPane.showMessageDialog(this, validatorDV() + "Thêm thất bại !", "Lỗi", HEIGHT);
+      return;
+    }
+
+    connect = new JdbcHelper();
+    dvDAO = new DichVuDAO();
+    DichVu sp = dvDAO.findByMaDV(txtMaDV.getText(), connect);
+    if (sp != null) {
+      JOptionPane.showMessageDialog(this, "Sản Phẩm có mã " + txtMaDV.getText() + " đã tồn tại !", "Lỗi", HEIGHT);
+      txtMaDV.requestFocus();
+      return;
+    }
+
+    DichVu dvNew = new DichVu();
+    dvNew.setMaDV(txtMaDV.getText());
+    dvNew.setTenDV(txtTenDV.getText());
+    String MaLH[] = cboMaLHDV.getSelectedItem().toString().split("- ");
+    dvNew.setMaLH(MaLH[1]);
+
+    dvNew.setGhiChu(txtGhiChuDV.getText());
+    if (dvDAO.insertDV(dvNew, connect) == 1) {
+      JOptionPane.showMessageDialog(this, "Thêm thành công");
+      fillTableDV();
+      fillListDV();
+      TrangChuFrame.txtTKNV.setText("");
+      setVisible(false);
+    } else {
+      JOptionPane.showMessageDialog(this, "Thêm thất bại !", "Lỗi", HEIGHT);
+    }
+  }
+
+  public void fillTableDV() {
+    dvDAO = new DichVuDAO();
+    listDV = dvDAO.getDichVu(connect);
+    DefaultTableModel model = (DefaultTableModel) tblDV.getModel();
+    model.setRowCount(0);
+    for (DichVu dv : listDV) {
+      model.addRow(new Object[]{
+        dv.getMaLH(), dv.getMaDV(), dv.getTenDV(), dv.getGhiChu()
+      });
+    }
+  }
+  
+  void fillListDV() {
+    dvDAO = new DichVuDAO();
+    lhDAO = new LoaiHinhDAO();
+    dvDAO = new DichVuDAO();
+    listLH = lhDAO.getLoaiHinhDichVu(connect);
+    listDV = dvDAO.getDichVuByMaLH(connect, listLH.get(0).getMaLH());
+    DefaultListModel modelDV = new DefaultListModel<>();
+    modelDV.removeAllElements();
+    for(DichVu dv : listDV) {
+      modelDV.addElement(dv.getTenDV());
+    }
+    dsDV.setModel(modelDV);
   }
 }

@@ -81,6 +81,11 @@ public class DangNhapDialog extends javax.swing.JDialog {
     txtMK.setForeground(new java.awt.Color(102, 102, 102));
     txtMK.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(253, 232, 252)));
     txtMK.setOpaque(false);
+    txtMK.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        txtMKActionPerformed(evt);
+      }
+    });
     jPanel1.add(txtMK, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 310, 280, 30));
 
     jSeparator4.setForeground(new java.awt.Color(102, 102, 102));
@@ -99,7 +104,7 @@ public class DangNhapDialog extends javax.swing.JDialog {
     });
 
     jLabel7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-    jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/fav.png"))); // NOI18N
+    jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-cat-18.png"))); // NOI18N
     jLabel7.setText("Đăng nhập");
 
     exit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/exit.png"))); // NOI18N
@@ -275,6 +280,11 @@ public class DangNhapDialog extends javax.swing.JDialog {
     int y = evt.getYOnScreen();
     this.setLocation(x-xx,y-xy);
   }//GEN-LAST:event_jPanel2MouseDragged
+
+  private void txtMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMKActionPerformed
+    // TODO add your handling code here:
+    login();
+  }//GEN-LAST:event_txtMKActionPerformed
 
   /**
    * @param args the command line arguments
