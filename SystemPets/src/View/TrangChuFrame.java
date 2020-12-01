@@ -218,6 +218,7 @@ public class TrangChuFrame extends javax.swing.JFrame {
     jScrollPane11 = new javax.swing.JScrollPane();
     tblTKDT = new javax.swing.JTable();
     cboTieuChi = new javax.swing.JComboBox<>();
+    txtTKDT = new javax.swing.JTextField();
     pnlTKKH = new javax.swing.JPanel();
     jScrollPane10 = new javax.swing.JScrollPane();
     tblTKKH = new javax.swing.JTable();
@@ -1332,6 +1333,21 @@ public class TrangChuFrame extends javax.swing.JFrame {
       }
     });
 
+    txtTKDT.setFont(new java.awt.Font("Dialog", 2, 16)); // NOI18N
+    txtTKDT.setForeground(new java.awt.Color(153, 153, 153));
+    txtTKDT.setText("Nhập vào ngày, tháng, năm cần tìm.....");
+    txtTKDT.setOpaque(false);
+    txtTKDT.addFocusListener(new java.awt.event.FocusAdapter() {
+      public void focusGained(java.awt.event.FocusEvent evt) {
+        txtTKDTFocusGained(evt);
+      }
+    });
+    txtTKDT.addKeyListener(new java.awt.event.KeyAdapter() {
+      public void keyReleased(java.awt.event.KeyEvent evt) {
+        txtTKDTKeyReleased(evt);
+      }
+    });
+
     javax.swing.GroupLayout pnlTKDTLayout = new javax.swing.GroupLayout(pnlTKDT);
     pnlTKDT.setLayout(pnlTKDTLayout);
     pnlTKDTLayout.setHorizontalGroup(
@@ -1339,19 +1355,23 @@ public class TrangChuFrame extends javax.swing.JFrame {
       .addGroup(pnlTKDTLayout.createSequentialGroup()
         .addContainerGap()
         .addGroup(pnlTKDTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 994, Short.MAX_VALUE)
+          .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 1006, Short.MAX_VALUE)
           .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTKDTLayout.createSequentialGroup()
             .addComponent(cboTieuChi, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(0, 0, Short.MAX_VALUE)))
+            .addGap(36, 36, 36)
+            .addComponent(txtTKDT, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         .addContainerGap())
     );
     pnlTKDTLayout.setVerticalGroup(
       pnlTKDTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTKDTLayout.createSequentialGroup()
-        .addGap(25, 25, 25)
-        .addComponent(cboTieuChi)
+        .addGap(23, 23, 23)
+        .addGroup(pnlTKDTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(cboTieuChi)
+          .addComponent(txtTKDT, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addGap(18, 18, 18)
-        .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
+        .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
         .addContainerGap())
     );
 
@@ -1987,6 +2007,11 @@ public class TrangChuFrame extends javax.swing.JFrame {
   }//GEN-LAST:event_tblHDMousePressed
 
   private void cboTieuChiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTieuChiActionPerformed
+    selectTieuChi();
+    txtTKDT.setText("");
+  }//GEN-LAST:event_cboTieuChiActionPerformed
+
+  public void selectTieuChi() {
     // TODO add your handling code here:
     int indexCboTieuChi = cboTieuChi.getSelectedIndex();
     if(indexCboTieuChi == 0) {
@@ -1996,7 +2021,7 @@ public class TrangChuFrame extends javax.swing.JFrame {
     } else if(indexCboTieuChi == 2) {
       fillTableTKDT("{call [sp.DoanhThu_ALLYEAR]}");
     }
-  }//GEN-LAST:event_cboTieuChiActionPerformed
+  }
 
   private void tblTKHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTKHDMouseClicked
     // TODO add your handling code here:
@@ -2006,6 +2031,27 @@ public class TrangChuFrame extends javax.swing.JFrame {
     maHD = String.valueOf(tblTKHD.getValueAt(indexHD, 0));    
     new HDCTDialog(this, true).setVisible(true);
   }//GEN-LAST:event_tblTKHDMouseClicked
+
+  private void txtTKDTFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTKDTFocusGained
+    // TODO add your handling code here:
+    setSearch(txtTKDT);
+  }//GEN-LAST:event_txtTKDTFocusGained
+
+  private void txtTKDTKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTKDTKeyReleased
+    // TODO add your handling code here:
+    if (txtTKDT.getText().equals("")) {
+      selectTieuChi();
+    } else {
+      int indexCboTieuChi = cboTieuChi.getSelectedIndex();
+      if(indexCboTieuChi == 0) {
+        fillTableTKDT("{call [sp.DoanhThu_Ngay](?)}", txtTKDT.getText());
+      } else if (indexCboTieuChi == 1) {
+        fillTableTKDT("{call [sp.DoanhThu_Thang](?)}", txtTKDT.getText());
+      } else if (indexCboTieuChi == 2) {
+        fillTableTKDT("{call [sp.DoanhThu_Nam](?)}", txtTKDT.getText());
+      }
+    }
+  }//GEN-LAST:event_txtTKDTKeyReleased
 
   /**
    * @param args the command line arguments
@@ -2181,6 +2227,7 @@ public class TrangChuFrame extends javax.swing.JFrame {
   private javax.swing.JTextArea txtGhiChuLH;
   private javax.swing.JTextField txtMaLH;
   private javax.swing.JTextField txtSDTKH;
+  private javax.swing.JTextField txtTKDT;
   private javax.swing.JTextField txtTKDV;
   private javax.swing.JTextField txtTKHD;
   public static javax.swing.JTextField txtTKKH;
@@ -2800,6 +2847,18 @@ public class TrangChuFrame extends javax.swing.JFrame {
   void fillTableTKDT(String sql) {
     tkDAO = new ThongKeDAO();
     listTKDT = tkDAO.getDoanhThuHD(connect, sql);
+    DefaultTableModel model = (DefaultTableModel) tblTKDT.getModel();
+    model.setRowCount(0);
+    for(Object[] row : listTKDT) {
+      model.addRow(new Object[]{
+        row[0], row[1], row[2], row[3], row[4], row[5]
+      });
+    }
+  }
+  
+  void fillTableTKDT(String sql, String time) {
+    tkDAO = new ThongKeDAO();
+    listTKDT = tkDAO.getDoanhThuHD(connect, sql, time);
     DefaultTableModel model = (DefaultTableModel) tblTKDT.getModel();
     model.setRowCount(0);
     for(Object[] row : listTKDT) {
