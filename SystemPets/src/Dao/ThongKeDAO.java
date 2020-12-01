@@ -91,4 +91,23 @@ public class ThongKeDAO {
     }
     return list;
   }
+  
+  public ArrayList<Object[]> getDoanhThuHD(JdbcHelper connect, String sql) {
+    ArrayList<Object[]> list = new ArrayList<>();
+    try {
+      CallableStatement cs = connect.getConnect().prepareCall(sql);
+      ResultSet rs = cs.executeQuery();
+      while(rs.next()) {
+        Object[] model = {
+          rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)
+        };
+        list.add(model);
+      }
+      cs.close();
+      rs.close();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return list;
+  }
 }

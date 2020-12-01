@@ -516,25 +516,10 @@
                   <Font name="Dialog" size="16" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="3" rowCount="4">
-                    <Column editable="false" title="M&#xe3; lo&#x1ea1;i h&#xec;nh" type="java.lang.Object">
-                      <Data value="Test 1 ph&#xe1;t"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                    </Column>
-                    <Column editable="true" title="T&#xea;n lo&#x1ea1;i h&#xec;nh" type="java.lang.Object">
-                      <Data value="T&#x1ebf;t &#x111;&#x1ebf;n tr&#x1ed3;"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                    </Column>
-                    <Column editable="true" title="Ghi ch&#xfa;" type="java.lang.Object">
-                      <Data value="T&#x1ebf;t &#x111;&#x1ebf;n r&#x1ed3;i"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                    </Column>
+                  <Table columnCount="3" rowCount="0">
+                    <Column editable="false" title="M&#xe3; lo&#x1ea1;i h&#xec;nh" type="java.lang.Object"/>
+                    <Column editable="true" title="T&#xea;n lo&#x1ea1;i h&#xec;nh" type="java.lang.Object"/>
+                    <Column editable="true" title="Ghi ch&#xfa;" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -1886,8 +1871,9 @@
                   <Font name="Dialog" size="16" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="4" rowCount="0">
-                    <Column editable="true" title="Lo&#x1ea1;i ho&#x1ea1;t &#x111;&#x1ed9;ng" type="java.lang.Object"/>
+                  <Table columnCount="5" rowCount="0">
+                    <Column editable="false" title="Lo&#x1ea1;i" type="java.lang.Object"/>
+                    <Column editable="false" title="M&#xe3; ho&#x1ea1;t &#x111;&#x1ed9;ng" type="java.lang.Object"/>
                     <Column editable="false" title="T&#xea;n" type="java.lang.Object"/>
                     <Column editable="false" title="S&#x1ed1; l&#x1b0;&#x1ee3;ng" type="java.lang.Object"/>
                     <Column editable="true" title="Gi&#xe1; th&#xe0;nh" type="java.lang.Object"/>
@@ -1895,7 +1881,12 @@
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
-                    <Column maxWidth="140" minWidth="140" prefWidth="140" resizable="true">
+                    <Column maxWidth="60" minWidth="60" prefWidth="60" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="120" minWidth="120" prefWidth="120" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
@@ -1910,7 +1901,7 @@
                       <Editor/>
                       <Renderer/>
                     </Column>
-                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                    <Column maxWidth="70" minWidth="70" prefWidth="70" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
@@ -1929,6 +1920,9 @@
                   <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblHDMousePressed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="JTableHeader tableHeader = tblHD.getTableHeader();     &#xd;&#xa;tableHeader.setFont(new java.awt.Font(&quot;Dialog&quot;, 0, 17));&#xd;&#xa;tableHeader.setBackground(new Color(0,147,223));     &#xd;&#xa;tableHeader.setOpaque(false);&#xd;&#xa;tableHeader.setForeground(Color.white);&#xd;&#xa;"/>
               </AuxValues>
@@ -2594,18 +2588,12 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jScrollPane11" alignment="0" pref="994" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="txtTKTKDT" min="-2" pref="523" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                              <Component id="rdoNgay" min="-2" pref="71" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="rdoThang" min="-2" pref="71" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="rdoNam" min="-2" pref="71" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="cboTieuChi" min="-2" pref="121" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -2616,15 +2604,10 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txtTKTKDT" pref="35" max="32767" attributes="0"/>
-                          <Component id="rdoNgay" alignment="0" max="32767" attributes="0"/>
-                          <Component id="rdoThang" alignment="0" max="32767" attributes="0"/>
-                          <Component id="rdoNam" alignment="0" max="32767" attributes="0"/>
-                      </Group>
+                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="cboTieuChi" max="32767" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jScrollPane11" pref="569" max="32767" attributes="0"/>
+                      <Component id="jScrollPane11" pref="570" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -2653,41 +2636,22 @@
                       <Font name="Dialog" size="16" style="0"/>
                     </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="5" rowCount="4">
-                        <Column editable="true" title="Th&#x1edd;i gian" type="java.lang.Object">
-                          <Data value="Test 1 ph&#xe1;t"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                        </Column>
-                        <Column editable="true" title="T&#x1ed5;ng doanh thu" type="java.lang.Object">
-                          <Data value="T&#x1ebf;t &#x111;&#x1ebf;n tr&#x1ed3;"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                        </Column>
-                        <Column editable="true" title="Thu nh&#x1ea1;p cao nh&#x1ea5;t" type="java.lang.Object">
-                          <Data value="T&#x1ebf;t &#x111;&#x1ebf;n r&#x1ed3;i"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                        </Column>
-                        <Column editable="true" title="Thu nh&#x1ead;p trung b&#xec;nh" type="java.lang.Object">
-                          <Data value="100---"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                        </Column>
-                        <Column editable="true" title="Thu nh&#x1ead;p th&#x1ea5;p nh&#x1ea5;t" type="java.lang.Object">
-                          <Data value="kh&#xf4;ng c&#xf3; ghji ch&#xfa; c&#xe1;i j c&#x1ea3;"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                        </Column>
+                      <Table columnCount="6" rowCount="0">
+                        <Column editable="false" title="Th&#x1edd;i gian" type="java.lang.Object"/>
+                        <Column editable="false" title="T&#x1ed5;ng ho&#xe1; &#x111;&#x1a1;n" type="java.lang.Object"/>
+                        <Column editable="false" title="T&#x1ed5;ng doanh thu" type="java.lang.Object"/>
+                        <Column editable="false" title="Thu nh&#x1ea1;p cao nh&#x1ea5;t" type="java.lang.Object"/>
+                        <Column editable="false" title="Thu nh&#x1ead;p trung b&#xec;nh" type="java.lang.Object"/>
+                        <Column editable="false" title="Thu nh&#x1ead;p th&#x1ea5;p nh&#x1ea5;t" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>
@@ -2736,56 +2700,33 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JTextField" name="txtTKTKDT">
+            <Component class="javax.swing.JComboBox" name="cboTieuChi">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Dialog" size="16" style="2"/>
+                  <Font name="Dialog" size="16" style="0"/>
                 </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="99" green="99" red="99" type="rgb"/>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="3">
+                    <StringItem index="0" value="T&#x1ea5;t c&#x1ea3;"/>
+                    <StringItem index="1" value="Th&#xe1;ng"/>
+                    <StringItem index="2" value="N&#x103;m"/>
+                  </StringArray>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Nh&#x1ead;p v&#xe0;o ng&#xe0;y th&#xe1;ng n&#x103;m c&#x1ea7;n t&#xec;m..."/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                    <LineBorder>
+                      <Color PropertyName="color" blue="cc" green="cc" red="ff" type="rgb"/>
+                    </LineBorder>
+                  </Border>
+                </Property>
                 <Property name="opaque" type="boolean" value="false"/>
               </Properties>
               <Events>
-                <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtTKTKDTFocusGained"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cboTieuChiActionPerformed"/>
               </Events>
-            </Component>
-            <Component class="javax.swing.JRadioButton" name="rdoNgay">
-              <Properties>
-                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                  <ComponentRef name="groupTKTKDT"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Dialog" size="16" style="0"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Ng&#xe0;y"/>
-                <Property name="opaque" type="boolean" value="false"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JRadioButton" name="rdoThang">
-              <Properties>
-                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                  <ComponentRef name="groupTKTKDT"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Dialog" size="16" style="0"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Th&#xe1;ng"/>
-                <Property name="opaque" type="boolean" value="false"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JRadioButton" name="rdoNam">
-              <Properties>
-                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                  <ComponentRef name="groupTKTKDT"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Dialog" size="16" style="0"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="N&#x103;m"/>
-                <Property name="opaque" type="boolean" value="false"/>
-              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
@@ -2996,16 +2937,22 @@
                       <Font name="Dialog" size="16" style="0"/>
                     </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="4" rowCount="0">
-                        <Column editable="true" title="M&#xe3; ho&#xe1; &#x111;&#x1a1;n" type="java.lang.Object"/>
+                      <Table columnCount="5" rowCount="0">
+                        <Column editable="false" title="M&#xe3; ho&#xe1; &#x111;&#x1a1;n" type="java.lang.Object"/>
                         <Column editable="false" title="Ng&#x1b0;&#x1edd;i t&#x1ea1;o" type="java.lang.Object"/>
+                        <Column editable="false" title="T&#xea;n kh&#xe1;ch h&#xe0;ng" type="java.lang.Object"/>
                         <Column editable="false" title="Ng&#xe0;y t&#x1ea1;o" type="java.lang.Object"/>
-                        <Column editable="false" title="SDT kh&#xe1;ch h&#xe0;ng" type="java.lang.Object"/>
+                        <Column editable="false" title="T&#x1ed5;ng ti&#x1ec1;n" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
                         <Column maxWidth="150" minWidth="150" prefWidth="150" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>
                           <Renderer/>
@@ -3042,6 +2989,9 @@
                       <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblTKHDMouseClicked"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="JTableHeader tableHeaderTKHD = tblTKHD.getTableHeader();     &#xd;&#xa; tableHeaderTKHD.setFont(new java.awt.Font(&quot;Dialog&quot;, 0, 17));&#xd;&#xa; tableHeaderTKHD.setBackground(new Color(0,147,223));     &#xd;&#xa; tableHeaderTKHD.setOpaque(false);&#xd;&#xa; tableHeaderTKHD.setForeground(Color.white);&#xd;&#xa; "/>
                   </AuxValues>
