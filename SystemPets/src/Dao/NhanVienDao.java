@@ -176,4 +176,37 @@ public class NhanVienDao {
     return i;
   }
   
+  public NhanVien findSDT(String sdt, JdbcHelper connect) {
+    NhanVien nv = new NhanVien();
+    try {
+      PreparedStatement ps = connect.getConnect().prepareStatement("select * from NHANVIEN where SDT = ?");
+      ps.setString(1, sdt);
+      ResultSet rs = ps.executeQuery();
+      while(rs.next()) {
+        nv.setMaNV(rs.getString(1));
+      }
+      ps.close();
+      rs.close();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return nv;
+  }
+  
+  public NhanVien findMail(String mail, JdbcHelper connect) {
+    NhanVien nv = new NhanVien();
+    try {
+      PreparedStatement ps = connect.getConnect().prepareStatement("select * from NHANVIEN where EMAIL = ?");
+      ps.setString(1, mail);
+      ResultSet rs = ps.executeQuery();
+      while(rs.next()) {
+        nv.setMaNV(rs.getString(1));
+      }
+      ps.close();
+      rs.close();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return nv;
+  }
 }

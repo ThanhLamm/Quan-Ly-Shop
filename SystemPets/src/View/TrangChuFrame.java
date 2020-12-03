@@ -5,47 +5,32 @@
  */
 package View;
 
-import Dao.ChiTietHoaDonDAO;
-import Dao.DichVuDAO;
-import Dao.HoaDonDAO;
-import Dao.KhachHangDAO;
-import Dao.LoaiHinhDAO;
-import Dao.NhanVienDao;
-import Dao.SanPhamDAO;
-import Dao.ThongKeDAO;
+import Dao.*;
 import JdbcConnection.JdbcHelper;
-import Utils.Auth;
-import Utils.DateHelper;
+import Utils.*;
 import Validator.Validator;
-import java.awt.Color;
-import java.awt.Font;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import static java.awt.image.ImageObserver.HEIGHT;
+import java.io.*;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.regex.Pattern;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.Timer;
+import javax.swing.*;
+import java.awt.Desktop;
 
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-import model.DichVu;
-import model.HoaDon;
-import model.HoaDonChiTiet;
-import model.KhachHang;
-import model.LoaiHinhDichVu;
-import model.NhanVien;
-import model.SanPham;
+import model.*;
 
 /**
  *
@@ -71,14 +56,13 @@ public class TrangChuFrame extends javax.swing.JFrame {
   ArrayList<KhachHang> listKH;
   ArrayList<SanPham> listCartSP;
   ArrayList<DichVu> listCartDV;
-  HoaDonDAO hdDAO;  
+  HoaDonDAO hdDAO;
   ArrayList<DichVu> listDVselect;
   ArrayList<SanPham> listSPselect;
   ChiTietHoaDonDAO cthdDAO;
   ArrayList<HoaDonChiTiet> listHDCT;
-  
+
   public static String maHD;
-  
 
   /**
    * Creates new form TrangChuFrame
@@ -1821,7 +1805,7 @@ public class TrangChuFrame extends javax.swing.JFrame {
     lblTKDT.setForeground(Color.white);
     hiddenPNLTK();
     unhidePNL(pnlTKDT);
-    
+
   }//GEN-LAST:event_pnlNavDoanhThuMousePressed
 
   private void pnlNavKhoHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlNavKhoHangMousePressed
@@ -1909,11 +1893,13 @@ public class TrangChuFrame extends javax.swing.JFrame {
   private void btnXoaDVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaDVActionPerformed
     // TODO add your handling code here:
     deleteDV();
+    resetTable();
   }//GEN-LAST:event_btnXoaDVActionPerformed
 
   private void btnSuaDVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaDVActionPerformed
     // TODO add your handling code here:
     updateDV();
+    resetTable();
   }//GEN-LAST:event_btnSuaDVActionPerformed
 
   private void btnThemLHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemLHActionPerformed
@@ -2014,11 +2000,11 @@ public class TrangChuFrame extends javax.swing.JFrame {
   public void selectTieuChi() {
     // TODO add your handling code here:
     int indexCboTieuChi = cboTieuChi.getSelectedIndex();
-    if(indexCboTieuChi == 0) {
+    if (indexCboTieuChi == 0) {
       fillTableTKDT("{call [sp.DoanhThu_ALLDAY]}");
-    } else if(indexCboTieuChi == 1) {
+    } else if (indexCboTieuChi == 1) {
       fillTableTKDT("{call [sp.DoanhThu_ALLMONTH]}");
-    } else if(indexCboTieuChi == 2) {
+    } else if (indexCboTieuChi == 2) {
       fillTableTKDT("{call [sp.DoanhThu_ALLYEAR]}");
     }
   }
@@ -2028,7 +2014,7 @@ public class TrangChuFrame extends javax.swing.JFrame {
     cthdDAO = new ChiTietHoaDonDAO();
     connect = new JdbcHelper();
     int indexHD = tblTKHD.getSelectedRow();
-    maHD = String.valueOf(tblTKHD.getValueAt(indexHD, 0));    
+    maHD = String.valueOf(tblTKHD.getValueAt(indexHD, 0));
     new HDCTDialog(this, true).setVisible(true);
   }//GEN-LAST:event_tblTKHDMouseClicked
 
@@ -2043,7 +2029,7 @@ public class TrangChuFrame extends javax.swing.JFrame {
       selectTieuChi();
     } else {
       int indexCboTieuChi = cboTieuChi.getSelectedIndex();
-      if(indexCboTieuChi == 0) {
+      if (indexCboTieuChi == 0) {
         fillTableTKDT("{call [sp.DoanhThu_Ngay](?)}", txtTKDT.getText());
       } else if (indexCboTieuChi == 1) {
         fillTableTKDT("{call [sp.DoanhThu_Thang](?)}", txtTKDT.getText());
@@ -2327,14 +2313,14 @@ public class TrangChuFrame extends javax.swing.JFrame {
     fillTableTKKHTQ();
     fillTableTKHD();
     fillTableTKDT("{call [sp.DoanhThu_ALLDAY]}");
-    
+
     //fillCombobox
     fillCboLH();
-    
+
     //fillList
     fillListDV();
     fillListSP();
-    
+
     listSPselect = new ArrayList<>();
     listDVselect = new ArrayList<>();
   }
@@ -2489,7 +2475,7 @@ public class TrangChuFrame extends javax.swing.JFrame {
 
   void deleteNV() {
     int indexNV = tblNV.getSelectedRow();
-    if (indexNV < 1) {
+    if (indexNV < 0) {
       JOptionPane.showMessageDialog(this, "Hãy chọn dòng cần xoá !");
       return;
     }
@@ -2603,7 +2589,7 @@ public class TrangChuFrame extends javax.swing.JFrame {
 
   void deleteSP() {
     int indexSP = tblSP.getSelectedRow();
-    if (indexSP < 1) {
+    if (indexSP < 0) {
       JOptionPane.showMessageDialog(this, "Hãy chọn dòng cần xoá !");
       return;
     }
@@ -2612,7 +2598,7 @@ public class TrangChuFrame extends javax.swing.JFrame {
       if (spDAO.deleteSP(String.valueOf(tblSP.getValueAt(indexSP, 0)), connect) == 1) {
         JOptionPane.showMessageDialog(this, "Xoá thành công !");
         txtTKSP.setText("");
-        fillTableSP();        
+        fillTableSP();
         fillListSP();
       } else {
         JOptionPane.showMessageDialog(this, "Xoá thất bại !", "Lỗi", HEIGHT);
@@ -2687,11 +2673,11 @@ public class TrangChuFrame extends javax.swing.JFrame {
 
   void updateLH() {
     String maLH, tenLH, ghiChu;
-    for(int i = 0; i < tblLHDV.getRowCount(); i++) {
+    for (int i = 0; i < tblLHDV.getRowCount(); i++) {
       maLH = String.valueOf(tblLHDV.getValueAt(i, 0));
       tenLH = String.valueOf(tblLHDV.getValueAt(i, 1));
       ghiChu = String.valueOf(tblLHDV.getValueAt(i, 2));
-      if(lhDAO.updateLH(maLH, tenLH, ghiChu, connect) != 1) {
+      if (lhDAO.updateLH(maLH, tenLH, ghiChu, connect) != 1) {
         JOptionPane.showMessageDialog(this, "Sửa thất bại ở dòng " + (i + 1) + " !", "Lỗi", HEIGHT);
       }
     }
@@ -2704,7 +2690,7 @@ public class TrangChuFrame extends javax.swing.JFrame {
 
   void deleteLH() {
     int indexSP = tblLHDV.getSelectedRow();
-    if (indexSP < 1) {
+    if (indexSP < 0) {
       JOptionPane.showMessageDialog(this, "Hãy chọn dòng cần xoá !");
       return;
     }
@@ -2778,7 +2764,7 @@ public class TrangChuFrame extends javax.swing.JFrame {
 
   void deleteDV() {
     int indexDV = tblDV.getSelectedRow();
-    if (indexDV < 1) {
+    if (indexDV < 0) {
       JOptionPane.showMessageDialog(this, "Hãy chọn dòng cần xoá !");
       return;
     }
@@ -2795,6 +2781,7 @@ public class TrangChuFrame extends javax.swing.JFrame {
       }
     }
   }
+
   //----------------------------------Thống kê----------------------------
   void fillTableTKKH() {
     tkDAO = new ThongKeDAO();
@@ -2807,7 +2794,7 @@ public class TrangChuFrame extends javax.swing.JFrame {
       });
     }
   }
-  
+
   void fillTableTKKHTQ() {
     tkDAO = new ThongKeDAO();
     listTKKHTQ = tkDAO.getKhachHang(connect);
@@ -2819,55 +2806,55 @@ public class TrangChuFrame extends javax.swing.JFrame {
       });
     }
   }
-  
+
   void fillTableTKHD() {
     tkDAO = new ThongKeDAO();
     listTKHD = tkDAO.getHoaDon(connect);
     DefaultTableModel model = (DefaultTableModel) tblTKHD.getModel();
     model.setRowCount(0);
-    for(Object[] row : listTKHD) {
+    for (Object[] row : listTKHD) {
       model.addRow(new Object[]{
         row[0], row[1], row[2], row[3], row[4]
       });
     }
   }
-  
+
   void fillTableTKHD(int maHD) {
     tkDAO = new ThongKeDAO();
     listTKHD = tkDAO.getHoaDonByMaHD(connect, maHD);
     DefaultTableModel model = (DefaultTableModel) tblTKHD.getModel();
     model.setRowCount(0);
-    for(Object[] row : listTKHD) {
+    for (Object[] row : listTKHD) {
       model.addRow(new Object[]{
         row[0], row[1], row[2], row[3], row[4]
       });
     }
   }
-  
+
   void fillTableTKDT(String sql) {
     tkDAO = new ThongKeDAO();
     listTKDT = tkDAO.getDoanhThuHD(connect, sql);
     DefaultTableModel model = (DefaultTableModel) tblTKDT.getModel();
     model.setRowCount(0);
-    for(Object[] row : listTKDT) {
+    for (Object[] row : listTKDT) {
       model.addRow(new Object[]{
-        row[0], row[1], row[2], row[3], row[4], row[5]
+        row[0], row[1], row[2], row[3], Math.round(Double.parseDouble(String.valueOf(row[4])) * 100) / 100, row[5]
       });
     }
   }
-  
+
   void fillTableTKDT(String sql, String time) {
     tkDAO = new ThongKeDAO();
     listTKDT = tkDAO.getDoanhThuHD(connect, sql, time);
     DefaultTableModel model = (DefaultTableModel) tblTKDT.getModel();
     model.setRowCount(0);
-    for(Object[] row : listTKDT) {
+    for (Object[] row : listTKDT) {
       model.addRow(new Object[]{
-        row[0], row[1], row[2], row[3], row[4], row[5]
+        row[0], row[1], row[2], row[3], Math.round(Double.parseDouble(String.valueOf(row[4])) * 100) / 100, row[5]
       });
     }
   }
-  
+
   void searchHD() {
     if (txtTKHD.getText().equals("")) {
       fillTableTKHD();
@@ -2883,7 +2870,7 @@ public class TrangChuFrame extends javax.swing.JFrame {
       }
     }
   }
-  
+
   //-------------------------KHÁCH HÀNG--------------------------
   void fillTableKH() {
     khDAO = new KhachHangDAO();
@@ -2896,9 +2883,21 @@ public class TrangChuFrame extends javax.swing.JFrame {
         gioitinh = "Nam";
       } else {
         gioitinh = "Nữ";
+      }      
+      String TenKH = String.valueOf(kh.getTenKH());
+      if(TenKH.equalsIgnoreCase("null")) {
+        TenKH = "";
+      }
+      String DiaChi = String.valueOf(kh.getDiaChi());
+      if(DiaChi.equalsIgnoreCase("null")) {
+        DiaChi = "";
+      }
+      String Email = String.valueOf(kh.getEmail());
+      if(Email.equalsIgnoreCase("null")) {
+        Email = "";
       }
       model.addRow(new Object[]{
-        kh.getSDT(), kh.getTenKH(), kh.getDiaChi(), kh.getEmail(), gioitinh, kh.getKhuyenMai()
+        kh.getSDT(), TenKH, DiaChi, Email, gioitinh, kh.getKhuyenMai()
       });
     }
   }
@@ -2967,7 +2966,7 @@ public class TrangChuFrame extends javax.swing.JFrame {
 
   void deleteKH() {
     int indexKH = tblKH.getSelectedRow();
-    if (indexKH < 1) {
+    if (indexKH < 0) {
       JOptionPane.showMessageDialog(this, "Hãy chọn dòng cần xoá !");
       return;
     }
@@ -2982,7 +2981,7 @@ public class TrangChuFrame extends javax.swing.JFrame {
       }
     }
   }
-  
+
 //  ------------------------------Hoá đơn------------------------------
   void fillListDV() {
     dvDAO = new DichVuDAO();
@@ -2992,84 +2991,84 @@ public class TrangChuFrame extends javax.swing.JFrame {
     listDV = dvDAO.getDichVuByMaLH(connect, listLH.get(0).getMaLH());
     DefaultListModel modelDV = new DefaultListModel<>();
     modelDV.removeAllElements();
-    for(DichVu dv : listDV) {
+    for (DichVu dv : listDV) {
       modelDV.addElement(dv.getTenDV());
     }
     dsDV.setModel(modelDV);
   }
-  
+
   void fillListSP() {
     spDAO = new SanPhamDAO();
     listSP = spDAO.getSanPham(connect);
     DefaultListModel modelSP = new DefaultListModel<>();
     modelSP.removeAllElements();
-    for(SanPham sp : listSP) {
+    for (SanPham sp : listSP) {
       modelSP.addElement(sp.getTenSP());
     }
     dsSP.setModel(modelSP);
   }
-  
+
   void fillCboLH() {
     lhDAO = new LoaiHinhDAO();
     listLH = lhDAO.getLoaiHinhDichVu(connect);
     DefaultComboBoxModel model = (DefaultComboBoxModel) cboLoaiHinhDV.getModel();
     model.removeAllElements();
-    for(LoaiHinhDichVu lh : listLH) {
+    for (LoaiHinhDichVu lh : listLH) {
       cboLoaiHinhDV.addItem(lh.getTenLH());
     }
   }
-  
+
   void selectLH() {
     int indexLH = cboLoaiHinhDV.getSelectedIndex();
     lhDAO = new LoaiHinhDAO();
     listLH = lhDAO.getLoaiHinhDichVu(connect);
     dvDAO = new DichVuDAO();
-    if(indexLH == -1) {
+    if (indexLH == -1) {
       indexLH = 0;
     }
     listDV = dvDAO.getDichVuByMaLH(connect, listLH.get(indexLH).getMaLH());
     DefaultListModel modelDV = new DefaultListModel<>();
     modelDV.removeAllElements();
-    for(DichVu dv : listDV) {
+    for (DichVu dv : listDV) {
       modelDV.addElement(dv.getTenDV());
     }
     dsDV.setModel(modelDV);
   }
-  
+
   void deleteRowHD() {
     spDAO = new SanPhamDAO();
     dvDAO = new DichVuDAO();
     int indexTableHD = tblHD.getSelectedRow();
-    if(indexTableHD < 0) {
+    if (indexTableHD < 0) {
       JOptionPane.showMessageDialog(this, "Hãy chọn vào dòng bạn muốn xoá !", "Lỗi", HEIGHT);
       return;
     }
     DefaultTableModel model = (DefaultTableModel) tblHD.getModel();
-    if(tblHD.getValueAt(indexTableHD, 0).equals("SP")) {
+    if (tblHD.getValueAt(indexTableHD, 0).equals("SP")) {
       listSPselect.remove(spDAO.findByMaSP(String.valueOf(tblHD.getValueAt(indexTableHD, 1)), connect));
     }
-    if(tblHD.getValueAt(indexTableHD, 0).equals("DV")) {
+    if (tblHD.getValueAt(indexTableHD, 0).equals("DV")) {
       listDVselect.remove(dvDAO.findByMaDV(String.valueOf(tblHD.getValueAt(indexTableHD, 1)), connect));
     }
     model.removeRow(indexTableHD);
     totalMoney();
   }
-  
-  void resetTable () {
+
+  void resetTable() {
     DefaultTableModel model = (DefaultTableModel) tblHD.getModel();
     int countRow = model.getRowCount();
-    for(int i = countRow - 1; i >=0 ; i--) {
+    for (int i = countRow - 1; i >= 0; i--) {
       model.removeRow(i);
     }
     listSPselect.clear();
     listDVselect.clear();
     totalMoney();
   }
-  
+
   void selectDV() {
     int indexLH = cboLoaiHinhDV.getSelectedIndex();
     int indexDV = dsDV.getSelectedIndex();
-    if(indexLH == -1) {
+    if (indexLH == -1) {
       indexLH = 0;
     }
     lhDAO = new LoaiHinhDAO();
@@ -3080,7 +3079,7 @@ public class TrangChuFrame extends javax.swing.JFrame {
     fillTableHD(dv, null);
     totalMoney();
   }
-  
+
   void selectSP() {
     int indexSP = dsSP.getSelectedIndex();
     spDAO = new SanPhamDAO();
@@ -3089,7 +3088,7 @@ public class TrangChuFrame extends javax.swing.JFrame {
     fillTableHD(null, sp);
     totalMoney();
   }
-  
+
   void fillTableHD(DichVu dv, SanPham sp) {
     DefaultTableModel model = (DefaultTableModel) tblHD.getModel();
     int countRow = model.getRowCount();
@@ -3121,7 +3120,7 @@ public class TrangChuFrame extends javax.swing.JFrame {
         listSPselect.add(sp);
         model.setRowCount(countRow);
         model.addRow(new Object[]{
-          "SP", sp.getMaSP(), sp.getTenSP(), 1, (Math.round(sp.getGiaBan()*10)/10)
+          "SP", sp.getMaSP(), sp.getTenSP(), 1, (Math.round(sp.getGiaBan() * 10) / 10)
         });
       }
     }
@@ -3130,7 +3129,7 @@ public class TrangChuFrame extends javax.swing.JFrame {
   void checkKH() {
     khDAO = new KhachHangDAO();
     KhachHang kh = khDAO.findBySDT(txtSDTKH.getText(), connect);
-    if(kh==null) {
+    if (kh == null) {
       txtTenKH.setText("");
       txtTenKH.setEditable(true);
       lblNotification.setText("Khách hàng này chưa mua lần nào, hãy nhập vào tên !");
@@ -3141,65 +3140,73 @@ public class TrangChuFrame extends javax.swing.JFrame {
       lblNotification.setText("");
       lblNotification.setToolTipText("");
     }
-    if(txtSDTKH.getText().equals("")) {
+    if (txtSDTKH.getText().equals("")) {
       txtTenKH.setText("");
       txtTenKH.setEditable(true);
       lblNotification.setText("");
       lblNotification.setToolTipText("");
     }
-    if(!txtTenKH.getText().equals("")) {
+    if (!txtTenKH.getText().equals("")) {
       System.out.println("ok");
       lblNotification.setText("");
       lblNotification.setToolTipText("");
     }
   }
-  
+
   StringBuilder validatorHD() {
     StringBuilder sb = new StringBuilder();
     Validator.checkEmpty(txtSDTKH, sb, "Hãy nhập vào số điện thoại khách hàng !");
     Validator.checkEmpty(txtTenKH, sb, "Hãy nhập vào tên khách hàng !");
     return sb;
   }
-  
+
   void totalMoney() {
     double total = 0;
-    for(int i = 0; i < tblHD.getRowCount(); i++) {
+    for (int i = 0; i < tblHD.getRowCount(); i++) {
       total += Double.parseDouble(String.valueOf(tblHD.getValueAt(i, 4))) * Double.parseDouble(String.valueOf(tblHD.getValueAt(i, 3)));
     }
     lblTongTien.setText(String.valueOf(total));
   }
-  
+
   void createHD() {
-    if(validatorHD().length()>0) {
-      JOptionPane.showMessageDialog(this,validatorHD() + "Tạo thất bại !", "Lỗi", HEIGHT);
+    if (validatorHD().length() > 0) {
+      JOptionPane.showMessageDialog(this, validatorHD() + "Tạo thất bại !", "Lỗi", HEIGHT);
       return;
     }
     String patternSDT = "[0][0-9]{9}";
-    if(!Pattern.matches(patternSDT, txtSDTKH.getText())) {
+    if (!Pattern.matches(patternSDT, txtSDTKH.getText())) {
       JOptionPane.showMessageDialog(this, "Hãy nhập đúng định dạng SĐT ! (0**********)");
       return;
     }
-    if(tblHD.getRowCount()<=0) {
-      JOptionPane.showMessageDialog(this,"Hãy chọn 1 sản phẩm hoặc dịch vụ muốn thanh toán !", "Lỗi", HEIGHT);
+    if (tblHD.getRowCount() <= 0) {
+      JOptionPane.showMessageDialog(this, "Hãy chọn 1 sản phẩm hoặc dịch vụ muốn thanh toán !", "Lỗi", HEIGHT);
       return;
     }
     HoaDon hd = new HoaDon(Auth.user.getMaNV(), txtSDTKH.getText(), txtGhiChuHD.getText(), DateHelper.toDate(lblNgayTaoHD.getText(), "dd-MM-yyyy"));
     hdDAO = new HoaDonDAO();
     cthdDAO = new ChiTietHoaDonDAO();
     connect = new JdbcHelper();
-    if(hdDAO.insertHD(hd, connect) == 1) {
+    if (hdDAO.insertHD(hd, connect) == 1) {
       JOptionPane.showMessageDialog(this, "Tạo thành công !");
-      String maHD = hdDAO.getMaHD(connect);
-      for(DichVu dv : listDVselect) {
+      maHD = hdDAO.getMaHD(connect);
+      for (DichVu dv : listDVselect) {
         HoaDonChiTiet hdct = new HoaDonChiTiet(getSL(dv.getMaDV()), maHD, dv.getMaDV(), null, getGia(dv.getMaDV()));
         cthdDAO.insertCTHDSP(hdct, connect);
       }
-      for(SanPham sp : listSPselect) {
+      for (SanPham sp : listSPselect) {
         HoaDonChiTiet hdct = new HoaDonChiTiet(getSL(sp.getMaSP()), maHD, null, sp.getMaSP(), getGia(sp.getMaSP()));
         cthdDAO.insertCTHDSP(hdct, connect);
       }
-      KhachHang kh = new KhachHang(txtTenKH.getText(), null, txtSDTKH.getText(), null, true, 0);
-      khDAO.insertKH(kh, connect);
+      new HDCTDialog(this, true).setVisible(true);
+      khDAO = new KhachHangDAO();
+      KhachHang checkKH = khDAO.findBySDT(txtSDTKH.getText(), connect);
+      if (checkKH == null) {
+        KhachHang kh = new KhachHang(txtTenKH.getText(), null, txtSDTKH.getText(), null, true, 0);
+        khDAO.insertKH(kh, connect);
+        fillTableKH();
+      }
+      ReadPDF(maHD, txtSDTKH.getText(), txtTenKH.getText(),
+              lblTenNV.getText(), txtGhiChuHD.getText(), lblTongTien.getText(), lblNgayTaoHD.getText());
       resetTable();
       txtSDTKH.setText("");
       txtTenKH.setText("");
@@ -3209,24 +3216,83 @@ public class TrangChuFrame extends javax.swing.JFrame {
       JOptionPane.showMessageDialog(this, "Tạo thất bại !", "Lỗi", HEIGHT);
     }
   }
-  
+
   int getSL(String ma) {
     int SL = 1;
-    for(int i = 0; i < tblHD.getRowCount(); i++) {
-      if(tblHD.getValueAt(i, 1).equals(ma)) {
+    for (int i = 0; i < tblHD.getRowCount(); i++) {
+      if (tblHD.getValueAt(i, 1).equals(ma)) {
         return Integer.parseInt(String.valueOf(tblHD.getValueAt(i, 3)));
       }
     }
     return SL;
   }
-  
+
   double getGia(String ma) {
     double SL = 1;
-    for(int i = 0; i < tblHD.getRowCount(); i++) {
-      if(tblHD.getValueAt(i, 1).equals(ma)) {
+    for (int i = 0; i < tblHD.getRowCount(); i++) {
+      if (tblHD.getValueAt(i, 1).equals(ma)) {
         return Integer.parseInt(String.valueOf(tblHD.getValueAt(i, 4)));
       }
     }
     return SL;
+  }
+
+  void ReadPDF(String MaHD, String SDT, String TenKH, String TenNV, String GhiChu, String TongTien, String NgayTao) {
+    Document document = new Document();
+    try {
+      // khởi tạo một PdfWriter truyền vào document và FileOutputStream
+      File file = new File("HoaDon/MaHD" + MaHD + "-" + NgayTao + ".pdf");
+      FileOutputStream fos = new FileOutputStream(file);
+      PdfWriter.getInstance(document, fos);
+
+      // mở file để thực hiện viết
+      document.open();
+      // thêm nội dung sử dụng add function
+      Paragraph pr = new Paragraph("------------------------------HOA DON------------------------------\n"
+              + "* Ten Nhan Vien: " + StringUtils.removeAccent(TenNV) + "\n"
+              + "* Ten Khach Hang: " + StringUtils.removeAccent(TenKH) + "\n"
+              + "* SDT Khach Hang: " + SDT + "\n"
+              + "-------------------------------------------------------------------\n");
+      pr.setIndentationLeft(80);
+      document.add(pr);
+      String Ten;
+      int SoLuong;
+      double GiaThanh;
+      for (int i = 0; i < tblHD.getRowCount(); i++) {
+        Ten = String.valueOf(tblHD.getValueAt(i, 2));
+        SoLuong = Integer.valueOf(String.valueOf(tblHD.getValueAt(i, 3)));
+        GiaThanh = Double.valueOf(String.valueOf(tblHD.getValueAt(i, 4)));
+        Paragraph pr1 = new Paragraph("* " + StringUtils.removeAccent(Ten) + ":     " + SoLuong + " x " + GiaThanh + "\n");
+        pr1.setIndentationLeft(80);
+        document.add(pr1);
+      }
+      Paragraph pr2 = new Paragraph("-------------------------------------------------------------------\n"
+              + "* Ghi Chu: " + StringUtils.removeAccent(GhiChu) + "\n"
+              + "* TONG TIEN: " + TongTien + "\n\n"
+              + "*********************************(" + NgayTao + ")*******************************");
+      pr2.setIndentationLeft(80);
+      document.add(pr2);
+
+      document.close();      
+      int a = JOptionPane.showConfirmDialog(this, "Bạn có muốn hiện hoá đơn PDF ?", "Thông báo", JOptionPane.YES_NO_OPTION);
+      if(a==JOptionPane.YES_OPTION) {
+        openFile(file);
+      }
+    } catch (DocumentException e) {
+      e.printStackTrace();
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    }
+  }
+  
+  void openFile(File file) {
+    try {
+      Desktop desktop = Desktop.getDesktop();
+      if (file.exists()) {
+        desktop.open(file);
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 }

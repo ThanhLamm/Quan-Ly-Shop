@@ -425,13 +425,26 @@ public class themNVDialog extends javax.swing.JDialog {
     
     String patternEmail = "^[\\w]+@.+";
     if(!Pattern.matches(patternEmail, txtEmail.getText())) {
-      JOptionPane.showMessageDialog(this, "Hãy nhập đúng định dạng Email ! (lam@gmail.com)");
+      JOptionPane.showMessageDialog(this, "Hãy nhập đúng định dạng Email ! (lam@gmail.com)", "Lỗi", HEIGHT);
+      return;
+    }
+    
+    NhanVien checkEmail = nvDAO.findMail(txtEmail.getText(), connect);
+    System.out.println(checkEmail.getMaNV());
+    if(checkEmail.getMaNV() != null) {
+      JOptionPane.showMessageDialog(this, "Email này đã tồn tại !", "Lỗi", HEIGHT);
       return;
     }
     
     String patternSDT = "[0][0-9]{9}";
     if(!Pattern.matches(patternSDT, txtSDT.getText())) {
-      JOptionPane.showMessageDialog(this, "Hãy nhập đúng định dạng SĐT ! (0**********)");
+      JOptionPane.showMessageDialog(this, "Hãy nhập đúng định dạng SĐT ! (0**********)", "Lỗi", HEIGHT);
+      return;
+    }
+    
+    NhanVien checkSDT = nvDAO.findSDT(txtSDT.getText(), connect);
+    if(checkSDT.getMaNV() != null) {
+      JOptionPane.showMessageDialog(this, "Số điện thoại này đã tồn tại !", "Lỗi", HEIGHT);
       return;
     }
     

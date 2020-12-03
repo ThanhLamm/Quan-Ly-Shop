@@ -2596,7 +2596,6 @@
                               <Component id="cboTieuChi" min="-2" pref="121" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                               <Component id="txtTKDT" min="-2" pref="292" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
