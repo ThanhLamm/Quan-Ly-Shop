@@ -305,7 +305,6 @@ public class themKHDialog extends javax.swing.JDialog {
     } else {
       khNew.setGioiTinh(false);
     }
-    khNew.setKhuyenMai(0.0);
     String patternEmail = "^[\\w]+@.+";
     if (!Pattern.matches(patternEmail, txtEmailKH.getText())) {
       JOptionPane.showMessageDialog(this, "Hãy nhập đúng định dạng Email ! (lam@gmail.com)");
@@ -341,7 +340,7 @@ public class themKHDialog extends javax.swing.JDialog {
         gioitinh = "Nữ";
       }
       model.addRow(new Object[]{
-        kh.getSDT(), kh.getTenKH(), kh.getDiaChi(), kh.getEmail(), gioitinh, kh.getKhuyenMai()
+        kh.getSDT(), kh.getTenKH(), kh.getDiaChi(), kh.getEmail(), gioitinh
       });
     }
   }

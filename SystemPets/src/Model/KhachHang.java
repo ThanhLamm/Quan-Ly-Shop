@@ -13,18 +13,16 @@ public class KhachHang {
 
     String TenKH, DiaChi, SDT, Email;
     boolean GioiTinh;
-    double KhuyenMai;
 
     public KhachHang() {
     }
 
-    public KhachHang(String TenKH, String DiaChi, String SDT, String Email, boolean GioiTinh, double KhuyenMai) {
+    public KhachHang(String TenKH, String DiaChi, String SDT, String Email, boolean GioiTinh) {
         this.TenKH = TenKH;
         this.DiaChi = DiaChi;
         this.SDT = SDT;
         this.Email = Email;
         this.GioiTinh = GioiTinh;
-        this.KhuyenMai = KhuyenMai;
     }
 
     public String getTenKH() {
@@ -65,14 +63,6 @@ public class KhachHang {
 
     public void setGioiTinh(boolean GioiTinh) {
         this.GioiTinh = GioiTinh;
-    }
-
-    public double getKhuyenMai() {
-        return KhuyenMai;
-    }
-
-    public void setKhuyenMai(double KhuyenMai) {
-        this.KhuyenMai = KhuyenMai;
     }
 
 }

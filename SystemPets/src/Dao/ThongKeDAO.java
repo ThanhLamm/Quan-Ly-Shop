@@ -111,11 +111,11 @@ public class ThongKeDAO {
     return list;
   }
   
-  public ArrayList<Object[]> getDoanhThuHD(JdbcHelper connect, String sql, String time) {
+  public ArrayList<Object[]> getDoanhThuHD(JdbcHelper connect, String sql, int time) {
     ArrayList<Object[]> list = new ArrayList<>();
     try {
       CallableStatement cs = connect.getConnect().prepareCall(sql);
-      cs.setString(1, time);
+      cs.setInt(1, time);
       ResultSet rs = cs.executeQuery();
       while(rs.next()) {
         Object[] model = {

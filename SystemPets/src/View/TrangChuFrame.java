@@ -203,6 +203,7 @@ public class TrangChuFrame extends javax.swing.JFrame {
     tblTKDT = new javax.swing.JTable();
     cboTieuChi = new javax.swing.JComboBox<>();
     txtTKDT = new javax.swing.JTextField();
+    lblNotificationDT = new javax.swing.JLabel();
     pnlTKKH = new javax.swing.JPanel();
     jScrollPane10 = new javax.swing.JScrollPane();
     tblTKKH = new javax.swing.JTable();
@@ -405,7 +406,7 @@ public class TrangChuFrame extends javax.swing.JFrame {
     lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
     lblTitle.setText("ĐĂNG KÍ HOÁ ĐƠN");
 
-    lblTime.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+    lblTime.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
     lblTime.setForeground(new java.awt.Color(51, 51, 51));
     lblTime.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     lblTime.setText("TIME");
@@ -459,10 +460,20 @@ public class TrangChuFrame extends javax.swing.JFrame {
     tblLHDV.setRowHeight(25);
     tblLHDV.setRowMargin(3);
     tblLHDV.setSelectionBackground(new java.awt.Color(255, 153, 153));
-    tblLHDV.setSelectionForeground(new java.awt.Color(255, 255, 255));
     tblLHDV.setShowVerticalLines(false);
     tblLHDV.getTableHeader().setReorderingAllowed(false);
     jScrollPane8.setViewportView(tblLHDV);
+    if (tblLHDV.getColumnModel().getColumnCount() > 0) {
+      tblLHDV.getColumnModel().getColumn(0).setMinWidth(150);
+      tblLHDV.getColumnModel().getColumn(0).setPreferredWidth(150);
+      tblLHDV.getColumnModel().getColumn(0).setMaxWidth(150);
+      tblLHDV.getColumnModel().getColumn(1).setMinWidth(150);
+      tblLHDV.getColumnModel().getColumn(1).setPreferredWidth(150);
+      tblLHDV.getColumnModel().getColumn(1).setMaxWidth(150);
+      tblLHDV.getColumnModel().getColumn(2).setMinWidth(200);
+      tblLHDV.getColumnModel().getColumn(2).setPreferredWidth(200);
+      tblLHDV.getColumnModel().getColumn(2).setMaxWidth(200);
+    }
     JTableHeader tableHeaderLHDV = tblLHDV.getTableHeader();     
     tableHeaderLHDV.setFont(new java.awt.Font("Dialog", 0, 17));
     tableHeaderLHDV.setBackground(new Color(0,147,223));     
@@ -587,10 +598,20 @@ public class TrangChuFrame extends javax.swing.JFrame {
     tblDV.setRowHeight(25);
     tblDV.setRowMargin(3);
     tblDV.setSelectionBackground(new java.awt.Color(255, 153, 153));
-    tblDV.setSelectionForeground(new java.awt.Color(255, 255, 255));
     tblDV.setShowVerticalLines(false);
     tblDV.getTableHeader().setReorderingAllowed(false);
     jScrollPane5.setViewportView(tblDV);
+    if (tblDV.getColumnModel().getColumnCount() > 0) {
+      tblDV.getColumnModel().getColumn(0).setMinWidth(150);
+      tblDV.getColumnModel().getColumn(0).setPreferredWidth(150);
+      tblDV.getColumnModel().getColumn(0).setMaxWidth(150);
+      tblDV.getColumnModel().getColumn(1).setMinWidth(130);
+      tblDV.getColumnModel().getColumn(1).setPreferredWidth(130);
+      tblDV.getColumnModel().getColumn(1).setMaxWidth(130);
+      tblDV.getColumnModel().getColumn(2).setMinWidth(200);
+      tblDV.getColumnModel().getColumn(2).setPreferredWidth(200);
+      tblDV.getColumnModel().getColumn(2).setMaxWidth(200);
+    }
     JTableHeader tableHeaderDV = tblDV.getTableHeader();     
     tableHeaderDV.setFont(new java.awt.Font("Dialog", 0, 17));
     tableHeaderDV.setBackground(new Color(0,147,223));     
@@ -685,7 +706,6 @@ public class TrangChuFrame extends javax.swing.JFrame {
     tblNV.setRowHeight(25);
     tblNV.setRowMargin(3);
     tblNV.setSelectionBackground(new java.awt.Color(255, 153, 153));
-    tblNV.setSelectionForeground(new java.awt.Color(255, 255, 255));
     tblNV.setShowVerticalLines(false);
     tblNV.getTableHeader().setReorderingAllowed(false);
     jScrollPane9.setViewportView(tblNV);
@@ -775,17 +795,17 @@ public class TrangChuFrame extends javax.swing.JFrame {
     tblSP.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
     tblSP.setModel(new javax.swing.table.DefaultTableModel(
       new Object [][] {
-        {"Test 1 phát", "Tết đến trồ", "Tết đến rồi", "100---", "không có ghji chú cái j cả", "10-10-2020"},
-        {null, null, null, null, null, null},
-        {null, null, null, null, null, null},
-        {null, null, null, null, null, null}
+        {"Test 1 phát", "Tết đến trồ", "Tết đến rồi", null, "100---", "không có ghji chú cái j cả", "10-10-2020"},
+        {null, null, null, null, null, null, null},
+        {null, null, null, null, null, null, null},
+        {null, null, null, null, null, null, null}
       },
       new String [] {
-        "Mã sản phẩm", "Tên sản phẩm", "Số lượng", "Giá tiền", "Ghi chú", "Ngày nhập kho"
+        "Mã sản phẩm", "Tên sản phẩm", "Số lượng", "Giá nhập", "Giá bán", "Ghi chú", "Ngày nhập kho"
       }
     ) {
       boolean[] canEdit = new boolean [] {
-        false, true, true, true, true, false
+        false, true, true, false, true, true, false
       };
 
       public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -797,10 +817,23 @@ public class TrangChuFrame extends javax.swing.JFrame {
     tblSP.setRowHeight(25);
     tblSP.setRowMargin(3);
     tblSP.setSelectionBackground(new java.awt.Color(255, 153, 153));
-    tblSP.setSelectionForeground(new java.awt.Color(255, 255, 255));
     tblSP.setShowVerticalLines(false);
     tblSP.getTableHeader().setReorderingAllowed(false);
     jScrollPane6.setViewportView(tblSP);
+    if (tblSP.getColumnModel().getColumnCount() > 0) {
+      tblSP.getColumnModel().getColumn(0).setMinWidth(150);
+      tblSP.getColumnModel().getColumn(0).setPreferredWidth(150);
+      tblSP.getColumnModel().getColumn(0).setMaxWidth(150);
+      tblSP.getColumnModel().getColumn(2).setMinWidth(80);
+      tblSP.getColumnModel().getColumn(2).setPreferredWidth(80);
+      tblSP.getColumnModel().getColumn(2).setMaxWidth(80);
+      tblSP.getColumnModel().getColumn(3).setMinWidth(130);
+      tblSP.getColumnModel().getColumn(3).setPreferredWidth(130);
+      tblSP.getColumnModel().getColumn(3).setMaxWidth(130);
+      tblSP.getColumnModel().getColumn(4).setMinWidth(130);
+      tblSP.getColumnModel().getColumn(4).setPreferredWidth(130);
+      tblSP.getColumnModel().getColumn(4).setMaxWidth(130);
+    }
     JTableHeader tableHeaderSP = tblSP.getTableHeader();     
     tableHeaderSP.setFont(new java.awt.Font("Dialog", 0, 17));
     tableHeaderSP.setBackground(new Color(0,147,223));     
@@ -926,7 +959,6 @@ public class TrangChuFrame extends javax.swing.JFrame {
     jScrollPane4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 204, 204)));
     jScrollPane4.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
 
-    dsSP.setBackground(new java.awt.Color(255, 255, 255));
     dsSP.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
     dsSP.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
     dsSP.setFixedCellHeight(30);
@@ -955,7 +987,6 @@ public class TrangChuFrame extends javax.swing.JFrame {
     jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 204, 204)));
     jScrollPane1.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
 
-    dsDV.setBackground(new java.awt.Color(255, 255, 255));
     dsDV.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
     dsDV.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
     dsDV.setFixedCellHeight(30);
@@ -982,9 +1013,16 @@ public class TrangChuFrame extends javax.swing.JFrame {
         "Loại", "Mã hoạt động", "Tên", "Số lượng", "Giá thành"
       }
     ) {
+      Class[] types = new Class [] {
+        java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Double.class
+      };
       boolean[] canEdit = new boolean [] {
         false, false, false, false, true
       };
+
+      public Class getColumnClass(int columnIndex) {
+        return types [columnIndex];
+      }
 
       public boolean isCellEditable(int rowIndex, int columnIndex) {
         return canEdit [columnIndex];
@@ -1007,15 +1045,15 @@ public class TrangChuFrame extends javax.swing.JFrame {
       tblHD.getColumnModel().getColumn(0).setMinWidth(60);
       tblHD.getColumnModel().getColumn(0).setPreferredWidth(60);
       tblHD.getColumnModel().getColumn(0).setMaxWidth(60);
-      tblHD.getColumnModel().getColumn(1).setMinWidth(120);
-      tblHD.getColumnModel().getColumn(1).setPreferredWidth(120);
-      tblHD.getColumnModel().getColumn(1).setMaxWidth(120);
+      tblHD.getColumnModel().getColumn(1).setMinWidth(130);
+      tblHD.getColumnModel().getColumn(1).setPreferredWidth(130);
+      tblHD.getColumnModel().getColumn(1).setMaxWidth(130);
       tblHD.getColumnModel().getColumn(3).setMinWidth(100);
       tblHD.getColumnModel().getColumn(3).setPreferredWidth(100);
       tblHD.getColumnModel().getColumn(3).setMaxWidth(100);
-      tblHD.getColumnModel().getColumn(4).setMinWidth(70);
-      tblHD.getColumnModel().getColumn(4).setPreferredWidth(70);
-      tblHD.getColumnModel().getColumn(4).setMaxWidth(70);
+      tblHD.getColumnModel().getColumn(4).setMinWidth(100);
+      tblHD.getColumnModel().getColumn(4).setPreferredWidth(100);
+      tblHD.getColumnModel().getColumn(4).setMaxWidth(100);
     }
     JTableHeader tableHeader = tblHD.getTableHeader();     
     tableHeader.setFont(new java.awt.Font("Dialog", 0, 17));
@@ -1159,17 +1197,17 @@ public class TrangChuFrame extends javax.swing.JFrame {
     tblKH.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
     tblKH.setModel(new javax.swing.table.DefaultTableModel(
       new Object [][] {
-        {"099999999", "Tết đến trồ", "Huế", "Lam@gmail.com", "Nam", "không có"},
-        {null, null, null, null, null, null},
-        {null, null, null, null, null, null},
-        {null, null, null, null, null, null}
+        {"099999999", "Tết đến trồ", "Huế", "Lam@gmail.com", "Nam"},
+        {null, null, null, null, null},
+        {null, null, null, null, null},
+        {null, null, null, null, null}
       },
       new String [] {
-        "SĐT", "Tên khách hàng", "Địa chỉ", "Email", "Giới tính", "Khuyến mãi"
+        "SĐT", "Tên khách hàng", "Địa chỉ", "Email", "Giới tính"
       }
     ) {
       boolean[] canEdit = new boolean [] {
-        false, true, true, true, true, true
+        false, false, true, true, true
       };
 
       public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -1181,10 +1219,17 @@ public class TrangChuFrame extends javax.swing.JFrame {
     tblKH.setRowHeight(25);
     tblKH.setRowMargin(3);
     tblKH.setSelectionBackground(new java.awt.Color(255, 153, 153));
-    tblKH.setSelectionForeground(new java.awt.Color(255, 255, 255));
     tblKH.setShowVerticalLines(false);
     tblKH.getTableHeader().setReorderingAllowed(false);
     jScrollPane7.setViewportView(tblKH);
+    if (tblKH.getColumnModel().getColumnCount() > 0) {
+      tblKH.getColumnModel().getColumn(0).setMinWidth(160);
+      tblKH.getColumnModel().getColumn(0).setPreferredWidth(160);
+      tblKH.getColumnModel().getColumn(0).setMaxWidth(160);
+      tblKH.getColumnModel().getColumn(4).setMinWidth(120);
+      tblKH.getColumnModel().getColumn(4).setPreferredWidth(120);
+      tblKH.getColumnModel().getColumn(4).setMaxWidth(120);
+    }
     JTableHeader tableHeaderKH = tblKH.getTableHeader();     
     tableHeaderKH.setFont(new java.awt.Font("Dialog", 0, 17));
     tableHeaderKH.setBackground(new Color(0,147,223));     
@@ -1297,7 +1342,6 @@ public class TrangChuFrame extends javax.swing.JFrame {
     tblTKDT.setRowHeight(25);
     tblTKDT.setRowMargin(3);
     tblTKDT.setSelectionBackground(new java.awt.Color(255, 153, 153));
-    tblTKDT.setSelectionForeground(new java.awt.Color(255, 255, 255));
     tblTKDT.setShowVerticalLines(false);
     tblTKDT.getTableHeader().setReorderingAllowed(false);
     jScrollPane11.setViewportView(tblTKDT);
@@ -1332,6 +1376,9 @@ public class TrangChuFrame extends javax.swing.JFrame {
       }
     });
 
+    lblNotificationDT.setFont(new java.awt.Font("Dialog", 3, 10)); // NOI18N
+    lblNotificationDT.setForeground(new java.awt.Color(255, 102, 102));
+
     javax.swing.GroupLayout pnlTKDTLayout = new javax.swing.GroupLayout(pnlTKDT);
     pnlTKDT.setLayout(pnlTKDTLayout);
     pnlTKDTLayout.setHorizontalGroup(
@@ -1340,11 +1387,13 @@ public class TrangChuFrame extends javax.swing.JFrame {
         .addContainerGap()
         .addGroup(pnlTKDTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 1006, Short.MAX_VALUE)
-          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTKDTLayout.createSequentialGroup()
+          .addGroup(pnlTKDTLayout.createSequentialGroup()
             .addComponent(cboTieuChi, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGap(36, 36, 36)
-            .addComponent(txtTKDT, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(pnlTKDTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+              .addComponent(lblNotificationDT, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+              .addComponent(txtTKDT, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(0, 0, Short.MAX_VALUE)))
         .addContainerGap())
     );
     pnlTKDTLayout.setVerticalGroup(
@@ -1354,8 +1403,10 @@ public class TrangChuFrame extends javax.swing.JFrame {
         .addGroup(pnlTKDTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(cboTieuChi)
           .addComponent(txtTKDT, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addGap(18, 18, 18)
-        .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addComponent(lblNotificationDT, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addContainerGap())
     );
 
@@ -1383,7 +1434,6 @@ public class TrangChuFrame extends javax.swing.JFrame {
     tblTKKH.setRowHeight(25);
     tblTKKH.setRowMargin(3);
     tblTKKH.setSelectionBackground(new java.awt.Color(255, 153, 153));
-    tblTKKH.setSelectionForeground(new java.awt.Color(255, 255, 255));
     tblTKKH.setShowVerticalLines(false);
     tblTKKH.getTableHeader().setReorderingAllowed(false);
     jScrollPane10.setViewportView(tblTKKH);
@@ -1439,7 +1489,6 @@ public class TrangChuFrame extends javax.swing.JFrame {
     tblTKHD.setRowHeight(25);
     tblTKHD.setRowMargin(3);
     tblTKHD.setSelectionBackground(new java.awt.Color(255, 153, 153));
-    tblTKHD.setSelectionForeground(new java.awt.Color(255, 255, 255));
     tblTKHD.setShowVerticalLines(false);
     tblTKHD.getTableHeader().setReorderingAllowed(false);
     tblTKHD.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1449,9 +1498,9 @@ public class TrangChuFrame extends javax.swing.JFrame {
     });
     jScrollPane12.setViewportView(tblTKHD);
     if (tblTKHD.getColumnModel().getColumnCount() > 0) {
-      tblTKHD.getColumnModel().getColumn(0).setMinWidth(150);
-      tblTKHD.getColumnModel().getColumn(0).setPreferredWidth(150);
-      tblTKHD.getColumnModel().getColumn(0).setMaxWidth(150);
+      tblTKHD.getColumnModel().getColumn(0).setMinWidth(100);
+      tblTKHD.getColumnModel().getColumn(0).setPreferredWidth(100);
+      tblTKHD.getColumnModel().getColumn(0).setMaxWidth(100);
     }
     JTableHeader tableHeaderTKHD = tblTKHD.getTableHeader();     
     tableHeaderTKHD.setFont(new java.awt.Font("Dialog", 0, 17));
@@ -1528,7 +1577,6 @@ public class TrangChuFrame extends javax.swing.JFrame {
     tblTKKHTQ.setRowHeight(25);
     tblTKKHTQ.setRowMargin(3);
     tblTKKHTQ.setSelectionBackground(new java.awt.Color(255, 153, 153));
-    tblTKKHTQ.setSelectionForeground(new java.awt.Color(255, 255, 255));
     tblTKKHTQ.setShowVerticalLines(false);
     tblTKKHTQ.getTableHeader().setReorderingAllowed(false);
     jScrollPane13.setViewportView(tblTKKHTQ);
@@ -1654,6 +1702,7 @@ public class TrangChuFrame extends javax.swing.JFrame {
     lblTitle.setText("ĐĂNG KÍ DỊCH VỤ");
     hiddenPNL();
     unhidePNL(pnlDichVu);
+    fillTableDV();
   }//GEN-LAST:event_pnlDKDVMousePressed
 
   private void pnlDSSPMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDSSPMousePressed
@@ -2028,13 +2077,19 @@ public class TrangChuFrame extends javax.swing.JFrame {
     if (txtTKDT.getText().equals("")) {
       selectTieuChi();
     } else {
-      int indexCboTieuChi = cboTieuChi.getSelectedIndex();
-      if (indexCboTieuChi == 0) {
-        fillTableTKDT("{call [sp.DoanhThu_Ngay](?)}", txtTKDT.getText());
-      } else if (indexCboTieuChi == 1) {
-        fillTableTKDT("{call [sp.DoanhThu_Thang](?)}", txtTKDT.getText());
-      } else if (indexCboTieuChi == 2) {
-        fillTableTKDT("{call [sp.DoanhThu_Nam](?)}", txtTKDT.getText());
+      try {
+        int Timkiem = Integer.parseInt(txtTKDT.getText());
+        int indexCboTieuChi = cboTieuChi.getSelectedIndex();
+        lblNotificationDT.setText("");
+        if (indexCboTieuChi == 0) {
+          fillTableTKDT("{call [sp.DoanhThu_Ngay](?)}", Timkiem);
+        } else if (indexCboTieuChi == 1) {
+          fillTableTKDT("{call [sp.DoanhThu_Thang](?)}", Timkiem);
+        } else if (indexCboTieuChi == 2) {
+          fillTableTKDT("{call [sp.DoanhThu_Nam](?)}", Timkiem);
+        }
+      } catch (Exception e) {
+        lblNotificationDT.setText("Định dạng tìm kiếm lỗi !!");
       }
     }
   }//GEN-LAST:event_txtTKDTKeyReleased
@@ -2149,6 +2204,7 @@ public class TrangChuFrame extends javax.swing.JFrame {
   private javax.swing.JLabel lblNgayTaoHD;
   private javax.swing.JLabel lblNgayTaoHD1;
   private javax.swing.JLabel lblNotification;
+  private javax.swing.JLabel lblNotificationDT;
   private javax.swing.JLabel lblNotificationHD;
   private javax.swing.JLabel lblQLNV;
   private javax.swing.JLabel lblSDTKH1;
@@ -2436,6 +2492,31 @@ public class TrangChuFrame extends javax.swing.JFrame {
       } catch (Exception e) {
         JOptionPane.showMessageDialog(this, "Lỗi định dạng ngày ! hãy nhập theo định dạng (ngày-tháng-năm)", "Lỗi", HEIGHT);
         fillTableNV();
+        return;
+      }
+    }
+    for (int i = 0; i < tblNV.getRowCount(); i++) {
+      String TenNV = String.valueOf(tblNV.getValueAt(i, 2));
+      if (TenNV.length() == 0) {
+        JOptionPane.showMessageDialog(this, "Tên nhân viên không được để trống !\n Cập nhật thông tin nhân viên không thành công!", "Thông báo", WIDTH);
+        return;
+      }
+    }
+    for (int i = 0; i < tblNV.getRowCount(); i++) {
+      String MK = String.valueOf(tblNV.getValueAt(i, 6));
+      String patternSDT = "[0][0-9]{9}";
+      if (MK.length() == 0) {
+        JOptionPane.showMessageDialog(this, "Sđt không được để trống !\n Cập nhật thông tin nhân viên không thành công!", "Thông báo", WIDTH);
+        return;
+      } else if (!Pattern.matches(patternSDT, MK)) {
+        JOptionPane.showMessageDialog(this, "Hãy nhập đúng định dạng SĐT ! (0**********)", "Lỗi", HEIGHT);
+        return;
+      }
+    }
+    for (int i = 0; i < tblNV.getRowCount(); i++) {
+      String diaChid = String.valueOf(tblNV.getValueAt(i, 4));
+      if (diaChid.length() == 0) {
+        JOptionPane.showMessageDialog(this, "Địa chỉ không được để trống !\n Cập nhật thông tin nhân viên không thành công!", "Thông báo", WIDTH);
         return;
       }
     }
@@ -2843,7 +2924,7 @@ public class TrangChuFrame extends javax.swing.JFrame {
     }
   }
 
-  void fillTableTKDT(String sql, String time) {
+  void fillTableTKDT(String sql, int time) {
     tkDAO = new ThongKeDAO();
     listTKDT = tkDAO.getDoanhThuHD(connect, sql, time);
     DefaultTableModel model = (DefaultTableModel) tblTKDT.getModel();
@@ -2883,21 +2964,21 @@ public class TrangChuFrame extends javax.swing.JFrame {
         gioitinh = "Nam";
       } else {
         gioitinh = "Nữ";
-      }      
+      }
       String TenKH = String.valueOf(kh.getTenKH());
-      if(TenKH.equalsIgnoreCase("null")) {
+      if (TenKH.equalsIgnoreCase("null")) {
         TenKH = "";
       }
       String DiaChi = String.valueOf(kh.getDiaChi());
-      if(DiaChi.equalsIgnoreCase("null")) {
+      if (DiaChi.equalsIgnoreCase("null")) {
         DiaChi = "";
       }
       String Email = String.valueOf(kh.getEmail());
-      if(Email.equalsIgnoreCase("null")) {
+      if (Email.equalsIgnoreCase("null")) {
         Email = "";
       }
       model.addRow(new Object[]{
-        kh.getSDT(), TenKH, DiaChi, Email, gioitinh, kh.getKhuyenMai()
+        kh.getSDT(), TenKH, DiaChi, Email, gioitinh
       });
     }
   }
@@ -2915,7 +2996,7 @@ public class TrangChuFrame extends javax.swing.JFrame {
         gioitinh = "Nữ";
       }
       model.addRow(new Object[]{
-        kh.getSDT(), kh.getTenKH(), kh.getDiaChi(), kh.getEmail(), gioitinh, kh.getKhuyenMai()
+        kh.getSDT(), kh.getTenKH(), kh.getDiaChi(), kh.getEmail(), gioitinh
       });
     }
   }
@@ -2927,17 +3008,6 @@ public class TrangChuFrame extends javax.swing.JFrame {
   void updateKH() {
     String TenKH, DiaChi, SDT, Email;
     boolean GioiTinh;
-    double KhuyenMai;
-
-    for (int i = 0; i < tblKH.getRowCount(); i++) {
-      try {
-        double khuyenmai = Double.parseDouble(String.valueOf(tblKH.getValueAt(i, 5)));
-      } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Lỗi định dạng Khuyến Mãi !", "Lỗi", HEIGHT);
-        fillTableKH();
-        return;
-      }
-    }
 
     for (int i = 0; i < tblKH.getRowCount(); i++) {
       SDT = String.valueOf(tblKH.getValueAt(i, 0));
@@ -2954,8 +3024,7 @@ public class TrangChuFrame extends javax.swing.JFrame {
         fillTableKH();
         return;
       }
-      KhuyenMai = Double.parseDouble(String.valueOf(tblKH.getValueAt(i, 5)));
-      if (khDAO.updateKH(SDT, TenKH, Email, DiaChi, KhuyenMai, GioiTinh, connect) != 1) {
+      if (khDAO.updateKH(SDT, TenKH, Email, DiaChi, GioiTinh, connect) != 1) {
         JOptionPane.showMessageDialog(this, "Sửa thất bại ở dòng " + (i + 1) + " !", "Lỗi", HEIGHT);
       }
     }
@@ -3038,20 +3107,47 @@ public class TrangChuFrame extends javax.swing.JFrame {
   void deleteRowHD() {
     spDAO = new SanPhamDAO();
     dvDAO = new DichVuDAO();
-    int indexTableHD = tblHD.getSelectedRow();
-    if (indexTableHD < 0) {
+    int startIndex = tblHD.getSelectedRow();
+    if (startIndex < 0) {
       JOptionPane.showMessageDialog(this, "Hãy chọn vào dòng bạn muốn xoá !", "Lỗi", HEIGHT);
       return;
     }
-    DefaultTableModel model = (DefaultTableModel) tblHD.getModel();
-    if (tblHD.getValueAt(indexTableHD, 0).equals("SP")) {
-      listSPselect.remove(spDAO.findByMaSP(String.valueOf(tblHD.getValueAt(indexTableHD, 1)), connect));
+    int countIndex = tblHD.getSelectedRowCount();
+    for (int k = startIndex + countIndex - 1; k >= startIndex; k--) {
+      DefaultTableModel model = (DefaultTableModel) tblHD.getModel();
+      if (tblHD.getValueAt(k, 0).equals("SP")) {
+        int ma = findIndexSP(spDAO.findByMaSP(String.valueOf(tblHD.getValueAt(k, 1)), connect).getMaSP());
+        listSPselect.remove(ma);
+      }
+      if (tblHD.getValueAt(k, 0).equals("DV")) {
+        int ma = findIndexDV(dvDAO.findByMaDV(String.valueOf(tblHD.getValueAt(k, 1)), connect).getMaDV());
+        listDVselect.remove(ma);
+      }
+      model.removeRow(k);
     }
-    if (tblHD.getValueAt(indexTableHD, 0).equals("DV")) {
-      listDVselect.remove(dvDAO.findByMaDV(String.valueOf(tblHD.getValueAt(indexTableHD, 1)), connect));
-    }
-    model.removeRow(indexTableHD);
     totalMoney();
+  }
+
+  int findIndexSP(String ma) {
+    int i = 0;
+    for (SanPham sp : listSPselect) {
+      if (sp.getMaSP().equals(ma)) {
+        return i;
+      }
+      i++;
+    }
+    return -1;
+  }
+
+  int findIndexDV(String ma) {
+    int i = 0;
+    for (DichVu dv : listDVselect) {
+      if (dv.getMaDV().equals(ma)) {
+        return i;
+      }
+      i++;
+    }
+    return -1;
   }
 
   void resetTable() {
@@ -3201,7 +3297,7 @@ public class TrangChuFrame extends javax.swing.JFrame {
       khDAO = new KhachHangDAO();
       KhachHang checkKH = khDAO.findBySDT(txtSDTKH.getText(), connect);
       if (checkKH == null) {
-        KhachHang kh = new KhachHang(txtTenKH.getText(), null, txtSDTKH.getText(), null, true, 0);
+        KhachHang kh = new KhachHang(txtTenKH.getText(), null, txtSDTKH.getText(), null, true);
         khDAO.insertKH(kh, connect);
         fillTableKH();
       }
@@ -3273,9 +3369,9 @@ public class TrangChuFrame extends javax.swing.JFrame {
       pr2.setIndentationLeft(80);
       document.add(pr2);
 
-      document.close();      
+      document.close();
       int a = JOptionPane.showConfirmDialog(this, "Bạn có muốn hiện hoá đơn PDF ?", "Thông báo", JOptionPane.YES_NO_OPTION);
-      if(a==JOptionPane.YES_OPTION) {
+      if (a == JOptionPane.YES_OPTION) {
         openFile(file);
       }
     } catch (DocumentException e) {
@@ -3284,7 +3380,7 @@ public class TrangChuFrame extends javax.swing.JFrame {
       e.printStackTrace();
     }
   }
-  
+
   void openFile(File file) {
     try {
       Desktop desktop = Desktop.getDesktop();

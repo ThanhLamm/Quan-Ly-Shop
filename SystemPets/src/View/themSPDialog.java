@@ -97,6 +97,11 @@ public class themSPDialog extends javax.swing.JDialog {
     txtMaSP.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
     txtMaSP.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 255)));
     txtMaSP.setOpaque(false);
+    txtMaSP.addKeyListener(new java.awt.event.KeyAdapter() {
+      public void keyReleased(java.awt.event.KeyEvent evt) {
+        txtMaSPKeyReleased(evt);
+      }
+    });
     jPanel1.add(txtMaSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 230, -1));
 
     jLabel1.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
@@ -216,8 +221,17 @@ public class themSPDialog extends javax.swing.JDialog {
 
     private void btnXacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXacNhanActionPerformed
       // TODO add your handling code here:
-      themSP();
+      if (checkSP()) {
+        themSP();
+      } else {
+        congDon();
+      }
     }//GEN-LAST:event_btnXacNhanActionPerformed
+
+  private void txtMaSPKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMaSPKeyReleased
+    // TODO add your handling code here:
+    checkSP();
+  }//GEN-LAST:event_txtMaSPKeyReleased
 
   /**
    * @param args the command line arguments
@@ -373,12 +387,77 @@ public class themSPDialog extends javax.swing.JDialog {
     cboNam.setSelectedItem(setDate[0]);
   }
 
+  void congDon() {
+    if (validator().length() > 0) {
+      JOptionPane.showMessageDialog(this, validator() + "Thêm thất bại !", "Lỗi", HEIGHT);
+      return;
+    }
+    spDAO = new SanPhamDAO();
+    connect = new JdbcHelper();
+    int soLuong = Integer.parseInt(txtSoLuong.getText());
+    if (spDAO.updateSLSP(txtMaSP.getText(), soLuong, connect) == 1) {
+      JOptionPane.showMessageDialog(this, "Thêm thành công");
+      fillTableSP();
+      TrangChuFrame.txtTKNV.setText("");
+      setVisible(false);
+    } else {
+      JOptionPane.showMessageDialog(this, "Thêm thất bại !", "Lỗi", HEIGHT);
+    }
+  }
+
+  boolean checkSP() {
+    String maSP = txtMaSP.getText();
+    spDAO = new SanPhamDAO();
+    connect = new JdbcHelper();
+    SanPham sp = spDAO.findByMaSP(maSP, connect);
+    if (sp != null) {
+      fillForm(sp);
+      setEditable(true);
+      return false;
+    } else {
+      setEditable(false);
+      return true;
+    }
+  }
+
+  void fillForm(SanPham sp) {
+    txtTenSP.setText(sp.getTenSP());
+    txtSoLuong.requestFocus();
+    txtGiaBan.setText(String.valueOf(sp.getGiaBan()));
+    txtGiaNhap.setText(String.valueOf(sp.getGiaNhap()));
+    String date[] = DateHelper.toString(sp.getNgayNhapKho(), "dd-MM-yyyy").split("-");
+    cboNgay.setSelectedItem(date[0]);
+    cboThang.setSelectedItem(date[1]);
+    cboNam.setSelectedItem(date[2]);
+    txtGhiChu.setText(sp.getGhiChu());
+  }
+
+  void setEditable(boolean check) {
+    txtTenSP.setEditable(!check);
+    txtGiaNhap.setEditable(!check);
+    txtGiaBan.setEditable(!check);
+    cboNgay.setEnabled(!check);
+    cboThang.setEnabled(!check);
+    cboNam.setEnabled(!check);
+    txtGhiChu.setEditable(!check);
+    btnXacNhan.setText("Thêm");
+    if (!check) {
+      txtTenSP.setText("");
+      txtSoLuong.setText("");
+      txtGiaBan.setText("");
+      txtGiaNhap.setText("");
+      fillcomboboxDate();
+      txtGhiChu.setText("");
+      btnXacNhan.setText("Xác nhận");
+    }
+  }
+
   void fillListSP() {
     spDAO = new SanPhamDAO();
     listSP = spDAO.getSanPham(connect);
     DefaultListModel modelSP = new DefaultListModel<>();
     modelSP.removeAllElements();
-    for(SanPham sp : listSP) {
+    for (SanPham sp : listSP) {
       modelSP.addElement(sp.getTenSP());
     }
     dsSP.setModel(modelSP);
