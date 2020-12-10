@@ -222,9 +222,17 @@ public class HDCTDialog extends javax.swing.JDialog {
     for(HoaDonChiTiet hdct : list) {
       String loaiHD= "";
       if(hdct.getMaSP()==null) {
-        loaiHD = dvDAO.findByMaDV(hdct.getMaDV(), connect).getTenDV();
+        try {
+          loaiHD = dvDAO.findByMaDV(hdct.getMaDV(), connect).getTenDV();
+        } catch (Exception e) {
+          loaiHD = "DV đã bị xoá";
+        }        
       } else {
-        loaiHD = spDAO.findByMaSP(hdct.getMaSP(), connect).getTenSP();
+        try {
+          loaiHD = spDAO.findByMaSP(hdct.getMaSP(), connect).getTenSP();
+        } catch (Exception e) {
+          loaiHD = "SP đã bị xoá";
+        }
       }
       model.addRow(new Object[]{
         loaiHD, hdct.getSoLuongMua(), hdct.getGia()
