@@ -230,7 +230,9 @@ public class themSPDialog extends javax.swing.JDialog {
 
   private void txtMaSPKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMaSPKeyReleased
     // TODO add your handling code here:
-    checkSP();
+    if(checkSP()) {
+      resetForm();
+    }
   }//GEN-LAST:event_txtMaSPKeyReleased
 
   /**
@@ -360,6 +362,7 @@ public class themSPDialog extends javax.swing.JDialog {
     if (spDAO.insertSP(spNew, connect) == 1) {
       JOptionPane.showMessageDialog(this, "Thêm thành công");
       fillTableSP();
+      fillListSP();
       TrangChuFrame.txtTKNV.setText("");
       setVisible(false);
     } else {
@@ -441,15 +444,16 @@ public class themSPDialog extends javax.swing.JDialog {
     cboNam.setEnabled(!check);
     txtGhiChu.setEditable(!check);
     btnXacNhan.setText("Thêm");
-    if (!check) {
-      txtTenSP.setText("");
-      txtSoLuong.setText("");
-      txtGiaBan.setText("");
-      txtGiaNhap.setText("");
-      fillcomboboxDate();
-      txtGhiChu.setText("");
-      btnXacNhan.setText("Xác nhận");
-    }
+  }
+  
+  void resetForm() {
+    txtTenSP.setText("");
+    txtSoLuong.setText("");
+    txtGiaBan.setText("");
+    txtGiaNhap.setText("");
+    fillcomboboxDate();
+    txtGhiChu.setText("");
+    btnXacNhan.setText("Xác nhận");
   }
 
   void fillListSP() {

@@ -85,11 +85,6 @@ public class HDCTDialog extends javax.swing.JDialog {
     tblCTHD.setSelectionForeground(new java.awt.Color(255, 255, 255));
     tblCTHD.setShowVerticalLines(false);
     tblCTHD.getTableHeader().setReorderingAllowed(false);
-    tblCTHD.addMouseListener(new java.awt.event.MouseAdapter() {
-      public void mouseClicked(java.awt.event.MouseEvent evt) {
-        tblCTHDMouseClicked(evt);
-      }
-    });
     jScrollPane12.setViewportView(tblCTHD);
     JTableHeader tableHeaderCTHD = tblCTHD.getTableHeader();     
     tableHeaderCTHD.setFont(new java.awt.Font("Dialog", 0, 17));
@@ -141,10 +136,6 @@ public class HDCTDialog extends javax.swing.JDialog {
 
     pack();
   }// </editor-fold>//GEN-END:initComponents
-
-  private void tblCTHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCTHDMouseClicked
-    // TODO add your handling code here:
-  }//GEN-LAST:event_tblCTHDMouseClicked
 
   private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
     // TODO add your handling code here:

@@ -139,9 +139,6 @@
                   <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblCTHDMouseClicked"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="JTableHeader tableHeaderCTHD = tblCTHD.getTableHeader();     &#xd;&#xa; tableHeaderCTHD.setFont(new java.awt.Font(&quot;Dialog&quot;, 0, 17));&#xd;&#xa; tableHeaderCTHD.setBackground(new Color(0,147,223));     &#xd;&#xa; tableHeaderCTHD.setOpaque(false);&#xd;&#xa; tableHeaderCTHD.setForeground(Color.white);&#xd;&#xa; "/>
               </AuxValues>
