@@ -117,9 +117,9 @@ public class TrangChuFrame extends javax.swing.JFrame {
     txtTKLH = new javax.swing.JTextField();
     jLabel11 = new javax.swing.JLabel();
     txtTenLH = new javax.swing.JTextField();
-    jLabel14 = new javax.swing.JLabel();
-    jLabel15 = new javax.swing.JLabel();
-    jLabel13 = new javax.swing.JLabel();
+    lblTenLH = new javax.swing.JLabel();
+    lblGhiChuLH = new javax.swing.JLabel();
+    lblMaLH = new javax.swing.JLabel();
     txtMaLH = new javax.swing.JTextField();
     jScrollPane14 = new javax.swing.JScrollPane();
     txtGhiChuLH = new javax.swing.JTextArea();
@@ -184,7 +184,7 @@ public class TrangChuFrame extends javax.swing.JFrame {
     btnThemKH = new javax.swing.JButton();
     txtTKKH = new javax.swing.JTextField();
     btnXoaKH = new javax.swing.JButton();
-    bntSuaKH = new javax.swing.JButton();
+    btnSuaKH = new javax.swing.JButton();
     jScrollPane7 = new javax.swing.JScrollPane();
     tblKH = new javax.swing.JTable();
     jLabel5 = new javax.swing.JLabel();
@@ -540,17 +540,17 @@ public class TrangChuFrame extends javax.swing.JFrame {
     txtTenLH.setOpaque(false);
     pnlLHDichVu.add(txtTenLH, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, 280, -1));
 
-    jLabel14.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jLabel14.setText("Tên loại hình:");
-    pnlLHDichVu.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
+    lblTenLH.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+    lblTenLH.setText("Tên loại hình:");
+    pnlLHDichVu.add(lblTenLH, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
 
-    jLabel15.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jLabel15.setText("Ghi chú:");
-    pnlLHDichVu.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, -1));
+    lblGhiChuLH.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+    lblGhiChuLH.setText("Ghi chú:");
+    pnlLHDichVu.add(lblGhiChuLH, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, -1));
 
-    jLabel13.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    jLabel13.setText("Mã loại hình:");
-    pnlLHDichVu.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
+    lblMaLH.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+    lblMaLH.setText("Mã loại hình:");
+    pnlLHDichVu.add(lblMaLH, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
 
     txtMaLH.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
     txtMaLH.setOpaque(false);
@@ -1181,16 +1181,16 @@ public class TrangChuFrame extends javax.swing.JFrame {
     });
     pnlKhachHang.add(btnXoaKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 670, -1, -1));
 
-    bntSuaKH.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-    bntSuaKH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-edit-property-30.png"))); // NOI18N
-    bntSuaKH.setText("Sửa");
-    bntSuaKH.setMargin(new java.awt.Insets(2, 5, 2, 5));
-    bntSuaKH.addActionListener(new java.awt.event.ActionListener() {
+    btnSuaKH.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+    btnSuaKH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/icons8-edit-property-30.png"))); // NOI18N
+    btnSuaKH.setText("Sửa");
+    btnSuaKH.setMargin(new java.awt.Insets(2, 5, 2, 5));
+    btnSuaKH.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
-        bntSuaKHActionPerformed(evt);
+        btnSuaKHActionPerformed(evt);
       }
     });
-    pnlKhachHang.add(bntSuaKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 670, -1, -1));
+    pnlKhachHang.add(btnSuaKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 670, -1, -1));
 
     jScrollPane7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 204, 204)));
 
@@ -1986,10 +1986,10 @@ public class TrangChuFrame extends javax.swing.JFrame {
     deleteKH();
   }//GEN-LAST:event_btnXoaKHActionPerformed
 
-  private void bntSuaKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSuaKHActionPerformed
+  private void btnSuaKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaKHActionPerformed
     // TODO add your handling code here:
     updateKH();
-  }//GEN-LAST:event_bntSuaKHActionPerformed
+  }//GEN-LAST:event_btnSuaKHActionPerformed
 
   private void txtTKKHKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTKKHKeyReleased
     // TODO add your handling code here:
@@ -2142,9 +2142,9 @@ public class TrangChuFrame extends javax.swing.JFrame {
   private javax.swing.JLabel BG;
   private javax.swing.JLabel BGHD;
   private javax.swing.JPanel User;
-  private javax.swing.JButton bntSuaKH;
   private javax.swing.JButton btnLamMoi;
   private javax.swing.JButton btnSuaDV;
+  private javax.swing.JButton btnSuaKH;
   private javax.swing.JButton btnSuaLH;
   private javax.swing.JButton btnSuaNV;
   private javax.swing.JButton btnSuaSP;
@@ -2167,9 +2167,6 @@ public class TrangChuFrame extends javax.swing.JFrame {
   private javax.swing.JLabel jLabel10;
   private javax.swing.JLabel jLabel11;
   private javax.swing.JLabel jLabel12;
-  private javax.swing.JLabel jLabel13;
-  private javax.swing.JLabel jLabel14;
-  private javax.swing.JLabel jLabel15;
   private javax.swing.JLabel jLabel2;
   private javax.swing.JLabel jLabel3;
   private javax.swing.JLabel jLabel4;
@@ -2196,9 +2193,11 @@ public class TrangChuFrame extends javax.swing.JFrame {
   public static javax.swing.JLabel lblDKHD;
   private javax.swing.JLabel lblDKLHDV;
   private javax.swing.JLabel lblDSKH;
+  private javax.swing.JLabel lblGhiChuLH;
   private javax.swing.JLabel lblLoaiHinhDV;
   private javax.swing.JLabel lblLoaiHinhDV1;
   private javax.swing.JLabel lblLoaiHinhDV2;
+  private javax.swing.JLabel lblMaLH;
   private javax.swing.JLabel lblNVHD;
   private javax.swing.JLabel lblNVHD1;
   private javax.swing.JLabel lblNgayTaoHD;
@@ -2214,6 +2213,7 @@ public class TrangChuFrame extends javax.swing.JFrame {
   public static javax.swing.JLabel lblTKHD;
   public static javax.swing.JLabel lblTKKH;
   public static javax.swing.JLabel lblTKKHTQ;
+  private javax.swing.JLabel lblTenLH;
   private javax.swing.JLabel lblTenNV;
   private javax.swing.JLabel lblTime;
   private javax.swing.JLabel lblTitle;
@@ -2296,8 +2296,7 @@ public class TrangChuFrame extends javax.swing.JFrame {
   void security() {
     if (Auth.user.isVaiTro()) {
       lblUser.setText(getTenshort());
-      pnlQLNV.setVisible(true);
-      pnlNavDoanhThu.setVisible(true);
+      set(true);
 
       //set hoa don
       lblTenNV.setText(Auth.user.getTenNV() + " (Quản lý)");
@@ -2305,14 +2304,37 @@ public class TrangChuFrame extends javax.swing.JFrame {
       lblNgayTaoHD.setText(DateHelper.toString(DateHelper.now(), "dd-MM-yyyy"));
     } else {
       lblUser.setText(getTenshort());
-      pnlQLNV.setVisible(false);
-      pnlNavDoanhThu.setVisible(false);
+      set(false);
 
       //set hoa don
       lblTenNV.setText(Auth.user.getTenNV());
       lblTenNV.setToolTipText(Auth.user.getTenNV());
       lblNgayTaoHD.setText(DateHelper.toString(DateHelper.now(), "dd-MM-yyyy"));
+      set(false);
     }
+  }
+  
+  void set(boolean check) {
+    btnXoaDV.setVisible(check);
+    btnThemDV.setVisible(check);
+    btnSuaDV.setVisible(check);
+    btnXoaKH.setVisible(check);
+    btnSuaKH.setVisible(check);
+    btnThemKH.setVisible(check);
+    btnXoaLH.setVisible(check);
+    btnSuaLH.setVisible(check);
+    btnThemLH.setVisible(check);
+//    lblMaLH.setVisible(check);
+//    lblTenLH.setVisible(check);
+//    lblGhiChuLH.setVisible(check);
+    txtMaLH.setEditable(check);
+    txtTenLH.setEditable(check);
+    txtGhiChuLH.setEditable(check);
+    btnXoaSP.setVisible(check);
+    btnSuaSP.setVisible(check);
+    btnThemSP.setVisible(check);
+    pnlQLNV.setVisible(check);
+    pnlNavDoanhThu.setVisible(check);
   }
 
   String getTenshort() {
@@ -3243,7 +3265,6 @@ public class TrangChuFrame extends javax.swing.JFrame {
       lblNotification.setToolTipText("");
     }
     if (!txtTenKH.getText().equals("")) {
-      System.out.println("ok");
       lblNotification.setText("");
       lblNotification.setToolTipText("");
     }
@@ -3337,7 +3358,7 @@ public class TrangChuFrame extends javax.swing.JFrame {
     Document document = new Document();
     try {
       // khởi tạo một PdfWriter truyền vào document và FileOutputStream
-      File file = new File("HoaDon/MaHD" + MaHD + "-" + NgayTao + ".pdf");
+      File file = new File("HoaDon/" + MaHD + " " + NgayTao + ".pdf");
       FileOutputStream fos = new FileOutputStream(file);
       PdfWriter.getInstance(document, fos);
 
@@ -3365,7 +3386,7 @@ public class TrangChuFrame extends javax.swing.JFrame {
       Paragraph pr2 = new Paragraph("-------------------------------------------------------------------\n"
               + "* Ghi Chu: " + StringUtils.removeAccent(GhiChu) + "\n"
               + "* TONG TIEN: " + TongTien + "\n\n"
-              + "*********************************(" + NgayTao + ")*******************************");
+              + "*****************************(" + NgayTao + ")***************************");
       pr2.setIndentationLeft(80);
       document.add(pr2);
 
